@@ -3,500 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorador Interativo: Colina & Inositol</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Chosen Palette: Warm Neutrals with Teal and Sky Blue accents -->
-    <!-- Application Structure Plan: A user-centric, tab-based Single Page Application (SPA) structure. The user can navigate between four main sections: a comparative "Overview," a deep dive into "Choline," a deep dive into "Inositol," and a "Combined Analysis." This non-linear structure prioritizes user-driven exploration over the report's linear format. Interactions include clickable content panes to break down complex information, a dropdown-controlled interactive chart for dosage data, and a custom HTML/CSS diagram to explain the complex MI/DCI mechanism in PCOS. This design was chosen to make the dense scientific information more accessible, engaging, and easier to digest by allowing users to focus on their specific area of interest and interact with the data visually. -->
-    <!-- Visualization & Content Choices: 
-        1. Report Info: Table 1 (Comparison) -> Goal: Compare -> Viz: Side-by-side styled cards -> Interaction: Static view for quick comparison -> Justification: More visually engaging and readable than a standard HTML table. -> Library: Tailwind CSS.
-        2. Report Info: Choline/Inositol benefits & risks -> Goal: Explore -> Viz: Two-column interactive list -> Interaction: Click list item to display details in a central pane. -> Justification: Breaks down extensive text into digestible, user-selected chunks, reducing cognitive load. -> Library: Vanilla JS.
-        3. Report Info: Table 2 (Choline Dosage) -> Goal: Inform/Compare -> Viz: Bar Chart -> Interaction: Dropdown selects demographic, highlighting corresponding bars. -> Justification: Makes numerical data visual and allows for easy, personalized data retrieval. -> Library: Chart.js.
-        4. Report Info: Inositol for PCOS (MI/DCI ratio) -> Goal: Explain Process -> Viz: Custom HTML/CSS Flow Diagram -> Interaction: Static visual aid. -> Justification: Clarifies a critical and complex biochemical concept that is difficult to grasp from text alone. -> Library: Tailwind CSS.
-        5. Report Info: Inositol for Mental Health (Evidence Levels) -> Goal: Summarize -> Viz: "Evidence Meter" (styled div) -> Interaction: Static visual rating. -> Justification: Provides an at-a-glance summary of research quality, which is faster to interpret than a text-based table. -> Library: Tailwind CSS.
-        6. Report Info: Synergy Analysis -> Goal: Contrast Concepts -> Viz: Two large cards ("Theory" vs. "Reality") -> Interaction: Static side-by-side comparison. -> Justification: Clearly delineates the core conflict between marketing claims and scientific evidence. -> Library: Tailwind CSS.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <title>Guia Definitivo de Suplementos</title>
+    
+    <!-- Importação da fonte Poppins do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        .chart-container {
+        /* --- Reset e Estilos Globais --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Paleta de Cores */
+            --cor-fundo: #121212;
+            --cor-texto: #F5F5F5;
+            --cor-destaque: #007BFF;
+            --cor-destaque-hover: #0056b3;
+            --cor-card: #1e1e1e;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+        }
+
+        /* --- Seção Hero (Cabeçalho e Destaque) --- */
+        .hero {
             position: relative;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efeito Parallax */
+        }
+
+        /* Overlay escuro para legibilidade do texto */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 450px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
         }
-        .nav-button.active {
-            background-color: #0d9488;
-            color: #ffffff;
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Seção de Suplementos --- */
+        .supplements-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .supplements-section h2 {
+            font-size: 2.5rem;
             font-weight: 600;
+            margin-bottom: 50px;
+            color: var(--cor-destaque);
         }
-        .content-section {
-            display: none;
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch; /* Garante que os cards tenham a mesma altura */
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .content-section.active {
-            display: block;
+
+        /* --- Estilo dos Cards --- */
+        .card {
+            background-color: var(--cor-card);
+            border-radius: 15px;
+            padding: 30px;
+            width: 320px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .info-list-item.active {
-            background-color: #e0f2f1;
-            border-left-color: #0d9488;
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 123, 255, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--cor-destaque);
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            flex-grow: 1; /* Faz a descrição ocupar o espaço disponível */
+            margin-bottom: 25px;
+        }
+
+        /* --- Estilo dos Botões --- */
+        .card-button {
+            display: inline-block;
+            background-color: var(--cor-destaque);
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .card-button:hover {
+            background-color: var(--cor-destaque-hover);
+        }
+
+        /* --- Rodapé --- */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #0a0a0a;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* --- Responsividade --- */
+        @media (max-width: 768px) {
+            .hero {
+                height: 50vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .supplements-section {
+                padding: 60px 15px;
+            }
+
+            .supplements-section h2 {
+                font-size: 2rem;
+            }
+
+            /* Os cards já irão empilhar naturalmente devido ao flex-wrap,
+               mas podemos garantir que eles fiquem centralizados. */
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+<body>
 
-        <header class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-teal-800 mb-2">Explorador Interativo</h1>
-            <h2 class="text-2xl md:text-3xl font-light text-teal-600">Colina & Inositol</h2>
-            <p class="max-w-3xl mx-auto mt-4 text-gray-600">Uma ferramenta para entender a ciência por trás dos suplementos de Colina e Inositol, baseada em uma análise abrangente da literatura científica.</p>
-        </header>
+    <!-- Cabeçalho e Seção de Destaque (Hero) -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Potencialize Seus Resultados</h1>
+            <p>Descubra a ciência por trás dos suplementos que podem transformar sua saúde e performance.</p>
+        </div>
+    </header>
 
-        <nav class="flex justify-center flex-wrap gap-2 mb-8">
-            <button data-target="overview" class="nav-button active py-2 px-4 rounded-md transition-all duration-300 ease-in-out bg-white shadow-sm hover:bg-teal-50">Visão Geral</button>
-            <button data-target="choline" class="nav-button py-2 px-4 rounded-md transition-all duration-300 ease-in-out bg-white shadow-sm hover:bg-teal-50">Análise: Colina</button>
-            <button data-target="inositol" class="nav-button py-2 px-4 rounded-md transition-all duration-300 ease-in-out bg-white shadow-sm hover:bg-teal-50">Análise: Inositol</button>
-            <button data-target="synergy" class="nav-button py-2 px-4 rounded-md transition-all duration-300 ease-in-out bg-white shadow-sm hover:bg-teal-50">Análise Combinada</button>
-        </nav>
+    <main>
+        <!-- Seção com os Cards de Suplementos -->
+        <section class="supplements-section" id="guias">
+            <h2>Explore Nossos Guias</h2>
+            <div class="cards-container">
 
-        <main>
-            <section id="overview" class="content-section active">
-                <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-                    <h3 class="text-2xl font-bold text-teal-700 mb-4 text-center">Comparativo Rápido</h3>
-                    <p class="text-center text-gray-600 mb-6">Embora frequentemente vendidos juntos, a Colina e o Inositol são compostos distintos com funções únicas no corpo. Veja as principais diferenças.</p>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
-                            <h4 class="text-xl font-semibold mb-3 text-sky-700">Colina</h4>
-                            <ul class="space-y-3 text-gray-700">
-                                <li><strong class="font-semibold text-sky-900">Tipo:</strong> Nutriente Essencial (semelhante à Vitamina B). Deve ser obtido da dieta.</li>
-                                <li><strong class="font-semibold text-sky-900">Principal Mecanismo:</strong> Componente estrutural das membranas celulares e precursor do neurotransmissor acetilcolina.</li>
-                                <li><strong class="font-semibold text-sky-900">Principal Alvo:</strong> Fígado e Cérebro.</li>
-                                <li><strong class="font-semibold text-sky-900">Aplicação Mais Forte:</strong> Prevenção de Doença Hepática Gordurosa e suporte ao desenvolvimento cerebral fetal.</li>
-                                <li><strong class="font-semibold text-sky-900">Fontes Comuns:</strong> Gemas de ovo, fígado, carnes, peixes, soja.</li>
-                            </ul>
-                        </div>
-                        <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
-                            <h4 class="text-xl font-semibold mb-3 text-green-700">Inositol</h4>
-                            <ul class="space-y-3 text-gray-700">
-                                <li><strong class="font-semibold text-green-900">Tipo:</strong> Álcool de Açúcar (Pseudo-vitamina). O corpo pode produzi-lo.</li>
-                                <li><strong class="font-semibold text-green-900">Principal Mecanismo:</strong> "Segundo mensageiro" celular, crucial na sinalização da insulina e de neurotransmissores.</li>
-                                <li><strong class="font-semibold text-green-900">Principal Alvo:</strong> Ovários e Sistema Nervoso.</li>
-                                <li><strong class="font-semibold text-green-900">Aplicação Mais Forte:</strong> Tratamento da Síndrome do Ovário Policístico (SOP) e da síndrome metabólica.</li>
-                                <li><strong class="font-semibold text-green-900">Fontes Comuns:</strong> Frutas cítricas, melão, grãos integrais, nozes.</li>
-                            </ul>
-                        </div>
+                <!-- Card 1: Arginina -->
+                <div class="card">
+                    <div>
+                        <h3>Arginina</h3>
+                        <p>O aminoácido essencial para o fluxo sanguíneo, vasodilatação e suporte ao óxido nítrico.</p>
                     </div>
-                </div>
-                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-bold text-teal-700 mb-4 text-center">Conclusões Principais</h3>
-                     <div class="flex flex-col md:flex-row gap-6">
-                        <div class="flex-1">
-                             <p class="text-gray-600 mb-4">A decisão de suplementar deve ser baseada em objetivos claros e, idealmente, com orientação profissional. A eficácia de cada composto é altamente dependente da condição a ser tratada.</p>
-                             <ul class="space-y-2 list-disc list-inside text-gray-700">
-                                 <li>A <strong>Colina</strong> é fundamental para a saúde do fígado e o desenvolvimento fetal. Sua suplementação é uma estratégia baseada em evidências sólidas para populações em risco.</li>
-                                 <li>O <strong>Inositol</strong> é uma das intervenções nutracêuticas mais eficazes e seguras para a Síndrome do Ovário Policístico (SOP) e condições metabólicas.</li>
-                                 <li>A evidência para o uso de ambos na <strong>melhora cognitiva geral</strong> em adultos saudáveis é fraca.</li>
-                                 <li>A <strong>combinação</strong> dos dois carece de provas de sinergia, com os benefícios sendo provavelmente a soma de seus efeitos individuais.</li>
-                             </ul>
-                        </div>
-                     </div>
-                </div>
-            </section>
-
-            <section id="choline" class="content-section">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-bold text-sky-700 mb-2 text-center">Análise Detalhada: Colina</h3>
-                    <p class="text-center text-gray-600 mb-6">Um nutriente essencial vital para a estrutura celular, função cerebral e saúde do fígado. Clique nos tópicos abaixo para explorar.</p>
-                    <div class="grid lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-1">
-                            <h4 class="font-bold text-lg mb-2 text-center">Tópicos de Análise</h4>
-                            <div id="choline-info-selector" class="flex flex-col space-y-2"></div>
-                        </div>
-                        <div id="choline-info-display" class="lg:col-span-2 bg-gray-50 p-6 rounded-lg border border-gray-200 min-h-[300px]">
-                        </div>
-                    </div>
+                    <a href="https://protomorphos.github.io/ia/arginina.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md mt-8">
-                     <h3 class="text-2xl font-bold text-sky-700 mb-4 text-center">Guia Interativo de Dosagem Diária</h3>
-                     <p class="text-center text-gray-600 mb-6">A necessidade de colina varia conforme idade, sexo e condição fisiológica. Selecione um grupo para ver as recomendações de Ingestão Adequada (AI) e o Limite Superior Tolerável (UL).</p>
-                     <div class="text-center mb-4">
-                        <select id="choline-demographic-selector" class="p-2 border rounded-md shadow-sm">
-                        </select>
-                     </div>
-                     <div class="chart-container">
-                         <canvas id="cholineDoseChart"></canvas>
-                     </div>
-                </div>
-            </section>
-
-            <section id="inositol" class="content-section">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-bold text-green-700 mb-2 text-center">Análise Detalhada: Inositol</h3>
-                    <p class="text-center text-gray-600 mb-6">Um mensageiro celular com forte impacto na sensibilidade à insulina e na função ovariana. Clique nos tópicos abaixo para explorar.</p>
-                     <div class="grid lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-1">
-                            <h4 class="font-bold text-lg mb-2 text-center">Tópicos de Análise</h4>
-                            <div id="inositol-info-selector" class="flex flex-col space-y-2"></div>
-                        </div>
-                        <div id="inositol-info-display" class="lg:col-span-2 bg-gray-50 p-6 rounded-lg border border-gray-200 min-h-[300px]">
-                        </div>
+                <!-- Card 2: Colina e Inositol -->
+                <div class="card">
+                    <div>
+                        <h3>Colina e Inositol</h3>
+                        <p>A dupla poderosa para a saúde cerebral, função hepática e metabolismo de gorduras.</p>
                     </div>
+                    <a href="https://protomorphos.github.io/ia/colinainositol.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
 
-                 <div class="bg-white p-6 rounded-lg shadow-md mt-8">
-                     <h3 class="text-2xl font-bold text-green-700 mb-4 text-center">Nível de Evidência: Saúde Mental</h3>
-                     <p class="text-center text-gray-600 mb-6">O uso de inositol para transtornos mentais é controverso. Este medidor resume a qualidade da evidência clínica atual para diferentes condições.</p>
-                     <div id="inositol-evidence-meter" class="space-y-4 max-w-2xl mx-auto"></div>
-                 </div>
-
-            </section>
-
-            <section id="synergy" class="content-section">
-                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-bold text-teal-700 mb-4 text-center">Sinergia: Teoria vs. Realidade Clínica</h3>
-                    <p class="text-center text-gray-600 mb-6">Suplementos combinando Colina e Inositol são muito populares. Mas será que a promessa de "efeito sinérgico" se sustenta cientificamente?</p>
-                    <div class="grid md:grid-cols-2 gap-8 items-start">
-                        <div class="border-l-4 border-sky-300 p-6 bg-sky-50 rounded-r-lg">
-                            <h4 class="text-xl font-bold text-sky-800 mb-3">A Justificativa Teórica</h4>
-                            <p class="text-gray-700 mb-4">A lógica para combinar os dois compostos é plausível e baseia-se em suas funções complementares:</p>
-                            <ul class="space-y-3">
-                                <li class="flex items-start">
-                                    <span class="text-sky-600 mr-3 text-xl">🧠</span>
-                                    <div><strong class="font-semibold">Saúde Cerebral:</strong> Ambos são componentes das membranas neuronais. A colina produz acetilcolina (memória) e o inositol atua na sinalização da serotonina (humor). A teoria é que juntos eles oferecem um suporte mais completo à função cerebral.</div>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-sky-600 mr-3 text-xl">🌿</span>
-                                    <div><strong class="font-semibold">Saúde Hepática:</strong> Ambos participam do metabolismo de gorduras no fígado. A colina é essencial para exportar gordura, enquanto o inositol ajuda na regulação da insulina, que influencia o acúmulo de gordura. Juntos, teoricamente, forneceriam um duplo suporte lipotrópico.</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="border-l-4 border-red-300 p-6 bg-red-50 rounded-r-lg">
-                            <h4 class="text-xl font-bold text-red-800 mb-3">A Evidência Clínica</h4>
-                            <p class="text-gray-700 mb-4">Apesar da teoria robusta, a realidade clínica é diferente:</p>
-                             <ul class="space-y-3">
-                                <li class="flex items-start">
-                                    <span class="text-red-600 mr-3 text-xl">🔬</span>
-                                    <div><strong class="font-semibold">Falta de Provas Diretas:</strong> Não há ensaios clínicos em humanos que demonstrem que a combinação de colina e inositol produz um efeito maior do que a soma de seus efeitos individuais.</div>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-red-600 mr-3 text-xl">📢</span>
-                                    <div><strong class="font-semibold">Extrapolação de Marketing:</strong> A alegação de "sinergia" é, no estado atual do conhecimento, uma extrapolação teórica e uma ferramenta de marketing, não um fato cientificamente validado em humanos.</div>
-                                </li>
-                                 <li class="flex items-start">
-                                    <span class="text-red-600 mr-3 text-xl">➕</span>
-                                    <div><strong class="font-semibold">Benefício Aditivo:</strong> O benefício de um suplemento combinado provavelmente advém dos efeitos aditivos de dois compostos úteis, não de uma interação mágica entre eles.</div>
-                                </li>
-                            </ul>
-                        </div>
+                <!-- Card 3: Coenzima Q10 -->
+                <div class="card">
+                    <div>
+                        <h3>Coenzima Q10</h3>
+                        <p>O antioxidante vital para a produção de energia celular e proteção cardiovascular.</p>
                     </div>
+                    <a href="https://protomorphos.github.io/ia/q10.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
-            </section>
-        </main>
-        
-        <footer class="text-center mt-12 text-sm text-gray-500">
-            <p>Este aplicativo é uma ferramenta educacional baseada em um relatório de análise científica. As informações não substituem o conselho médico profissional.</p>
-            <p>Consulte sempre um profissional de saúde antes de iniciar qualquer suplementação.</p>
-        </footer>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+            </div>
+        </section>
+    </main>
 
-            const appData = {
-                choline: {
-                    info: [
-                        {
-                            title: 'Saúde Hepática (DHGNA)',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-sky-800">Prevenção da Doença Hepática Gordurosa Não Alcoólica (DHGNA)</h5>
-                                <p class="mb-2">Esta é a aplicação mais robusta da colina. Ela é essencial para que o fígado possa empacotar e exportar gorduras (triglicerídeos) para o resto do corpo, através de partículas chamadas VLDL.</p>
-                                <p>Na ausência de colina, a gordura acumula-se no fígado, levando à DHGNA. Estudos de depleção em humanos mostraram que a privação de colina causa rapidamente danos hepáticos, que são revertidos com a sua reintrodução. Garantir a ingestão adequada é, portanto, uma estratégia de prevenção primária crucial.</p>`
-                        },
-                        {
-                            title: 'Desenvolvimento Fetal',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-sky-800">Desenvolvimento Cerebral do Feto</h5>
-                                <p class="mb-2">A demanda por colina aumenta drasticamente durante a gestação, pois o nutriente é essencial para o desenvolvimento do cérebro fetal, especialmente de áreas como o hipocampo, ligadas à memória.</p>
-                                <p>Estudos de referência mostraram que mães que suplementaram com doses mais altas de colina (930 mg/dia) durante o terceiro trimestre tiveram bebês com maior velocidade de processamento de informações e melhor atenção sustentada na infância, sugerindo benefícios cognitivos duradouros.</p>`
-                        },
-                        {
-                            title: 'Função Cognitiva',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-sky-800">Memória e Cognição</h5>
-                                <p class="mb-2">A colina é a precursora direta da acetilcolina, um neurotransmissor vital para a memória, aprendizado e atenção. Teoricamente, mais colina poderia levar a uma melhor função cognitiva.</p>
-                                <p>No entanto, as evidências clínicas são inconsistentes. Estudos em adultos saudáveis e em pacientes com Alzheimer não conseguiram demonstrar um benefício claro da suplementação na melhoria da cognição. A ligação teórica é forte, mas os resultados práticos são decepcionantes até o momento.</p>`
-                        },
-                        {
-                            title: 'Riscos: Efeitos Colaterais',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-red-800">Toxicidade e Efeitos Colaterais</h5>
-                                <p class="mb-2">A suplementação é segura dentro dos limites recomendados (até 3,500 mg/dia para adultos). Doses excessivas podem causar efeitos colaterais.</p>
-                                <ul class="list-disc list-inside">
-                                    <li><strong>Comuns:</strong> Odor corporal de peixe (devido ao metabólito TMA), sudorese, salivação, náuseas e diarreia.</li>
-                                    <li><strong>Graves (doses muito altas):</strong> Queda da pressão arterial (hipotensão) e toxicidade hepática.</li>
-                                </ul>`
-                        },
-                         {
-                            title: 'Riscos: Paradoxo do TMAO',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-red-800">O Paradoxo Cardiovascular (TMAO)</h5>
-                                <p class="mb-2">O papel da colina na saúde cardiovascular é complexo. Por um lado, ajuda a reduzir a homocisteína, um fator de risco. Por outro, a colina (especialmente de fontes animais) pode ser convertida pela microbiota intestinal em TMA, que o fígado transforma em TMAO.</p>
-                                <p>Níveis elevados de TMAO no sangue estão associados a um <strong>maior risco</strong> de aterosclerose, infarto e AVC. Isso sugere que o risco pode não vir da colina isolada, mas do "pacote nutricional" em que ela se encontra (ex: carne vermelha) e da saúde intestinal do indivíduo.</p>`
-                        },
-                         {
-                            title: 'Riscos: Contraindicações',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-red-800">Contraindicações e Interações</h5>
-                                <p class="mb-2">A suplementação deve ser feita com cautela em algumas situações.</p>
-                                <ul class="list-disc list-inside">
-                                    <li><strong>Transtorno Bipolar:</strong> A colina não deve ser usada por indivíduos com transtorno bipolar, pois pode induzir ou piorar sintomas de depressão.</li>
-                                    <li><strong>Interações:</strong> Pode interagir com medicamentos como o metotrexato. A consulta a um profissional de saúde é essencial antes de iniciar a suplementação.</li>
-                                </ul>`
-                        },
-                    ],
-                    doses: {
-                        labels: ['Crianças (1-8a)', 'Crianças (9-13a)', 'Adolescentes (14-18a)', 'Adultos (>19a)', 'Gestantes', 'Lactantes'],
-                        datasets: [
-                            {
-                                label: 'Ingestão Adequada (AI) mg/dia',
-                                data: [225, 375, 475, 487.5, 450, 550], // Média para facilitar visualização
-                                backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                            },
-                            {
-                                label: 'Limite Superior (UL) mg/dia',
-                                data: [1000, 2000, 3000, 3500, 3500, 3500],
-                                backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                            }
-                        ]
-                    }
-                },
-                inositol: {
-                    info: [
-                         {
-                            title: 'SOP e Saúde Reprodutiva',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-green-800">Síndrome do Ovário Policístico (SOP)</h5>
-                                <p class="mb-2">Esta é a aplicação mais bem-sucedida do inositol, com evidências robustas. A suplementação (principalmente com Mio-Inositol ou uma combinação de Mio e D-Chiro-Inositol) demonstrou ser tão eficaz quanto a metformina, mas com muito menos efeitos colaterais.</p>
-                                <ul class="list-disc list-inside mb-4">
-                                   <li>Melhora a regularidade menstrual e aumenta as taxas de ovulação.</li>
-                                   <li>Reduz os níveis de andrógenos (melhorando acne e hirsutismo).</li>
-                                   <li>Melhora a sensibilidade à insulina e o perfil lipídico.</li>
-                                </ul>
-                                <h6 class="font-semibold mb-2">Mecanismo na SOP: O Equilíbrio MI/DCI</h6>
-                                <div class="p-4 bg-white rounded-md border">
-                                    <div class="flex flex-col md:flex-row items-center justify-around text-center gap-2">
-                                        <div class="flex-1">
-                                            <p class="font-bold">Ovário Saudável</p>
-                                            <div class="p-2 bg-green-100 rounded my-1">Alta Proporção MI:DCI</div>
-                                            <p class="text-sm">MI alto promove resposta ao FSH e qualidade do óvulo.</p>
-                                        </div>
-                                        <div class="text-2xl font-bold text-gray-400 mx-4">→</div>
-                                        <div class="flex-1">
-                                            <p class="font-bold">Ovário com SOP</p>
-                                            <div class="p-2 bg-red-100 rounded my-1">Baixa Proporção MI:DCI</div>
-                                            <p class="text-sm">Excesso de DCI prejudica a resposta ao FSH e aumenta andrógenos.</p>
-                                        </div>
-                                         <div class="text-2xl font-bold text-gray-400 mx-4">→</div>
-                                         <div class="flex-1">
-                                            <p class="font-bold">Suplementação</p>
-                                            <div class="p-2 bg-blue-100 rounded my-1">Restaura Proporção 40:1</div>
-                                            <p class="text-sm">A suplementação (ex: 40:1 MI:DCI) restaura o equilíbrio fisiológico.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                `
-                        },
-                        {
-                            title: 'Saúde Metabólica',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-green-800">Síndrome Metabólica e Diabetes</h5>
-                                <p class="mb-2">O inositol atua como um sensibilizador de insulina. Sua suplementação demonstrou melhorar múltiplos fatores de risco associados à síndrome metabólica.</p>
-                                <ul class="list-disc list-inside">
-                                   <li>Reduções significativas na pressão arterial.</li>
-                                   <li>Redução dos triglicerídeos e do colesterol LDL.</li>
-                                   <li>Aumento do colesterol HDL.</li>
-                                   <li>Melhora da glicemia de jejum e da sensibilidade à insulina.</li>
-                                   <li>Reduz o risco de desenvolver Diabetes Gestacional em mulheres com fatores de risco.</li>
-                                </ul>`
-                        },
-                        {
-                            title: 'Saúde Mental',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-yellow-800">Transtornos de Humor e Ansiedade</h5>
-                                <p class="mb-2">A evidência aqui é fraca e controversa. A teoria é que o inositol modula os receptores de serotonina, influenciando o humor.</p>
-                                <ul class="list-disc list-inside">
-                                   <li><strong>Transtorno de Pânico:</strong> Estudos iniciais (pequenos e antigos) mostraram que altas doses (12-18 g/dia) foram eficazes, mas precisam de replicação.</li>
-                                   <li><strong>Depressão e TOC:</strong> Meta-análises e revisões sistemáticas não encontraram um benefício claro ou estatisticamente significativo. Não é recomendado como tratamento de primeira linha.</li>
-                                </ul>`
-                        },
-                        {
-                            title: 'Riscos e Segurança',
-                            content: `
-                                <h5 class="font-bold text-lg mb-2 text-red-800">Perfil de Segurança Excelente</h5>
-                                <p class="mb-2">O inositol é muito bem tolerado. Os efeitos colaterais são raros, leves e geralmente associados a doses muito altas (acima de 12 g/dia).</p>
-                                <ul class="list-disc list-inside">
-                                   <li><strong>Efeitos Comuns:</strong> Desconforto gastrointestinal leve (náuseas, gases, diarreia).</li>
-                                   <li><strong>Precaução Importante:</strong> Em indivíduos com <strong>transtorno bipolar</strong>, há uma preocupação teórica de que possa induzir episódios de mania. O uso deve ser feito com extrema cautela e sob supervisão médica.</li>
-                                   <li><strong>Interações:</strong> Pode ter um efeito aditivo com medicamentos para diabetes, aumentando o risco de hipoglicemia.</li>
-                                </ul>`
-                        },
-                    ],
-                    evidence: [
-                        { condition: 'Transtorno de Pânico', level: 50, label: 'Baixa a Moderada', color: 'bg-yellow-500', description: 'Promissor, mas necessita de estudos maiores e mais recentes.' },
-                        { condition: 'Depressão Maior', level: 15, label: 'Muito Baixa', color: 'bg-red-500', description: 'A maioria das meta-análises é negativa ou inconclusiva.'},
-                        { condition: 'Transtorno Obsessivo-Compulsivo (TOC)', level: 10, label: 'Muito Baixa', color: 'bg-red-500', description: 'Meta-análise não encontrou efeito significativo.'},
-                        { condition: 'Transtorno Bipolar', level: 5, label: 'Não Recomendado', color: 'bg-red-700', description: 'Risco potencial de induzir mania. Não usar como monoterapia.'}
-                    ]
-                }
-            };
-            
-            const navButtons = document.querySelectorAll('.nav-button');
-            const contentSections = document.querySelectorAll('.content-section');
-            const cholineInfoSelector = document.getElementById('choline-info-selector');
-            const cholineInfoDisplay = document.getElementById('choline-info-display');
-            const inositolInfoSelector = document.getElementById('inositol-info-selector');
-            const inositolInfoDisplay = document.getElementById('inositol-info-display');
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>&copy; 2024 Guia de Suplementos. Todas as informações são para fins educacionais.</p>
+    </footer>
 
-            function switchTab(targetId) {
-                navButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.target === targetId);
-                });
-                contentSections.forEach(section => {
-                    section.classList.toggle('active', section.id === targetId);
-                });
-            }
-
-            navButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    switchTab(button.dataset.target);
-                });
-            });
-            
-            function createInfoSelector(container, data, displayElement, defaultIndex = 0) {
-                container.innerHTML = '';
-                data.forEach((item, index) => {
-                    const button = document.createElement('button');
-                    button.textContent = item.title;
-                    button.className = 'info-list-item text-left p-3 rounded-md border-l-4 border-transparent transition-all duration-200 hover:bg-gray-100';
-                    if(item.title.toLowerCase().includes('risco')) {
-                         button.classList.add('text-red-700');
-                    }
-                    button.addEventListener('click', () => {
-                        displayElement.innerHTML = item.content;
-                        container.querySelectorAll('.info-list-item').forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
-                    });
-                    container.appendChild(button);
-                });
-
-                if (container.children[defaultIndex]) {
-                    container.children[defaultIndex].click();
-                }
-            }
-
-            createInfoSelector(cholineInfoSelector, appData.choline.info, cholineInfoDisplay);
-            createInfoSelector(inositolInfoSelector, appData.inositol.info, inositolInfoDisplay);
-
-            let cholineChart;
-            const cholineDoseSelector = document.getElementById('choline-demographic-selector');
-            
-            appData.choline.doses.labels.forEach((label, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = label;
-                cholineDoseSelector.appendChild(option);
-            });
-
-            function createCholineChart(selectedIndex = 3) {
-                const ctx = document.getElementById('cholineDoseChart').getContext('2d');
-                const data = appData.choline.doses;
-
-                const backgroundColorsAI = data.datasets[0].backgroundColor.split(',').slice(0, 3).join(',') + ',';
-                const backgroundColorsUL = data.datasets[1].backgroundColor.split(',').slice(0, 3).join(',') + ',';
-
-                const aiColors = data.labels.map((_, i) => i === selectedIndex ? backgroundColorsAI + '0.9)' : backgroundColorsAI + '0.3)');
-                const ulColors = data.labels.map((_, i) => i === selectedIndex ? backgroundColorsUL + '0.9)' : backgroundColorsUL + '0.3)');
-
-                if (cholineChart) {
-                    cholineChart.destroy();
-                }
-
-                cholineChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: data.labels,
-                        datasets: [
-                            {
-                                label: data.datasets[0].label,
-                                data: data.datasets[0].data,
-                                backgroundColor: aiColors,
-                                borderColor: aiColors.map(c => c.replace('0.3', '1').replace('0.9', '1')),
-                                borderWidth: 1
-                            },
-                             {
-                                label: data.datasets[1].label,
-                                data: data.datasets[1].data,
-                                backgroundColor: ulColors,
-                                borderColor: ulColors.map(c => c.replace('0.3', '1').replace('0.9', '1')),
-                                borderWidth: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Miligramas (mg) por dia'
-                                }
-                            }
-                        },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    title: function(context) {
-                                        return context[0].label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            cholineDoseSelector.addEventListener('change', (e) => {
-                 createCholineChart(parseInt(e.target.value));
-            });
-            
-            const evidenceMeterContainer = document.getElementById('inositol-evidence-meter');
-            appData.inositol.evidence.forEach(item => {
-                const meterElement = document.createElement('div');
-                meterElement.innerHTML = `
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-semibold text-gray-700">${item.condition}</span>
-                        <span class="text-sm font-medium ${item.color.replace('bg-','text-')}">${item.label}</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div class="${item.color} h-2.5 rounded-full" style="width: ${item.level}%"></div>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-1">${item.description}</p>
-                `;
-                evidenceMeterContainer.appendChild(meterElement);
-            });
-
-            createCholineChart();
-            switchTab('overview');
-        });
-    </script>
 </body>
 </html>
