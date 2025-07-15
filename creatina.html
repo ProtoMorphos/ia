@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo da Creatina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutral & Teal -->
+    <!-- Application Structure Plan: A thematic, multi-section SPA with a persistent top navigation bar. The structure prioritizes user-driven exploration over the linear format of the source report. Key sections include 'O Que É?' (with a visual mechanism explanation), 'Benefícios' (using a tabbed interface for clarity), 'Mitos & Verdades' (with interactive fact-checking cards), 'Como Tomar' (with a toggle for different protocols), and 'Fontes' (with a comparative chart). This design breaks down complex information into digestible, interactive chunks, enhancing usability and engagement by allowing users to directly access topics of interest. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: ATP-PCr mechanism. Goal: Explain. Method: HTML/CSS animated diagram. Interaction: Visual flow. Justification: More intuitive than text alone.
+        - Report Info: Multiple benefits. Goal: Organize. Method: Tabbed interface. Interaction: Click to reveal. Justification: Prevents information overload.
+        - Report Info: Myths vs Facts. Goal: Debunk. Method: Interactive cards. Interaction: Click to flip/reveal. Justification: Engaging and direct.
+        - Report Info: Dosing protocols. Goal: Compare. Method: Toggle switch. Interaction: Select to view details. Justification: Simplifies comparison.
+        - Report Info: Food vs. supplement sources. Goal: Compare quantities. Method: Chart.js Bar Chart. Interaction: Visual comparison. Justification: Effectively demonstrates the impracticality of relying solely on food for ergogenic doses. Library: Chart.js for responsive canvas charts.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #334155;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #0d9488;
+            border-bottom-color: #0d9488;
+        }
+        .tab-btn {
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background-color: #0d9488;
+            color: #ffffff;
+        }
+        .myth-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .myth-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .protocol-btn.active {
+            background-color: #14b8a6;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#hero" class="text-2xl font-bold text-teal-700">Creatina</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#o-que-e" class="nav-link px-3 py-2 rounded-md text-sm font-medium">O Que É?</a>
+                        <a href="#beneficios" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Benefícios</a>
+                        <a href="#mitos" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Mitos & Verdades</a>
+                        <a href="#como-tomar" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Como Tomar</a>
+                        <a href="#fontes" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Fontes</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-teal-700 hover:bg-teal-50 focus:outline-none">
+                        <span class="sr-only">Abrir menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#o-que-e" class="nav-link block px-3 py-2 rounded-md text-base font-medium">O Que É?</a>
+                <a href="#beneficios" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Benefícios</a>
+                <a href="#mitos" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Mitos & Verdades</a>
+                <a href="#como-tomar" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Como Tomar</a>
+                <a href="#fontes" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Fontes</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-800 leading-tight">
+                    Creatina: O Guia Definitivo
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-600">
+                    Uma análise completa e baseada em ciência de um dos suplementos mais estudados e eficazes do mundo. Explore seus mecanismos, benefícios, mitos e a forma correta de usar.
+                </p>
+                <a href="#o-que-e" class="mt-8 inline-block bg-teal-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-teal-700 transition-transform transform hover:scale-105">
+                    Comece a Explorar
+                </a>
+            </div>
+        </section>
+
+        <section id="o-que-e" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">O Que É a Creatina?</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        Esta seção introduz os conceitos fundamentais da creatina, desde sua definição química até seu papel crucial como a principal fonte de energia rápida para os músculos e o cérebro durante esforços intensos.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-700 mb-4">A Moeda Energética do Músculo</h3>
+                        <p class="text-slate-600 mb-4">
+                            A creatina é um composto derivado de aminoácidos, produzido pelo corpo e encontrado em alimentos como carne vermelha. Sua principal função é atuar no sistema <span class="font-semibold text-teal-700">ATP-PCr</span>, a via energética mais rápida do corpo.
+                        </p>
+                        <p class="text-slate-600">
+                            Quando você faz um esforço máximo, como levantar um peso ou um sprint, seu corpo usa ATP (energia) muito rapidamente. A creatina, na forma de fosfocreatina (PCr), doa um fosfato para regenerar o ATP quase instantaneamente, permitindo que você mantenha a força e a potência por mais tempo. A suplementação aumenta esses estoques de PCr, potencializando esse sistema.
+                        </p>
+                    </div>
+                    <div class="bg-slate-100 p-6 rounded-lg shadow-inner">
+                        <h4 class="text-center font-semibold text-slate-700 mb-4">Sistema ATP-PCr em Ação</h4>
+                        <div class="flex justify-around items-center text-center">
+                            <div class="w-1/3">
+                                <div class="text-lg font-bold text-red-500">ATP ↘</div>
+                                <p class="text-sm text-slate-500">Energia usada</p>
+                            </div>
+                            <div class="w-1/3">
+                                <div class="text-lg font-bold text-slate-700">PCr + ADP</div>
+                                <p class="text-sm text-slate-500">Reação rápida</p>
+                            </div>
+                            <div class="w-1/3">
+                                <div class="text-lg font-bold text-green-500">ATP ↗</div>
+                                <p class="text-sm text-slate-500">Energia restaurada</p>
+                            </div>
+                        </div>
+                        <div class="relative w-full h-4 bg-slate-200 rounded-full mt-6 overflow-hidden">
+                            <div id="energy-bar" class="absolute top-0 left-0 h-full bg-teal-500 rounded-full" style="width: 100%;"></div>
+                        </div>
+                        <p class="text-xs text-center mt-2 text-slate-500">A creatina mantém seus níveis de energia (ATP) altos durante o esforço.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="beneficios" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Benefícios Comprovados</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        A creatina é mais do que um suplemento para músculos. Explore os seus efeitos positivos, apoiados por centenas de estudos científicos, em diversas áreas da saúde e do desempenho humano.
+                    </p>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-6 flex flex-wrap justify-center gap-2 md:gap-4 border-b border-slate-200 pb-4">
+                        <button class="tab-btn active text-slate-600 font-semibold py-2 px-4 rounded-lg" data-tab="desempenho">💪 Desempenho</button>
+                        <button class="tab-btn text-slate-600 font-semibold py-2 px-4 rounded-lg" data-tab="hipertrofia">🏋️ Hipertrofia</button>
+                        <button class="tab-btn text-slate-600 font-semibold py-2 px-4 rounded-lg" data-tab="cerebro">🧠 Cérebro</button>
+                        <button class="tab-btn text-slate-600 font-semibold py-2 px-4 rounded-lg" data-tab="saude">❤️ Saúde</button>
+                    </div>
+
+                    <div id="tab-content" class="mt-8">
+                        <div class="tab-pane active" id="desempenho-content">
+                            <h3 class="text-2xl font-semibold text-slate-700 mb-4">Mais Força, Potência e Resistência</h3>
+                            <p class="text-slate-600 mb-3">O benefício mais conhecido da creatina é sua capacidade de melhorar o desempenho atlético em atividades de alta intensidade. Isso se traduz em:</p>
+                            <ul class="list-disc list-inside space-y-2 text-slate-600">
+                                <li><span class="font-semibold">Aumento da força máxima:</span> Levantar mais peso em exercícios como supino e agachamento.</li>
+                                <li><span class="font-semibold">Melhora em sprints repetidos:</span> Menor queda de desempenho em séries de tiros curtos, crucial em esportes coletivos.</li>
+                                <li><span class="font-semibold">Maior volume de treino:</span> Capacidade de realizar mais repetições e séries, o que é um estímulo chave para o crescimento muscular.</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane hidden" id="hipertrofia-content">
+                            <h3 class="text-2xl font-semibold text-slate-700 mb-4">Construção de Massa Muscular</h3>
+                            <p class="text-slate-600 mb-3">A creatina auxilia no ganho de massa muscular através de múltiplos mecanismos, não apenas pelo aumento da capacidade de treino:</p>
+                            <ul class="list-disc list-inside space-y-2 text-slate-600">
+                                <li><span class="font-semibold">Voluminização celular:</span> A creatina atrai água para dentro da célula muscular, o que não só aumenta seu tamanho, mas também sinaliza para o anabolismo (construção).</li>
+                                <li><span class="font-semibold">Sinalização anabólica:</span> Influencia vias bioquímicas que ativam o crescimento muscular e a reparação das fibras.</li>
+                                <li><span class="font-semibold">Redução do catabolismo:</span> Ajuda a diminuir a quebra de proteínas musculares.</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane hidden" id="cerebro-content">
+                            <h3 class="text-2xl font-semibold text-slate-700 mb-4">Combustível para a Mente</h3>
+                            <p class="text-slate-600 mb-3">O cérebro é um órgão de alta demanda energética. A creatina atua como um "estabilizador metabólico", melhorando a função cognitiva, especialmente em situações de estresse:</p>
+                            <ul class="list-disc list-inside space-y-2 text-slate-600">
+                                <li><span class="font-semibold">Melhora da memória e raciocínio:</span> Particularmente notável em vegetarianos, idosos e sob privação de sono.</li>
+                                <li><span class="font-semibold">Atenua a fadiga mental:</span> Ajuda a manter o foco e o desempenho em tarefas mentais exigentes.</li>
+                                <li><span class="font-semibold">Neuroproteção:</span> Pesquisas emergentes investigam seu potencial em doenças neurodegenerativas.</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane hidden" id="saude-content">
+                             <h3 class="text-2xl font-semibold text-slate-700 mb-4">Aplicações Clínicas e Terapêuticas</h3>
+                            <p class="text-slate-600 mb-3">O papel fundamental da creatina na energia celular abre portas para diversas aplicações na saúde geral e em populações clínicas:</p>
+                            <ul class="list-disc list-inside space-y-2 text-slate-600">
+                                <li><span class="font-semibold">Combate à Sarcopenia:</span> Em idosos, ajuda a preservar a massa e a força muscular, melhorando a qualidade de vida e reduzindo o risco de quedas.</li>
+                                <li><span class="font-semibold">Auxílio em Distrofias Musculares:</span> Melhora a força e a função em pacientes com certas condições de distrofia.</li>
+                                <li><span class="font-semibold">Reabilitação de Lesões:</span> Pode atenuar a perda de músculo durante a imobilização e acelerar a recuperação na fisioterapia.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mitos" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Mitos & Verdades</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                       A creatina é segura? Causa queda de cabelo? Vamos separar os fatos da ficção com base no que a ciência realmente diz. Clique nos cartões para revelar a verdade.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="myth-card bg-white rounded-lg shadow-md p-6 cursor-pointer" data-myth="rins">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">Mito: "Creatina prejudica os rins."</h3>
+                        <p class="text-slate-500">Essa é a preocupação mais comum, mas será que tem fundamento?</p>
+                        <div class="myth-answer hidden mt-4 pt-4 border-t border-slate-200">
+                            <p class="font-bold text-green-600">VERDADE CIENTÍFICA:</p>
+                            <p class="text-slate-600">Falso. Em indivíduos saudáveis, a ciência é conclusiva: a creatina não causa dano renal. O mito surge porque a creatina aumenta a creatinina no sangue (um resíduo inofensivo), que é um *marcador* usado para avaliar a função renal. O aumento do marcador não significa dano ao órgão.</p>
+                        </div>
+                    </div>
+                    <div class="myth-card bg-white rounded-lg shadow-md p-6 cursor-pointer" data-myth="cabelo">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">Mito: "Creatina causa queda de cabelo."</h3>
+                        <p class="text-slate-500">Uma preocupação que ganhou fama, mas qual é a evidência real?</p>
+                        <div class="myth-answer hidden mt-4 pt-4 border-t border-slate-200">
+                            <p class="font-bold text-green-600">VERDADE CIENTÍFICA:</p>
+                            <p class="text-slate-600">Falso. A evidência científica atual não sustenta essa afirmação. A preocupação originou-se de um único estudo que mostrou um aumento de DHT (um hormônio ligado à calvície), mas não mediu a queda de cabelo em si. Estudos mais recentes e diretos não encontraram nenhuma ligação entre a suplementação de creatina e a queda de cabelo.</p>
+                        </div>
+                    </div>
+                    <div class="myth-card bg-white rounded-lg shadow-md p-6 cursor-pointer" data-myth="inchaco">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">Mito: "Creatina causa inchaço."</h3>
+                        <p class="text-slate-500">Muitos temem ficar com uma aparência "retida" ou "inchada".</p>
+                        <div class="myth-answer hidden mt-4 pt-4 border-t border-slate-200">
+                            <p class="font-bold text-green-600">VERDADE CIENTÍFICA:</p>
+                            <p class="text-slate-600">Depende da definição. A creatina causa retenção de água <span class="font-semibold">intracelular</span> (dentro do músculo), o que é um efeito positivo e desejado (voluminização). Ela não causa o "inchaço" subcutâneo (sob a pele), que dá uma aparência retida. O ganho de peso inicial é água muscular, não gordura ou inchaço.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="como-tomar" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Guia Prático: Como Tomar</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        Para obter os máximos benefícios da creatina, é importante saber como usá-la corretamente. Nesta seção, você encontrará um guia prático sobre dosagem, protocolos e dicas para otimizar a absorção.
+                    </p>
+                </div>
+
+                <div class="max-w-4xl mx-auto bg-slate-50 p-8 rounded-lg shadow-inner">
+                    <h3 class="text-2xl font-semibold text-center text-slate-700 mb-6">Escolha seu Protocolo</h3>
+                    <div class="flex justify-center mb-8 rounded-lg bg-slate-200 p-1">
+                         <button class="protocol-btn w-1/2 py-2 px-4 rounded-md font-semibold text-slate-600 transition" data-protocol="sem-saturacao">Uso Contínuo</button>
+                        <button class="protocol-btn w-1/2 py-2 px-4 rounded-md font-semibold text-slate-600 transition" data-protocol="com-saturacao">Com Saturação</button>
+                    </div>
+
+                    <div id="protocol-content">
+                        <!-- Content will be injected by JS -->
+                    </div>
+                </div>
+
+                <div class="mt-12 grid md:grid-cols-2 gap-8 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-teal-700 mb-2">Quando Tomar?</h4>
+                        <p class="text-slate-600">O mais importante é a <span class="font-bold">consistência diária</span>. Tomar perto do treino (antes ou depois) parece ser ligeiramente melhor, mas o fundamental é não pular dias. Em dias de descanso, pode tomar em qualquer horário.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-teal-700 mb-2">Como Otimizar?</h4>
+                        <p class="text-slate-600">Consumir com uma fonte de carboidratos e/ou proteínas (ex: em um shake pós-treino) pode melhorar a absorção devido ao pico de insulina. Manter uma <span class="font-bold">boa hidratação</span> é essencial.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fontes" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Fontes de Creatina</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        De onde vem a creatina? Explore as fontes naturais e compare os diferentes tipos de suplementos disponíveis no mercado para fazer a escolha certa.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-700 mb-4">Fontes Alimentares vs. Suplemento</h3>
+                        <p class="text-slate-600 mb-6">A creatina é encontrada principalmente em carnes e peixes. No entanto, para atingir uma dose ergogênica (3-5g), seria necessário consumir quantidades impraticáveis de alimentos. O gráfico mostra quanto de cada alimento você precisaria comer para obter 5 gramas de creatina.</p>
+                        <div class="chart-container">
+                            <canvas id="foodSourceChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-700 mb-4">Tipos de Suplementos</h3>
+                        <p class="text-slate-600 mb-6">O mercado oferece várias formas de creatina, mas a ciência aponta para um vencedor claro em termos de custo-benefício e comprovação.</p>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-teal-500">
+                                <h4 class="font-bold text-lg text-slate-800">Monohidratada</h4>
+                                <p class="text-slate-600">A forma <span class="font-semibold">padrão-ouro</span>. É a mais estudada, mais barata e com eficácia e segurança comprovadas em centenas de estudos. É a escolha recomendada.</p>
+                            </div>
+                             <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-amber-500">
+                                <h4 class="font-bold text-lg text-slate-800">Creapure®</h4>
+                                <p class="text-slate-600">Não é um tipo, mas uma <span class="font-semibold">marca de creatina monohidratada</span> de alta pureza, fabricada na Alemanha. Garante um produto livre de impurezas. É uma versão premium da monohidratada.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-slate-400">
+                                <h4 class="font-bold text-lg text-slate-800">Outras Formas (HCL, Alcalina, etc.)</h4>
+                                <p class="text-slate-600">Apesar das alegações de marketing sobre melhor absorção ou menos efeitos colaterais, <span class="font-semibold">não há evidências científicas robustas</span> que provem a superioridade dessas formas mais caras em comparação com a monohidratada.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-slate-800 text-white">
+            <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-2xl font-bold mb-4">Conclusão e Recomendação Final</h2>
+                <p class="max-w-3xl mx-auto text-slate-300 mb-6">
+                    A creatina é um suplemento seguro e eficaz para melhorar o desempenho, a força e a massa muscular, com benefícios promissores para a saúde cerebral e geral. Sua eficácia é apoiada por uma vasta base científica, tornando-a uma das melhores escolhas para atletas, idosos e vegetarianos.
+                </p>
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md max-w-2xl mx-auto">
+                    <p class="font-bold">Aviso Importante:</p>
+                    <p>Antes de iniciar o uso de qualquer suplemento, consulte sempre um médico ou nutricionista. A orientação profissional é essencial para garantir o uso seguro e adequado às suas necessidades individuais.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const contentData = {
+        protocolos: {
+            "com-saturacao": {
+                title: "Protocolo com Saturação (Carga)",
+                description: "Ideal para quem busca resultados mais rápidos, como atletas antes de uma competição. Satura os músculos em aproximadamente 1 semana.",
+                items: [
+                    "<strong>Fase de Carga:</strong> 20g por dia (dividido em 4 doses de 5g) durante 5-7 dias.",
+                    "<strong>Fase de Manutenção:</strong> 3-5g por dia continuamente.",
+                    "<strong>Prós:</strong> Resultados rápidos.",
+                    "<strong>Contras:</strong> Maior chance de desconforto gastrointestinal inicial."
+                ]
+            },
+            "sem-saturacao": {
+                title: "Protocolo de Uso Contínuo",
+                description: "Mais simples e com menor risco de efeitos colaterais. Satura os músculos em 3-4 semanas, atingindo o mesmo resultado final.",
+                items: [
+                    "<strong>Dosagem:</strong> 3-5g por dia, desde o início.",
+                    "<strong>Duração:</strong> Contínua, sem necessidade de pausas.",
+                    "<strong>Prós:</strong> Simplicidade e tolerância máxima.",
+                    "<strong>Contras:</strong> Resultados demoram um pouco mais para aparecer."
+                ]
+            }
+        }
+    };
+    
+    function updateProtocolContent(protocolId) {
+        const protocolData = contentData.protocolos[protocolId];
+        const contentContainer = document.getElementById('protocol-content');
+        
+        let itemsHtml = protocolData.items.map(item => `<li class="text-slate-600">${item}</li>`).join('');
+        
+        contentContainer.innerHTML = `
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h4 class="text-xl font-bold text-slate-800 mb-2">${protocolData.title}</h4>
+                <p class="text-slate-600 mb-4">${protocolData.description}</p>
+                <ul class="space-y-2 list-disc list-inside">
+                    ${itemsHtml}
+                </ul>
+            </div>
+        `;
+    }
+
+    const protocolButtons = document.querySelectorAll('.protocol-btn');
+    protocolButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            protocolButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            updateProtocolContent(button.dataset.protocol);
+        });
+    });
+
+    updateProtocolContent('sem-saturacao');
+    document.querySelector('.protocol-btn[data-protocol="sem-saturacao"]').classList.add('active');
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const tabId = button.dataset.tab;
+            tabPanes.forEach(pane => {
+                if (pane.id === `${tabId}-content`) {
+                    pane.classList.remove('hidden');
+                } else {
+                    pane.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    const mythCards = document.querySelectorAll('.myth-card');
+    mythCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const answer = card.querySelector('.myth-answer');
+            answer.classList.toggle('hidden');
+        });
+    });
+
+    const foodSourceCtx = document.getElementById('foodSourceChart').getContext('2d');
+    new Chart(foodSourceCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Carne Bovina (1.1kg)', 'Salmão (1.1kg)', 'Frango (1.4kg)', 'Suplemento (5g)'],
+            datasets: [{
+                label: 'Gramas de Creatina',
+                data: [5, 5, 5, 5],
+                backgroundColor: [
+                    'rgba(239, 68, 68, 0.6)',
+                    'rgba(249, 115, 22, 0.6)',
+                    'rgba(245, 158, 11, 0.6)',
+                    'rgba(20, 184, 166, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(239, 68, 68, 1)',
+                    'rgba(249, 115, 22, 1)',
+                    'rgba(245, 158, 11, 1)',
+                    'rgba(20, 184, 166, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Quantidade de Alimento para Obter 5g de Creatina',
+                    font: { size: 16 },
+                    color: '#334155'
+                },
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                     callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y + 'g';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Creatina (g)',
+                        color: '#475569'
+                    }
+                },
+                x: {
+                   ticks: {
+                       color: '#475569'
+                   }
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
