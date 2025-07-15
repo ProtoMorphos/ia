@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo da L-Arginina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Stone, Amber, Red for warnings) -->
+    <!-- Application Structure Plan: A tab-based, non-linear dashboard structure was chosen to allow users to navigate directly to their area of interest (e.g., Benefits, Risks, Dosing), rather than forcing a linear scroll through a dense report. This user-centric design respects different user goals (athlete vs. person with hypertension) and enhances usability. Key interactions include an interactive dosage calculator, clickable cards for detailed information, and data visualizations to simplify complex data points, such as the effect on blood pressure. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Blood pressure reduction stats. -> Goal: Compare/Inform -> Viz: Bar Chart (Chart.js/Canvas) -> Interaction: Hover for details -> Justification: Quantifies a key, proven benefit visually and effectively.
+        - Report Info: Dosing for different goals (performance, health). -> Goal: Guide -> Viz: Interactive Form (HTML/JS) -> Interaction: User selects goal and enters weight to see a calculated dose range. -> Justification: Provides personalized, actionable information, making the data more useful.
+        - Report Info: Serious contraindications (Post-MI, Herpes). -> Goal: Warn -> Viz: High-contrast alert cards (HTML/CSS) with icons. -> Interaction: Static, high-visibility. -> Justification: Critical safety information must be immediately apparent and unambiguous.
+        - Report Info: Arginine's metabolic roles. -> Goal: Inform -> Viz: Structured HTML/CSS diagram. -> Interaction: Clickable sections revealing text. -> Justification: Simplifies a complex biochemical concept into an explorable, easy-to-digest format.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 320px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .tab-active { border-color: #f59e0b; color: #f59e0b; font-weight: 600; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-5xl font-bold text-stone-900">Guia Interativo da L-Arginina</h1>
+            <p class="mt-2 md:mt-4 text-lg text-stone-600">Explore a ciência por trás do suplemento de forma clara e visual.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8 md:mb-12">
+            <button class="tab-btn py-3 px-4 md:px-6 text-sm md:text-base border-b-2 border-transparent hover:border-amber-500 hover:text-amber-500 transition-colors duration-300" data-tab="overview">Visão Geral</button>
+            <button class="tab-btn py-3 px-4 md:px-6 text-sm md:text-base border-b-2 border-transparent hover:border-amber-500 hover:text-amber-500 transition-colors duration-300" data-tab="benefits">Benefícios</button>
+            <button class="tab-btn py-3 px-4 md:px-6 text-sm md:text-base border-b-2 border-transparent hover:border-amber-500 hover:text-amber-500 transition-colors duration-300" data-tab="risks">Riscos e Segurança</button>
+            <button class="tab-btn py-3 px-4 md:px-6 text-sm md:text-base border-b-2 border-transparent hover:border-amber-500 hover:text-amber-500 transition-colors duration-300" data-tab="usage">Como Usar</button>
+            <button class="tab-btn py-3 px-4 md:px-6 text-sm md:text-base border-b-2 border-transparent hover:border-amber-500 hover:text-amber-500 transition-colors duration-300" data-tab="conclusion">Conclusão</button>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section active fade-in">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-stone-800">O que é a L-Arginina?</h2>
+                <p class="text-center max-w-3xl mx-auto mb-10 text-stone-600">A L-Arginina é um aminoácido "condicionalmente essencial". Isso significa que, embora nosso corpo possa produzi-lo, em situações de estresse (como treinos intensos, doenças ou lesões), a necessidade do corpo pode superar sua capacidade de produção, tornando a obtenção pela dieta ou suplementação crucial. Ela desempenha papéis vitais em diversos processos metabólicos.</p>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <h3 class="font-bold text-lg text-amber-600 mb-2">Precursora de Óxido Nítrico (NO)</h3>
+                        <p class="text-sm text-stone-600">Esta é sua função mais famosa. A Arginina é convertida em Óxido Nítrico, uma molécula que relaxa os vasos sanguíneos (vasodilatação). Isso aumenta o fluxo de sangue, o que é fundamental para a saúde cardiovascular, desempenho físico e função erétil.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <h3 class="font-bold text-lg text-amber-600 mb-2">Ciclo da Ureia</h3>
+                        <p class="text-sm text-stone-600">No fígado, a Arginina é essencial para converter a amônia, um subproduto tóxico do metabolismo de proteínas, em ureia. A ureia é então eliminada pela urina, desintoxicando o corpo.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <h3 class="font-bold text-lg text-amber-600 mb-2">Síntese de Creatina</h3>
+                        <p class="text-sm text-stone-600">A Arginina é um dos blocos de construção para a produção de creatina no corpo, uma molécula vital para a energia rápida nos músculos e no cérebro, especialmente durante atividades de alta intensidade.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="benefits" class="content-section fade-in">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 text-stone-800">Análise dos Benefícios Potenciais</h2>
+                <div class="space-y-12">
+                    <div class="p-6 bg-white rounded-lg shadow-md border border-stone-200">
+                        <h3 class="text-xl font-bold text-amber-700 mb-4">Saúde Cardiovascular</h3>
+                        <p class="text-stone-600 mb-6">Esta é uma das áreas com as evidências mais fortes. Ao aumentar a produção de óxido nítrico, a L-Arginina ajuda a melhorar a função endotelial (a saúde do revestimento dos vasos sanguíneos) e a reduzir a pressão arterial. Uma meta-análise de estudos clínicos mostrou reduções significativas, como visualizado no gráfico abaixo.</p>
+                        <div class="chart-container">
+                            <canvas id="bloodPressureChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="p-6 bg-white rounded-lg shadow-md border border-stone-200">
+                            <h3 class="text-xl font-bold text-amber-700 mb-4">Desempenho Esportivo</h3>
+                            <p class="text-stone-600 mb-4">A evidência aqui é mista e controversa. Enquanto o "efeito pump" (vasodilatação) é relatado, sua ligação direta com ganhos de força ou hipertrofia é fraca. Alguns estudos mostram melhorias modestas na resistência, mas dependem de doses e protocolos específicos.</p>
+                            <div class="bg-amber-50 border border-amber-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-amber-800">Mito do Hormônio do Crescimento (GH)</h4>
+                                <p class="text-sm text-amber-700 mt-2">A alegação de que a arginina oral aumenta o GH para ganho muscular é um grande mito. Na verdade, estudos mostram que tomar arginina *antes* do exercício pode diminuir a liberação natural de GH induzida pelo próprio treino.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-white rounded-lg shadow-md border border-stone-200">
+                            <h3 class="text-xl font-bold text-amber-700 mb-4">Saúde Sexual e Cicatrização</h3>
+                            <p class="text-stone-600 mb-4"><span class="font-semibold">Disfunção Erétil:</span> A arginina mostra eficácia no tratamento da disfunção erétil de leve a moderada, pois a ereção depende do fluxo sanguíneo mediado pelo óxido nítrico. A combinação com Picnogenol parece ser ainda mais eficaz.</p>
+                            <p class="text-stone-600"><span class="font-semibold">Cicatrização:</span> Em contextos clínicos, como na recuperação de cirurgias ou no tratamento de escaras, a suplementação (sob supervisão médica) pode acelerar a cicatrização de feridas, pois a arginina é necessária para a produção de colágeno.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="risks" class="content-section fade-in">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 text-stone-800">Riscos, Efeitos Colaterais e Contraindicações</h2>
+                <p class="text-center max-w-3xl mx-auto mb-10 text-stone-600">A arginina não é inofensiva. Por ser farmacologicamente ativa, apresenta riscos reais que devem ser conhecidos antes de qualquer uso. As contraindicações abaixo são particularmente graves.</p>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-red-50 border-l-4 border-red-500 text-red-800 p-6 rounded-r-lg shadow-md">
+                        <h3 class="font-bold text-lg flex items-center"><span class="text-2xl mr-3">❌</span> Contraindicação Absoluta: Pós-Infarto</h3>
+                        <p class="mt-2 text-sm">Um estudo clínico (VINTAGE MI) foi interrompido precocemente porque a suplementação com L-arginina em pacientes que haviam sofrido um infarto aumentou significativamente o risco de morte em comparação com o placebo. A L-arginina NUNCA deve ser usada após um ataque cardíaco.</p>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 text-red-800 p-6 rounded-r-lg shadow-md">
+                        <h3 class="font-bold text-lg flex items-center"><span class="text-2xl mr-3">⚠️</span> Alto Risco: Herpes</h3>
+                        <p class="mt-2 text-sm">O vírus do herpes (labial ou genital) utiliza a arginina para se replicar. A suplementação pode fornecer "combustível" para o vírus, podendo desencadear ou agravar surtos. Pessoas com histórico de herpes devem evitar o suplemento.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-bold text-amber-700 mb-4">Efeitos Colaterais e Interações Medicamentosas</h3>
+                    <ul class="space-y-3 text-stone-600 list-disc list-inside">
+                        <li><span class="font-semibold">Distúrbios Gastrointestinais:</span> O efeito colateral mais comum, especialmente em doses acima de 9-10g. Pode causar náusea, cólicas e diarreia.</li>
+                        <li><span class="font-semibold">Hipotensão (Pressão Baixa):</span> Pode causar tontura, especialmente se combinada com medicamentos para pressão arterial, nitratos (para angina) ou medicamentos para disfunção erétil (Viagra, Cialis). A combinação com nitratos é extremamente perigosa.</li>
+                        <li><span class="font-semibold">Risco de Sangramento:</span> Pode aumentar o risco de sangramento quando tomada com anticoagulantes (ex: Varfarina) ou antiplaquetários (ex: Aspirina).</li>
+                        <li><span class="font-semibold">Doenças Renais e Hepáticas:</span> Deve ser evitada por pessoas com problemas nos rins ou fígado, a menos que sob estrita supervisão médica.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="usage" class="content-section fade-in">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 text-stone-800">Protocolo de Uso: Como Tomar</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <h3 class="text-xl font-bold text-amber-700 mb-4">Calculadora de Dosagem Sugerida</h3>
+                        <p class="text-stone-600 mb-4">Esta calculadora fornece uma estimativa baseada em dados de estudos. Não substitui a orientação médica.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="goal" class="block text-sm font-medium text-stone-700">Qual seu objetivo?</label>
+                                <select id="goal" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-stone-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                                    <option value="none" selected disabled>Selecione um objetivo...</option>
+                                    <option value="performance_acute">Desempenho (Treino Único)</option>
+                                    <option value="performance_chronic">Desempenho (Uso Crônico)</option>
+                                    <option value="vascular">Saúde Vascular / Pressão</option>
+                                    <option value="ed">Disfunção Erétil</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="weight" class="block text-sm font-medium text-stone-700">Seu peso (em kg)</label>
+                                <input type="number" id="weight" class="mt-1 block w-full pl-3 pr-3 py-2 border border-stone-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm" placeholder="Ex: 80">
+                            </div>
+                        </div>
+                        <div id="dosageResult" class="mt-6 bg-amber-50 p-4 rounded-lg text-amber-800 text-center font-medium hidden"></div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 space-y-4">
+                        <h3 class="text-xl font-bold text-amber-700 mb-2">Outras Recomendações</h3>
+                        <div>
+                            <h4 class="font-semibold text-stone-800">Melhor Horário</h4>
+                            <p class="text-stone-600 text-sm mt-1">Para desempenho, tome 60-90 minutos antes do treino. Para outros fins, pode ser dividido ao longo do dia. É melhor tomar com o estômago vazio para melhorar a absorção.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-stone-800">Ciclos de Uso</h4>
+                            <p class="text-stone-600 text-sm mt-1">Não há uma regra clara, mas o uso contínuo em altas doses não é recomendado. Fazer pausas (ex: usar por 8 semanas, parar por 4) pode ser uma abordagem prudente para evitar que o corpo se adapte negativamente.</p>
+                        </div>
+                         <div>
+                            <h4 class="font-semibold text-stone-800">Arginina vs. L-Citrulina</h4>
+                            <p class="text-stone-600 text-sm mt-1">A L-Citrulina é um precursor da arginina que é melhor absorvido pelo corpo. Suplementar com L-Citrulina resulta em um aumento maior e mais estável de arginina no sangue do que tomar a própria arginina. Para muitos objetivos, a L-Citrulina pode ser uma escolha superior.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="conclusion" class="content-section fade-in">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-stone-800">Conclusão: Para Quem a L-Arginina Vale a Pena?</h2>
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-stone-200 max-w-4xl mx-auto">
+                    <p class="text-stone-600 mb-6">A L-Arginina é um suplemento de dois gumes. Por um lado, possui benefícios bem comprovados para <span class="font-semibold">saúde cardiovascular</span> (redução da pressão arterial) e <span class="font-semibold">disfunção erétil</span> leve. Por outro, suas promessas para <span class="font-semibold">desempenho esportivo</span> são inconsistentes, e a alegação sobre o <span class="font-semibold">aumento de GH</span> é em grande parte um mito.</p>
+                    <p class="text-stone-600 mb-6">Mais importante são os <span class="font-bold text-red-600">riscos graves e contraindicações fatais</span>, especialmente para quem já teve um infarto ou tem herpes. A L-Arginina não é um suplemento para ser tomado de forma leviana.</p>
+                    <div class="mt-6 bg-amber-100 border-l-4 border-amber-500 text-amber-900 p-4" role="alert">
+                        <p class="font-bold">Recomendação Final e Essencial</p>
+                        <p>A auto-suplementação é fortemente desaconselhada. A decisão de usar L-Arginina deve **SEMPRE** ser feita após uma consulta com um médico ou nutricionista. Apenas um profissional pode avaliar seu estado de saúde, seus medicamentos e determinar se os benefícios superam os riscos no seu caso específico.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const sections = document.querySelectorAll('.content-section');
+            const goalSelect = document.getElementById('goal');
+            const weightInput = document.getElementById('weight');
+            const dosageResultDiv = document.getElementById('dosageResult');
+
+            function updateTabs(activeTab) {
+                tabs.forEach(tab => {
+                    if (tab === activeTab) {
+                        tab.classList.add('tab-active');
+                    } else {
+                        tab.classList.remove('tab-active');
+                    }
+                });
+            }
+
+            function updateSections(activeSectionId) {
+                sections.forEach(section => {
+                    if (section.id === activeSectionId) {
+                        section.classList.add('active');
+                        section.classList.add('fade-in');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.dataset.tab;
+                    updateTabs(tab);
+                    updateSections(tabName);
+                });
+            });
+
+            const initialTab = document.querySelector('.tab-btn');
+            initialTab.classList.add('tab-active');
+
+            const bpChartCtx = document.getElementById('bloodPressureChart').getContext('2d');
+            const bpChart = new Chart(bpChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pressão Sistólica (mmHg)', 'Pressão Diastólica (mmHg)'],
+                    datasets: [{
+                        label: 'Redução Média (mmHg)',
+                        data: [5.39, 2.66],
+                        backgroundColor: [
+                            'rgba(245, 158, 11, 0.6)', 
+                            'rgba(217, 119, 6, 0.6)'    
+                        ],
+                        borderColor: [
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(217, 119, 6, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Redução Média da Pressão Arterial com Suplementação',
+                            font: { size: 16 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y.toFixed(2) + ' mmHg';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Redução (mmHg)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            function calculateDosage() {
+                const goal = goalSelect.value;
+                const weight = parseFloat(weightInput.value);
+                let resultText = '';
+
+                if (goal === 'none') {
+                    dosageResultDiv.classList.add('hidden');
+                    return;
+                }
+
+                if (!weight || weight <= 0) {
+                    resultText = 'Por favor, insira um peso válido.';
+                } else {
+                    switch(goal) {
+                        case 'performance_acute':
+                            const dose = (0.15 * weight).toFixed(1);
+                            resultText = `Dose sugerida: ${dose}g, tomados 60-90 min antes do treino. Atenção ao risco de desconforto gastrointestinal.`;
+                            break;
+                        case 'performance_chronic':
+                            resultText = 'Dose sugerida: 1.5g a 2g por dia, por 4-7 semanas.';
+                            break;
+                        case 'vascular':
+                            resultText = 'Dose sugerida: 4g a 24g por dia, divididos em 2-3 tomas. Comece com doses menores (3-6g) e ajuste conforme tolerância e orientação médica.';
+                            break;
+                        case 'ed':
+                            resultText = 'Dose sugerida: 1.5g a 5g por dia.';
+                            break;
+                    }
+                }
+                
+                dosageResultDiv.textContent = resultText;
+                dosageResultDiv.classList.remove('hidden');
+            }
+
+            goalSelect.addEventListener('change', calculateDosage);
+            weightInput.addEventListener('input', calculateDosage);
+
+        });
+    </script>
+</body>
+</html>
