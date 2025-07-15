@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo da Coenzima Q10</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Neutral Earth Tones -->
+    <!-- Application Structure Plan: A dashboard-style, single-page application with thematic sections. This structure was chosen to deconstruct the dense report into digestible, interactive modules. The user flow is designed to be intuitive: starting with fundamental concepts ("O que é?"), moving to specific applications ("Benefícios"), practical guidance ("Como Tomar"), safety information ("Riscos"), and supplementary data ("Fontes"). This non-linear approach enhances user engagement and allows for self-directed exploration, making complex information more accessible than a linear report. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification -> Library/Method.
+        1. CoQ10 Decline -> Goal: Illustrate change over time -> Viz: Line Chart -> Interaction: Tooltips -> Justification: Visually demonstrates the abstract concept of age-related decline -> Library: Chart.js.
+        2. Clinical Benefits -> Goal: Compare/Inform -> Viz: Interactive Cards Grid -> Interaction: Click-to-reveal content -> Justification: Prevents overwhelming the user with text; allows focused exploration of specific health areas -> Library: Vanilla JS.
+        3. Dosages -> Goal: Guide/Inform -> Viz: Interactive Bar Chart -> Interaction: Dropdown filter by condition -> Justification: Makes tabular data dynamic and practical for finding specific dosage information -> Library: Chart.js.
+        4. Risks & Interactions -> Goal: Warn/Organize -> Viz: Accordion -> Interaction: Click to expand/collapse -> Justification: Segments critical safety information cleanly, with visual cues for high-risk items (Warfarin) -> Library: Vanilla JS.
+        5. Food Sources -> Goal: Compare/Explore -> Viz: Horizontal Bar Chart -> Interaction: Tooltips -> Justification: More intuitive for comparing food content values than a static table -> Library: Chart.js.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #f97316;
+            border-bottom-color: #f97316;
+        }
+        .benefit-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-gray-800">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-orange-600">CoQ10</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#introducao" class="nav-link text-gray-600 font-medium px-3 py-2 text-sm border-b-2 border-transparent">Introdução</a>
+                        <a href="#beneficios" class="nav-link text-gray-600 font-medium px-3 py-2 text-sm border-b-2 border-transparent">Benefícios</a>
+                        <a href="#guia" class="nav-link text-gray-600 font-medium px-3 py-2 text-sm border-b-2 border-transparent">Guia de Uso</a>
+                        <a href="#riscos" class="nav-link text-gray-600 font-medium px-3 py-2 text-sm border-b-2 border-transparent">Riscos</a>
+                        <a href="#fontes" class="nav-link text-gray-600 font-medium px-3 py-2 text-sm border-b-2 border-transparent">Fontes Naturais</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <select id="mobile-nav" class="bg-white border border-gray-300 rounded-md py-2 px-3 text-sm">
+                        <option value="#introducao">Introdução</option>
+                        <option value="#beneficios">Benefícios</option>
+                        <option value="#guia">Guia de Uso</option>
+                        <option value="#riscos">Riscos</option>
+                        <option value="#fontes">Fontes Naturais</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="introducao" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Desvende a Coenzima Q10</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg leading-8 text-gray-600">Explore os papéis vitais da CoQ10 no corpo humano. Esta molécula é fundamental tanto para a produção de energia nas nossas células quanto para a proteção contra o stress oxidativo. Descubra como os seus níveis mudam com a idade e o que isso significa para a sua saúde.</p>
+
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold text-orange-600">⚡ Gerador de Energia Celular</h3>
+                        <p class="mt-4 text-gray-600">A CoQ10 é indispensável na mitocôndria, a "central elétrica" da célula. Ela atua como uma faísca na cadeia de produção de energia, ajudando a converter os alimentos que comemos em ATP, o combustível que alimenta cada músculo, pensamento e batimento cardíaco. Os órgãos com maior demanda energética, como coração, fígado e cérebro, possuem as maiores concentrações de CoQ10.</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold text-teal-600">🛡️ Guardião Antioxidante</h3>
+                        <p class="mt-4 text-gray-600">Na sua forma de Ubiquinol, a CoQ10 é um poderoso antioxidante. Ela protege as células contra os danos dos radicais livres, subprodutos do metabolismo. Esta ação defensiva ajuda a preservar a integridade das membranas celulares, do DNA e a prevenir a oxidação do colesterol LDL, um fator chave na saúde cardiovascular.</p>
+                    </div>
+                </div>
+
+                <div class="mt-16">
+                    <h3 class="text-2xl font-semibold text-gray-900">O Declínio Natural com a Idade</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">A produção de CoQ10 pelo corpo atinge o seu pico na juventude e diminui progressivamente com o passar dos anos. Este gráfico ilustra como essa queda pode impactar a energia e a proteção celular ao longo da vida, justificando o interesse na suplementação.</p>
+                    <div class="mt-8 chart-container">
+                        <canvas id="ageDeclineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="beneficios" class="py-16 sm:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold tracking-tight text-gray-900">Benefícios Clínicos Potenciais</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-lg leading-8 text-gray-600">A suplementação com CoQ10 tem sido estudada para diversas condições, principalmente aquelas ligadas à disfunção mitocondrial e ao stress oxidativo. Clique nos cartões abaixo para explorar as evidências científicas para cada área de aplicação.</p>
+                </div>
+
+                <div id="benefit-cards-container" class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+
+                <div id="benefit-details-container" class="mt-8"></div>
+            </div>
+        </section>
+
+        <section id="guia" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold tracking-tight text-gray-900">Guia Prático de Suplementação</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-lg leading-8 text-gray-600">Para obter os melhores resultados, a suplementação com CoQ10 deve seguir algumas diretrizes. Explore as dosagens recomendadas por condição e aprenda a otimizar a sua absorção e eficácia.</p>
+                </div>
+
+                <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-semibold text-gray-900">Dosagens por Objetivo Clínico</h3>
+                    <p class="mt-2 text-gray-600">Selecione uma condição para ver a faixa de dosagem diária tipicamente utilizada em estudos clínicos. Lembre-se que doses acima de 200mg/dia devem ser orientadas por um profissional de saúde.</p>
+                    <div class="mt-6">
+                        <label for="condition-select" class="block text-sm font-medium text-gray-700">Selecione a condição:</label>
+                        <select id="condition-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md">
+                        </select>
+                    </div>
+                    <div class="mt-6 chart-container h-64 md:h-80">
+                        <canvas id="dosageChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold text-orange-600">🍽️ Como Otimizar a Absorção</h3>
+                        <p class="mt-4 text-gray-600">A CoQ10 é lipossolúvel. Para maximizar a absorção, tome sempre o suplemento junto com uma refeição que contenha gorduras (ex: azeite, abacate, nozes). Tomar com o estômago vazio reduz drasticamente a sua eficácia.</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold text-teal-600">☀️ Melhor Horário para Tomar</h3>
+                        <p class="mt-4 text-gray-600">Devido ao seu papel na produção de energia, tomar CoQ10 à noite pode, raramente, causar insónia em pessoas sensíveis. O ideal é tomar o suplemento pela manhã ou ao almoço para aproveitar o impulso energético durante o dia.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="riscos" class="py-16 sm:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold tracking-tight text-gray-900">Segurança, Riscos e Interações</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-lg leading-8 text-gray-600">A CoQ10 é considerada muito segura, mas é crucial conhecer os seus efeitos colaterais raros, contraindicações e, especialmente, as suas interações com outros medicamentos. Consulte sempre um profissional de saúde.</p>
+                </div>
+                <div id="accordion-container" class="mt-12 max-w-4xl mx-auto space-y-4">
+                </div>
+            </div>
+        </section>
+
+        <section id="fontes" class="py-16 sm:py-24">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold tracking-tight text-gray-900">Fontes Naturais de CoQ10</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-lg leading-8 text-gray-600">Embora a suplementação seja necessária para atingir doses terapêuticas, uma dieta rica em CoQ10 contribui para a saúde geral. Veja o conteúdo aproximado em diferentes alimentos.</p>
+                </div>
+                 <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-semibold text-gray-900">Conteúdo de CoQ10 nos Alimentos (mg por 100g)</h3>
+                    <p class="mt-2 text-gray-600">Este gráfico compara a quantidade de CoQ10 em diversas fontes alimentares. Note como as doses de suplementos (geralmente acima de 100mg) são difíceis de alcançar apenas com a dieta.</p>
+                    <div class="mt-8 chart-container" style="height: 500px; max-height: 600px;">
+                        <canvas id="foodSourceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <p>Esta aplicação é uma ferramenta informativa baseada em pesquisa científica. As informações aqui contidas não substituem a consulta com um profissional de saúde qualificado.</p>
+            <p class="mt-2 text-sm text-gray-400">Desenvolvido como um guia interativo para exploração de dados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const benefitsData = [
+                {
+                    id: 'coracao',
+                    title: 'Saúde Cardíaca',
+                    icon: '❤️',
+                    color: 'text-red-500',
+                    summary: 'A área com as evidências mais robustas, especialmente na insuficiência cardíaca congestiva (ICC).',
+                    details: `
+                        <p class="text-gray-600">A suplementação com CoQ10 é uma terapia adjuvante bem estabelecida para a ICC. O coração é um dos órgãos que mais consome energia, e a deficiência de CoQ10 é comum em pacientes cardíacos.</p>
+                        <ul class="mt-4 list-disc list-inside space-y-2 text-gray-600">
+                            <li><strong>Estudo Q-SYMBIO:</strong> Demonstrou que 300mg/dia de CoQ10 (ubiquinona) reduziu a mortalidade por todas as causas em <strong>43%</strong> em pacientes com ICC.</li>
+                            <li><strong>Melhora da Função Cardíaca:</strong> Aumenta a fração de ejeção e a capacidade de exercício.</li>
+                            <li><strong>Pressão Arterial:</strong> Pode ajudar a reduzir a pressão arterial através da melhoria da função endotelial.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'fertilidade',
+                    title: 'Fertilidade',
+                    icon: '👶',
+                    color: 'text-pink-500',
+                    summary: 'Melhora a saúde dos gâmetas (óvulos e espermatozoides) ao otimizar a energia mitocondrial.',
+                    details: `
+                        <p class="text-gray-600">A CoQ10 melhora a função mitocondrial e protege os gâmetas do stress oxidativo, processos cruciais para a fertilidade masculina e feminina.</p>
+                        <ul class="mt-4 list-disc list-inside space-y-2 text-gray-600">
+                           <li><strong>Fertilidade Masculina:</strong> Estudos mostram melhorias significativas na motilidade (movimento), concentração e morfologia dos espermatozoides.</li>
+                           <li><strong>Fertilidade Feminina:</strong> Ajuda a reverter o declínio da qualidade dos óvulos associado à idade, melhorando a produção de energia necessária para a maturação e o desenvolvimento embrionário. Particularmente promissor para mulheres acima de 35 anos.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'enxaqueca',
+                    title: 'Profilaxia da Enxaqueca',
+                    icon: '🧠',
+                    color: 'text-purple-500',
+                    summary: 'Atua na disfunção mitocondrial e neuroinflamação, fatores ligados à enxaqueca.',
+                    details: `
+                        <p class="text-gray-600">Evidências crescentes apontam a disfunção mitocondrial como um fator na enxaqueca. A CoQ10 pode ser uma estratégia profilática eficaz.</p>
+                        <ul class="mt-4 list-disc list-inside space-y-2 text-gray-600">
+                            <li>Reduz a <strong>frequência, duração e severidade</strong> das crises.</li>
+                            <li>Estudos mostram que a CoQ10 diminui os níveis de marcadores inflamatórios como o CGRP, um alvo chave dos novos medicamentos para enxaqueca.</li>
+                            <li>As doses eficazes variam geralmente entre 300mg e 400mg por dia.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'pele',
+                    title: 'Saúde da Pele',
+                    icon: '✨',
+                    color: 'text-yellow-500',
+                    summary: 'Protege contra o envelhecimento cutâneo causado pelo stress oxidativo e radiação UV.',
+                    details: `
+                        <p class="text-gray-600">A CoQ10 combate o stress oxidativo, um dos principais causadores do envelhecimento da pele, tanto via oral quanto tópica.</p>
+                        <ul class="mt-4 list-disc list-inside space-y-2 text-gray-600">
+                            <li><strong>Uso Tópico:</strong> Penetra na epiderme, protegendo contra os danos da radiação UV e reduzindo a aparência de rídulas.</li>
+                            <li><strong>Suplementação Oral:</strong> Estudos mostram melhorias nos parâmetros do envelhecimento cutâneo, como elasticidade e suavidade da pele.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'desempenho',
+                    title: 'Desempenho Físico',
+                    icon: '🏃',
+                    color: 'text-blue-500',
+                    summary: 'Pode reduzir a fadiga e o dano muscular em atletas, mas a dose é um fator crítico.',
+                    details: `
+                        <p class="text-gray-600">O exercício intenso aumenta a produção de radicais livres. A CoQ10 pode mitigar este efeito, melhorando a produção de ATP e atuando como antioxidante.</p>
+                        <ul class="mt-4 list-disc list-inside space-y-2 text-gray-600">
+                           <li>Ajuda a diminuir a sensação de fadiga e pode reduzir a incidência de lesões musculares.</li>
+                           <li><strong>Dependente da Dose:</strong> Estudos mostram que doses mais elevadas (acima de 300mg/dia) são necessárias para observar benefícios mensuráveis no desempenho e recuperação.</li>
+                        </ul>
+                    `
+                },
+                 {
+                    id: 'neuro',
+                    title: 'Doenças Neurodegenerativas',
+                    icon: '🧬',
+                    color: 'text-green-500',
+                    summary: 'Resultados promissores em modelos animais, mas as evidências em humanos são inconclusivas.',
+                    details: `
+                        <p class="text-gray-600">A disfunção mitocondrial é central em doenças como Parkinson e Alzheimer. A CoQ10 é um candidato terapêutico lógico, mas os resultados em ensaios clínicos humanos têm sido mistos.</p>
+                        <ul class="mt-4 list-disc list-inside space-y-2 text-gray-600">
+                            <li><strong>Doença de Parkinson:</strong> Um estudo de Fase II com doses elevadas (1200mg/dia) mostrou um abrandamento do declínio funcional, mas um estudo de Fase III subsequente não confirmou os resultados.</li>
+                            <li><strong>Doença de Alzheimer:</strong> Evidências muito preliminares sugerem um possível benefício, mas são necessários ensaios de larga escala para qualquer conclusão. O uso nesta área permanece experimental.</li>
+                        </ul>
+                    `
+                }
+            ];
+            
+            const dosageData = {
+                'Saúde Geral / Antioxidante': { min: 50, max: 200 },
+                'Insuficiência Cardíaca': { min: 300, max: 300 },
+                'Hipertensão Arterial': { min: 100, max: 200 },
+                'Fertilidade': { min: 200, max: 600 },
+                'Profilaxia da Enxaqueca': { min: 300, max: 400 },
+                'Desempenho Desportivo': { min: 300, max: 500 },
+                'Sintomas de Estatinas': { min: 100, max: 300 },
+                'Doença de Parkinson (Experimental)': { min: 360, max: 1200 },
+            };
+
+            const accordionData = [
+                {
+                    title: 'Efeitos Colaterais Comuns (Raros e Leves)',
+                    content: 'A CoQ10 é extremamente bem tolerada. Quando ocorrem, os efeitos adversos são geralmente leves e transitórios. Os mais comuns são de natureza gastrointestinal, como desconforto no estômago, náuseas ou diarreia. Efeitos mais raros incluem dores de cabeça ou insónia (se tomada à noite).',
+                    color: 'blue'
+                },
+                {
+                    title: 'Contraindicações e Populações de Risco',
+                    content: 'Por precaução, a suplementação não é recomendada para crianças, grávidas ou lactantes sem aconselhamento médico. Pessoas com doenças renais ou hepáticas graves devem ter cautela. Pacientes em quimioterapia devem obrigatoriamente consultar o seu oncologista.',
+                    color: 'yellow'
+                },
+                {
+                    title: '🚨 Interação Crítica: Anticoagulantes (Varfarina)',
+                    content: '<strong>Esta é a interação mais importante e perigosa.</strong> A CoQ10 pode diminuir a eficácia da varfarina, aumentando o risco de coágulos sanguíneos (trombose, AVC). A sua estrutura é semelhante à da Vitamina K. Pacientes a tomar varfarina devem <strong>evitar a CoQ10</strong> ou usá-la apenas sob monitorização médica extremamente rigorosa com medições frequentes de INR.',
+                    color: 'red'
+                },
+                {
+                    title: 'Interação com Estatinas',
+                    content: 'As estatinas (medicamentos para o colesterol) bloqueiam a produção natural de CoQ10 no corpo. Esta depleção pode estar ligada a dores musculares (SAMS). Embora a suplementação seja comum para mitigar estes sintomas, as evidências clínicas sobre a sua eficácia são mistas e inconclusivas. A co-suplementação é segura, mas o benefício não é garantido.',
+                    color: 'blue'
+                },
+                {
+                    title: 'Interação com Anti-hipertensores',
+                    content: 'A CoQ10 pode ter um ligeiro efeito de redução da pressão arterial. Usada em conjunto com medicamentos para a hipertensão, pode potenciar o efeito, o que pode ser benéfico mas requer monitorização da pressão arterial para evitar hipotensão (pressão demasiado baixa).',
+                    color: 'blue'
+                }
+            ];
+
+            const foodData = {
+                labels: ['Coração de Boi', 'Sardinha (em óleo)', 'Cavala', 'Fígado de Boi', 'Bife de Boi', 'Amendoim', 'Frango (coxa)', 'Pistacho', 'Salmão', 'Espinafre'],
+                values: [11.3, 6.4, 6.7, 3.9, 3.1, 2.7, 2.1, 2.0, 0.9, 0.1]
+            };
+
+            Chart.defaults.font.family = 'Inter';
+            Chart.defaults.color = '#374151';
+
+            const ageDeclineCtx = document.getElementById('ageDeclineChart').getContext('2d');
+            new Chart(ageDeclineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['20', '30', '40', '50', '60', '70', '80'],
+                    datasets: [{
+                        label: 'Níveis Relativos de CoQ10',
+                        data: [100, 95, 80, 65, 50, 40, 30],
+                        borderColor: '#f97316',
+                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#f97316',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Nível (%)' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Idade (anos)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` Nível aproximado: ${context.raw}% do pico`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const benefitsContainer = document.getElementById('benefit-cards-container');
+            const detailsContainer = document.getElementById('benefit-details-container');
+            let activeBenefit = null;
+
+            benefitsData.forEach(benefit => {
+                const card = document.createElement('div');
+                card.className = 'benefit-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center';
+                card.innerHTML = `
+                    <div class="text-5xl">${benefit.icon}</div>
+                    <h3 class="mt-4 text-xl font-semibold text-gray-900">${benefit.title}</h3>
+                    <p class="mt-2 text-sm text-gray-500">${benefit.summary}</p>
+                `;
+                card.addEventListener('click', () => {
+                    if (activeBenefit === benefit.id) {
+                        detailsContainer.innerHTML = '';
+                        activeBenefit = null;
+                        document.querySelectorAll('.benefit-card').forEach(c => c.classList.remove('ring-2', 'ring-orange-500'));
+                    } else {
+                        detailsContainer.innerHTML = `
+                            <div class="bg-orange-50/50 border-l-4 border-orange-500 rounded-r-lg p-6 shadow-lg">
+                                <h3 class="text-2xl font-semibold ${benefit.color}">${benefit.icon} ${benefit.title}</h3>
+                                <div class="mt-4 text-base">${benefit.details}</div>
+                            </div>
+                        `;
+                        activeBenefit = benefit.id;
+                        document.querySelectorAll('.benefit-card').forEach(c => c.classList.remove('ring-2', 'ring-orange-500'));
+                        card.classList.add('ring-2', 'ring-orange-500');
+                        detailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+                benefitsContainer.appendChild(card);
+            });
+
+            const conditionSelect = document.getElementById('condition-select');
+            Object.keys(dosageData).forEach(condition => {
+                const option = document.createElement('option');
+                option.value = condition;
+                option.textContent = condition;
+                conditionSelect.appendChild(option);
+            });
+
+            const dosageCtx = document.getElementById('dosageChart').getContext('2d');
+            const dosageChart = new Chart(dosageCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Dose Mínima', 'Dose Máxima'],
+                    datasets: [{
+                        label: 'Dosagem Diária (mg)',
+                        data: [],
+                        backgroundColor: ['#6ee7b7', '#34d399'],
+                        borderColor: ['#059669', '#047857'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Miligramas (mg)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: ''
+                        }
+                    }
+                }
+            });
+
+            function updateDosageChart(condition) {
+                const data = dosageData[condition];
+                dosageChart.data.datasets[0].data = [data.min, data.max];
+                dosageChart.options.plugins.title.text = `Dosagem para: ${condition}`;
+                dosageChart.update();
+            }
+
+            conditionSelect.addEventListener('change', (e) => updateDosageChart(e.target.value));
+            updateDosageChart(conditionSelect.value);
+
+
+            const accordionContainer = document.getElementById('accordion-container');
+            accordionData.forEach(item => {
+                const colorClasses = {
+                    red: { bg: 'bg-red-50', border: 'border-red-500', text: 'text-red-800' },
+                    yellow: { bg: 'bg-yellow-50', border: 'border-yellow-500', text: 'text-yellow-800' },
+                    blue: { bg: 'bg-blue-50', border: 'border-blue-500', text: 'text-blue-800' }
+                };
+                const theme = colorClasses[item.color] || colorClasses.blue;
+
+                const wrapper = document.createElement('div');
+                wrapper.className = `border ${theme.border} rounded-lg overflow-hidden`;
+                
+                const button = document.createElement('button');
+                button.className = `w-full text-left p-4 font-semibold ${theme.bg} ${theme.text} flex justify-between items-center transition`;
+                button.innerHTML = `<span>${item.title}</span><span class="transform transition-transform duration-300 ">▼</span>`;
+                
+                const content = document.createElement('div');
+                content.className = 'accordion-content bg-white p-4 border-t border-gray-200';
+                content.innerHTML = `<p class="text-gray-600">${item.content}</p>`;
+                
+                wrapper.appendChild(button);
+                wrapper.appendChild(content);
+                accordionContainer.appendChild(wrapper);
+
+                button.addEventListener('click', () => {
+                    const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = '0px');
+                    document.querySelectorAll('.accordion-content').forEach(el => el.previousElementSibling.querySelector('span:last-child').classList.remove('rotate-180'));
+                    
+                    if (!isExpanded) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        button.querySelector('span:last-child').classList.add('rotate-180');
+                    }
+                });
+            });
+
+            const foodSourceCtx = document.getElementById('foodSourceChart').getContext('2d');
+            new Chart(foodSourceCtx, {
+                type: 'bar',
+                data: {
+                    labels: foodData.labels,
+                    datasets: [{
+                        label: 'Conteúdo de CoQ10 (mg/100g)',
+                        data: foodData.values,
+                        backgroundColor: '#fb923c',
+                        borderColor: '#ea580c',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'mg por 100g' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.addEventListener('change', () => {
+                window.location.hash = mobileNav.value;
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
