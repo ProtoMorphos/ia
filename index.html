@@ -174,19 +174,56 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
+        
+        .card-content {
+            flex-grow: 1;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background-color: var(--cor-destaque-hover);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
 
         .card h3 {
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--cor-destaque);
-            margin-bottom: 15px;
+            color: var(--cor-texto);
+            margin-bottom: 10px;
         }
 
         .card p {
             font-size: 1rem;
             color: var(--cor-texto-secundario);
-            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
             margin-bottom: 25px;
+        }
+
+        .benefits-list li {
+            color: var(--cor-texto-secundario);
+            margin-bottom: 8px;
+            padding-left: 22px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            color: var(--cor-destaque);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 1px;
         }
 
         .card-button {
@@ -202,6 +239,7 @@
             cursor: pointer;
             width: 100%;
             text-align: center;
+            margin-top: auto; /* Empurra o botão para baixo */
         }
 
         .card-button:hover {
@@ -322,48 +360,78 @@
             <div class="cards-container">
                 <!-- Card 1: Arginina -->
                 <div class="card">
-                    <div>
+                    <div class="card-content">
+                        <span class="card-tag">Aminoácidos</span>
                         <h3>Arginina</h3>
-                        <p>O aminoácido essencial para o fluxo sanguíneo, vasodilatação e suporte ao óxido nítrico.</p>
+                        <p>Essencial para o fluxo sanguíneo, vasodilatação e suporte ao óxido nítrico.</p>
+                        <ul class="benefits-list">
+                            <li>Melhora circulação</li>
+                            <li>Aumenta performance</li>
+                            <li>Suporte cardiovascular</li>
+                        </ul>
                     </div>
                     <a href="https://protomorphos.github.io/ia/arginina.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
                 <!-- Card 2: Colina e Inositol -->
                 <div class="card">
-                    <div>
+                    <div class="card-content">
+                        <span class="card-tag">Nootrópicos</span>
                         <h3>Colina e Inositol</h3>
                         <p>A dupla poderosa para a saúde cerebral, função hepática e metabolismo de gorduras.</p>
+                        <ul class="benefits-list">
+                            <li>Saúde cerebral</li>
+                            <li>Função hepática</li>
+                            <li>Metabolismo</li>
+                        </ul>
                     </div>
                     <a href="https://protomorphos.github.io/ia/colinainositol.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
                 <!-- Card 3: Coenzima Q10 -->
                 <div class="card">
-                    <div>
+                    <div class="card-content">
+                        <span class="card-tag">Antioxidantes</span>
                         <h3>Coenzima Q10</h3>
-                        <p>O antioxidante vital para a produção de energia celular e proteção cardiovascular.</p>
+                        <p>Antioxidante vital para a produção de energia celular e proteção cardiovascular.</p>
+                         <ul class="benefits-list">
+                            <li>Energia celular</li>
+                            <li>Antioxidante</li>
+                            <li>Proteção cardíaca</li>
+                        </ul>
                     </div>
                     <a href="https://protomorphos.github.io/ia/q10.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
                 <!-- Card 4: Creatina -->
                 <div class="card">
-                    <div>
+                     <div class="card-content">
+                        <span class="card-tag">Performance</span>
                         <h3>Creatina</h3>
                         <p>O suplemento mais estudado para aumento de força, potência e massa muscular.</p>
+                        <ul class="benefits-list">
+                            <li>Força muscular</li>
+                            <li>Potência</li>
+                            <li>Massa muscular</li>
+                        </ul>
                     </div>
                     <a href="https://protomorphos.github.io/ia/creatina.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
                 <!-- Card 5: BCAA -->
                 <div class="card">
-                    <div>
+                    <div class="card-content">
+                        <span class="card-tag">Aminoácidos</span>
                         <h3>BCAA</h3>
                         <p>Aminoácidos de cadeia ramificada para recuperação muscular e síntese de proteínas.</p>
+                        <ul class="benefits-list">
+                            <li>Recuperação</li>
+                            <li>Síntese proteica</li>
+                            <li>Resistência</li>
+                        </ul>
                     </div>
                     <a href="https://protomorphos.github.io/ia/bcaa.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
             </div>
         </section>
 
-        <!-- Nova Seção de Informações Integradas -->
+        <!-- Seção de Informações e Gráficos -->
         <section class="section info-section" id="info">
             <h2 class="section-title">Os Titãs da Suplementação</h2>
             <p class="section-subtitle">O consumo de suplementos não é restrito a atletas. Diferentes faixas etárias e tipos de produtos dominam o mercado, cada um com um objetivo específico.</p>
@@ -420,98 +488,97 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const FONT_COLOR = '#343a40';
-            const GRID_COLOR = '#dee2e6';
-            // Paleta de cores baseada no verde principal
-            const PALETTE = ['#28a745', '#218838', '#2ea664', '#34c778', '#5dd599'];
+        // Movendo o código para fora do listener DOMContentLoaded, pois o script já está no final do body.
+        const FONT_COLOR = '#343a40';
+        const GRID_COLOR = '#dee2e6';
+        // Paleta de cores baseada no verde principal
+        const PALETTE = ['#28a745', '#218838', '#2ea664', '#34c778', '#5dd599'];
 
-            const commonChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: FONT_COLOR,
-                            font: {
-                                family: "'Poppins', sans-serif",
-                                size: 14
-                            }
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: FONT_COLOR,
+                        font: {
+                            family: "'Poppins', sans-serif",
+                            size: 14
                         }
-                    }
-                },
-                scales: {
-                    y: {
-                        ticks: { color: FONT_COLOR, font: { family: "'Poppins', sans-serif" } },
-                        grid: { color: GRID_COLOR }
-                    },
-                    x: {
-                        ticks: { color: FONT_COLOR, font: { family: "'Poppins', sans-serif" } },
-                        grid: { display: false }
                     }
                 }
-            };
-
-            // Gráfico de Tipos de Suplementos (Barras)
-            const supplementTypesCtx = document.getElementById('supplementTypesChart')?.getContext('2d');
-            if (supplementTypesCtx) {
-                new Chart(supplementTypesCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Proteínas', 'Vitaminas', 'Ômega 3', 'Probióticos', 'Ervas'],
-                        datasets: [{
-                            label: 'Participação de Mercado (%)',
-                            data: [45, 30, 12, 8, 5],
-                            backgroundColor: PALETTE,
-                            borderRadius: 5
-                        }]
-                    },
-                    options: {
-                        ...commonChartOptions,
-                        indexAxis: 'y',
-                        scales: {
-                            x: { grid: { color: GRID_COLOR } },
-                            y: { grid: { display: false } }
-                        }
-                    }
-                });
+            },
+            scales: {
+                y: {
+                    ticks: { color: FONT_COLOR, font: { family: "'Poppins', sans-serif" } },
+                    grid: { color: GRID_COLOR }
+                },
+                x: {
+                    ticks: { color: FONT_COLOR, font: { family: "'Poppins', sans-serif" } },
+                    grid: { display: false }
+                }
             }
+        };
 
-            // Gráfico de Demografia (Pizza)
-            const ageDemographicsCtx = document.getElementById('ageDemographicsChart')?.getContext('2d');
-            if (ageDemographicsCtx) {
-                new Chart(ageDemographicsCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['18-30 anos', '31-45 anos', '46-60 anos', '60+ anos'],
-                        datasets: [{
-                            label: 'Consumo por Faixa Etária',
-                            data: [40, 35, 15, 10],
-                            backgroundColor: PALETTE,
-                            hoverOffset: 4,
-                            borderColor: '#fff',
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                                labels: {
-                                    color: FONT_COLOR,
-                                    font: {
-                                        family: "'Poppins', sans-serif",
-                                        size: 14
-                                    }
+        // Gráfico de Tipos de Suplementos (Barras)
+        const supplementTypesCtx = document.getElementById('supplementTypesChart')?.getContext('2d');
+        if (supplementTypesCtx) {
+            new Chart(supplementTypesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Proteínas', 'Vitaminas', 'Ômega 3', 'Probióticos', 'Ervas'],
+                    datasets: [{
+                        label: 'Participação de Mercado (%)',
+                        data: [45, 30, 12, 8, 5],
+                        backgroundColor: PALETTE,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    ...commonChartOptions,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { grid: { color: GRID_COLOR } },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Gráfico de Demografia (Pizza)
+        const ageDemographicsCtx = document.getElementById('ageDemographicsChart')?.getContext('2d');
+        if (ageDemographicsCtx) {
+            new Chart(ageDemographicsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['18-30 anos', '31-45 anos', '46-60 anos', '60+ anos'],
+                    datasets: [{
+                        label: 'Consumo por Faixa Etária',
+                        data: [40, 35, 15, 10],
+                        backgroundColor: PALETTE,
+                        hoverOffset: 4,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: FONT_COLOR,
+                                font: {
+                                    family: "'Poppins', sans-serif",
+                                    size: 14
                                 }
                             }
                         }
                     }
-                });
-            }
-        });
+                }
+            });
+        }
     </script>
 
 </body>
