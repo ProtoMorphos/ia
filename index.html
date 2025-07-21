@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Biblioteca Chart.js para os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         /* --- Reset e Estilos Globais --- */
@@ -89,7 +92,6 @@
             background-attachment: fixed;
         }
 
-        /* Overlay escuro para legibilidade do texto */
         .hero::before {
             content: '';
             position: absolute;
@@ -123,20 +125,27 @@
             color: var(--cor-texto-hero);
         }
 
-        /* --- Seção de Suplementos --- */
-        .supplements-section {
+        /* --- Estilos de Seção Genéricos --- */
+        .section {
             padding: 80px 20px;
-            background-color: var(--cor-fundo); /* Garante fundo branco para esta seção */
             text-align: center;
         }
 
-        .supplements-section h2 {
+        .section-title {
             font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 50px;
             color: var(--cor-texto);
         }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--cor-texto-secundario);
+            max-width: 800px;
+            margin: -30px auto 50px auto;
+        }
 
+        /* --- Seção de Suplementos (Cards) --- */
         .cards-container {
             display: flex;
             justify-content: center;
@@ -147,7 +156,6 @@
             margin: 0 auto;
         }
 
-        /* --- Estilo dos Cards --- */
         .card {
             background-color: var(--cor-fundo);
             border: 1px solid var(--cor-borda);
@@ -159,6 +167,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            text-align: left;
         }
 
         .card:hover {
@@ -180,7 +189,6 @@
             margin-bottom: 25px;
         }
 
-        /* --- Estilo dos Botões --- */
         .card-button {
             display: inline-block;
             background-color: var(--cor-destaque);
@@ -193,49 +201,101 @@
             border: none;
             cursor: pointer;
             width: 100%;
+            text-align: center;
         }
 
         .card-button:hover {
             background-color: var(--cor-destaque-hover);
             transform: scale(1.02);
         }
+        
+        /* --- Seção de Informações e Gráficos --- */
+        .info-section {
+            background-color: var(--cor-fundo-secundaria);
+        }
+
+        /* Container dos Gráficos */
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+            text-align: left;
+        }
+        .chart-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .chart-box h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .chart-box p {
+            text-align: center;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 25px;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        /* Guia "Como Escolher" */
+        .choice-guide-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .guide-step {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--cor-destaque);
+        }
+        .guide-step .step-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-destaque);
+            margin-bottom: 10px;
+        }
+        .guide-step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .guide-step p {
+            color: var(--cor-texto-secundario);
+            font-size: 0.9rem;
+        }
 
         /* --- Rodapé --- */
         .footer {
             text-align: center;
             padding: 40px 20px;
-            background-color: var(--cor-fundo-secundaria);
-            font-size: 0.9rem;
-            color: var(--cor-texto-secundario);
-            border-top: 1px solid var(--cor-borda);
+            background-color: #343a40;
+            color: #f8f9fa;
         }
 
         /* --- Responsividade --- */
+        @media (max-width: 992px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .supplements-section {
-                padding: 60px 15px;
-            }
-
-            .supplements-section h2 {
-                font-size: 2rem;
-            }
-
-            .cards-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .navbar {
-                flex-direction: column;
-                gap: 10px;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .section { padding: 60px 15px; }
+            .section-title { font-size: 2rem; }
+            .cards-container { flex-direction: column; align-items: center; }
+            .navbar { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
@@ -257,10 +317,9 @@
 
     <main>
         <!-- Seção com os Cards de Suplementos -->
-        <section class="supplements-section" id="guias">
-            <h2>Explore Nossos Guias</h2>
+        <section class="section" id="guias">
+            <h2 class="section-title">Explore Nossos Guias</h2>
             <div class="cards-container">
-
                 <!-- Card 1: Arginina -->
                 <div class="card">
                     <div>
@@ -269,7 +328,6 @@
                     </div>
                     <a href="https://protomorphos.github.io/ia/arginina.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
-
                 <!-- Card 2: Colina e Inositol -->
                 <div class="card">
                     <div>
@@ -278,7 +336,6 @@
                     </div>
                     <a href="https://protomorphos.github.io/ia/colinainositol.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
-
                 <!-- Card 3: Coenzima Q10 -->
                 <div class="card">
                     <div>
@@ -287,7 +344,6 @@
                     </div>
                     <a href="https://protomorphos.github.io/ia/q10.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
-
                 <!-- Card 4: Creatina -->
                 <div class="card">
                     <div>
@@ -296,7 +352,6 @@
                     </div>
                     <a href="https://protomorphos.github.io/ia/creatina.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
-
                 <!-- Card 5: BCAA -->
                 <div class="card">
                     <div>
@@ -305,15 +360,159 @@
                     </div>
                     <a href="https://protomorphos.github.io/ia/bcaa.html" target="_blank" class="card-button">Saiba Mais</a>
                 </div>
+            </div>
+        </section>
 
+        <!-- Nova Seção de Informações Integradas -->
+        <section class="section info-section" id="info">
+            <h2 class="section-title">Os Titãs da Suplementação</h2>
+            <p class="section-subtitle">O consumo de suplementos não é restrito a atletas. Diferentes faixas etárias e tipos de produtos dominam o mercado, cada um com um objetivo específico.</p>
+
+            <!-- Gráficos -->
+            <div class="charts-container">
+                <div class="chart-box">
+                    <h3>Tipos Mais Populares</h3>
+                    <p>Proteínas e vitaminas dominam, mas outros nichos mostram força.</p>
+                    <div class="chart-wrapper">
+                        <canvas id="supplementTypesChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-box">
+                    <h3>Quem Consome?</h3>
+                    <p>Jovens adultos em busca de performance lideram o consumo.</p>
+                    <div class="chart-wrapper">
+                        <canvas id="ageDemographicsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title" style="margin-top: 80px;">Como Escolher o Suplemento Certo?</h2>
+            <p class="section-subtitle">Navegar pelo mundo dos suplementos pode ser confuso. Siga estes passos para tomar decisões mais seguras e eficazes.</p>
+
+            <div class="choice-guide-container">
+                <div class="guide-step">
+                    <div class="step-number">Passo 1</div>
+                    <h4>Defina o Objetivo</h4>
+                    <p>Busca energia, mais força, recuperação ou saúde geral? Tenha uma meta clara.</p>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">Passo 2</div>
+                    <h4>Consulte um Profissional</h4>
+                    <p>Um médico ou nutricionista pode indicar o melhor suplemento para suas necessidades.</p>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">Passo 3</div>
+                    <h4>Pesquise o Produto</h4>
+                    <p>Verifique a qualidade, selos de aprovação, e leia avaliações de outros usuários.</p>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">Passo 4</div>
+                    <h4>Comece com Cautela</h4>
+                    <p>Inicie com a menor dose recomendada e observe como seu corpo reage antes de aumentar.</p>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Rodapé -->
     <footer class="footer">
-        <p>&copy; 2024 Guia de Suplementos. Todas as informações são para fins educacionais.</p>
+        <p>&copy; 2024 Guia de Suplementos. Todas as informações são para fins educacionais. Sempre consulte um profissional de saúde.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const FONT_COLOR = '#343a40';
+            const GRID_COLOR = '#dee2e6';
+            // Paleta de cores baseada no verde principal
+            const PALETTE = ['#28a745', '#218838', '#2ea664', '#34c778', '#5dd599'];
+
+            const commonChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: FONT_COLOR,
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: FONT_COLOR, font: { family: "'Poppins', sans-serif" } },
+                        grid: { color: GRID_COLOR }
+                    },
+                    x: {
+                        ticks: { color: FONT_COLOR, font: { family: "'Poppins', sans-serif" } },
+                        grid: { display: false }
+                    }
+                }
+            };
+
+            // Gráfico de Tipos de Suplementos (Barras)
+            const supplementTypesCtx = document.getElementById('supplementTypesChart')?.getContext('2d');
+            if (supplementTypesCtx) {
+                new Chart(supplementTypesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Proteínas', 'Vitaminas', 'Ômega 3', 'Probióticos', 'Ervas'],
+                        datasets: [{
+                            label: 'Participação de Mercado (%)',
+                            data: [45, 30, 12, 8, 5],
+                            backgroundColor: PALETTE,
+                            borderRadius: 5
+                        }]
+                    },
+                    options: {
+                        ...commonChartOptions,
+                        indexAxis: 'y',
+                        scales: {
+                            x: { grid: { color: GRID_COLOR } },
+                            y: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // Gráfico de Demografia (Pizza)
+            const ageDemographicsCtx = document.getElementById('ageDemographicsChart')?.getContext('2d');
+            if (ageDemographicsCtx) {
+                new Chart(ageDemographicsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['18-30 anos', '31-45 anos', '46-60 anos', '60+ anos'],
+                        datasets: [{
+                            label: 'Consumo por Faixa Etária',
+                            data: [40, 35, 15, 10],
+                            backgroundColor: PALETTE,
+                            hoverOffset: 4,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: FONT_COLOR,
+                                    font: {
+                                        family: "'Poppins', sans-serif",
+                                        size: 14
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
