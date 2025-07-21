@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de BCAA: Mitos e Verdades</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: A tab-based SPA. The structure is designed to break down the dense scientific report into user-selectable thematic sections ("O Que São?", "Benefícios", "Riscos", etc.). This non-linear approach empowers users to explore topics based on their immediate questions, enhancing usability and comprehension. For example, a user only interested in food sources can navigate there directly. This is superior to a long, linear document as it prevents information overload and facilitates targeted learning. Key interactions include interactive charts for data comparison (BCAA vs Whey, Food Sources) and dynamic content displays for practical guidance (Dosage Ratios), making complex data intuitive. -->
+    <!-- Visualization & Content Choices: 
+        1. Report Info: BCAA Mechanisms. Goal: Inform. Viz: HTML Cards with icons. Interaction: Static. Justification: Visually separates complex biochemical roles for easy scanning. Method: HTML/Tailwind.
+        2. Report Info: Hypertrophy (BCAA vs. Whey). Goal: Compare. Viz: Bar Chart. Interaction: Hover tooltips. Justification: Clearly shows the superior effect of complete protein over isolated BCAAs, a core message of the report. Library: Chart.js.
+        3. Report Info: BCAA in Foods. Goal: Compare/Inform. Viz: Horizontal Bar Chart. Interaction: Filter buttons (Animal vs. Vegetal). Justification: Manages a large dataset, making it easy to compare sources and reinforcing the idea that BCAAs are abundant in a normal diet. Library: Chart.js.
+        4. Report Info: Dosage Ratios. Goal: Organize/Inform. Viz: HTML/CSS visual blocks. Interaction: Buttons to change ratio display and text. Justification: Provides a practical, interactive guide to a common point of confusion for consumers. Method: HTML/JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #3D405B;
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-button.active {
+            border-bottom-color: #E07A5F;
+            color: #E07A5F;
+            font-weight: 600;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .ratio-bar-container {
+            display: flex;
+            height: 40px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .ratio-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.875rem;
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#3D405B] mb-2">Guia Interativo sobre BCAA</h1>
+            <p class="text-lg text-gray-600">Mitos, Verdades e Evidências Científicas</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-gray-200 mb-8 space-x-2 md:space-x-6">
+            <button class="nav-button py-3 px-2 md:px-4 text-sm md:text-base" data-target="fundamentos">O Que São?</button>
+            <button class="nav-button py-3 px-2 md:px-4 text-sm md:text-base" data-target="beneficios">Benefícios vs. Realidade</button>
+            <button class="nav-button py-3 px-2 md:px-4 text-sm md:text-base" data-target="riscos">Riscos e Controvérsias</button>
+            <button class="nav-button py-3 px-2 md:px-4 text-sm md:text-base" data-target="guia">Guia de Uso</button>
+            <button class="nav-button py-3 px-2 md:px-4 text-sm md:text-base" data-target="fontes">Fontes Naturais</button>
+            <button class="nav-button py-3 px-2 md:px-4 text-sm md:text-base" data-target="veredito">Veredito Final</button>
+        </nav>
+
+        <main id="app-content">
+            <section id="fundamentos" class="content-section space-y-8">
+                <div class="bg-white/60 p-6 rounded-xl shadow-sm">
+                    <h2 class="text-2xl font-bold text-[#81B29A] mb-4">Fundamentos Bioquímicos e Fisiológicos</h2>
+                    <p class="text-gray-700 leading-relaxed">Os Aminoácidos de Cadeia Ramificada (BCAAs) são um grupo de três aminoácidos essenciais: Leucina, Isoleucina e Valina. São chamados de "essenciais" porque nosso corpo não consegue produzi-los, devendo ser obtidos através da dieta ou suplementação. Sua principal característica é serem metabolizados preferencialmente nos músculos, e não no fígado, o que lhes confere papéis únicos no metabolismo energético e na construção muscular.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                        <div class="text-4xl mb-3">L</div>
+                        <h3 class="text-xl font-semibold mb-2">Leucina</h3>
+                        <p class="text-gray-600 text-sm">Considerada o principal gatilho para a síntese de proteínas musculares, ativando a importante via de sinalização conhecida como mTOR.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                        <div class="text-4xl mb-3">I</div>
+                        <h3 class="text-xl font-semibold mb-2">Isoleucina</h3>
+                        <p class="text-gray-600 text-sm">Participa na síntese proteica e é crucial para a captação de glicose pelas células musculares, ajudando na produção de energia.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                        <div class="text-4xl mb-3">V</div>
+                        <h3 class="text-xl font-semibold mb-2">Valina</h3>
+                        <p class="text-gray-600 text-sm">Contribui para o fornecimento de energia e compete com o triptofano no cérebro, o que pode ajudar a reduzir a percepção de fadiga.</p>
+                    </div>
+                </div>
+                 <div class="bg-white/60 p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-[#81B29A] mb-4">Mecanismos de Ação</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">Os BCAAs exercem suas funções no corpo através de três vias principais, que são frequentemente citadas como justificativa para sua suplementação. Explore abaixo para entender como eles atuam na síntese proteica, como fonte de energia e no combate à fadiga central.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-4">
+                            <span class="text-2xl text-[#E07A5F]">💪</span>
+                            <div>
+                                <h4 class="font-semibold">Síntese Proteica Muscular</h4>
+                                <p class="text-gray-600">A Leucina age como um sinalizador que "liga" o processo de construção de novas proteínas no músculo (via mTOR). No entanto, para que a construção ocorra de fato, todos os outros aminoácidos essenciais precisam estar presentes em quantidade suficiente.</p>
+                            </div>
+                        </li>
+                         <li class="flex items-start space-x-4">
+                            <span class="text-2xl text-[#E07A5F]">⚡️</span>
+                            <div>
+                                <h4 class="font-semibold">Fonte de Energia</h4>
+                                <p class="text-gray-600">Durante exercícios longos e intensos, quando os estoques de glicogênio muscular diminuem, os BCAAs podem ser oxidados diretamente no músculo para gerar energia (ATP), ajudando a poupar o glicogênio restante.</p>
+                            </div>
+                        </li>
+                         <li class="flex items-start space-x-4">
+                            <span class="text-2xl text-[#E07A5F]">🧠</span>
+                            <div>
+                                <h4 class="font-semibold">Redução da Fadiga Central</h4>
+                                <p class="text-gray-600">A teoria sugere que os BCAAs competem com o triptofano (um precursor da serotonina, que causa sensação de cansaço) pela entrada no cérebro. Menos triptofano no cérebro significaria menor percepção de fadiga durante o exercício.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="beneficios" class="content-section space-y-8">
+                <div class="bg-white/60 p-6 rounded-xl shadow-sm">
+                    <h2 class="text-2xl font-bold text-[#81B29A] mb-4">Análise Crítica dos Benefícios Alegados</h2>
+                    <p class="text-gray-700 leading-relaxed mb-6">Muitos benefícios são atribuídos à suplementação de BCAA, mas a ciência moderna tem uma visão mais crítica. Esta seção analisa as alegações mais comuns e as confronta com as evidências científicas atuais, especialmente ao comparar a suplementação isolada de BCAA com a ingestão de fontes de proteína completas, como o whey protein.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Hipertrofia Muscular: BCAA isolado vs. Proteína Completa</h3>
+                            <p class="text-gray-600 mb-4">A alegação é que BCAAs aumentam a massa muscular. A leucina de fato inicia o sinal para a síntese proteica, mas sem os outros aminoácidos essenciais (disponíveis em proteínas completas), o processo não é sustentado. É como ligar o interruptor de uma fábrica sem ter a matéria-prima para produzir.</p>
+                            <div class="chart-container">
+                                <canvas id="hypertrophyChart"></canvas>
+                            </div>
+                             <p class="text-center text-sm text-gray-500 mt-2">Gráfico ilustrativo da resposta da síntese proteica muscular (SPM) após o consumo.</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg border border-gray-200">
+                             <h3 class="text-lg font-semibold mb-1">Redução da Dor Muscular (DOMS)</h3>
+                             <p class="text-gray-600"><span class="font-bold text-green-700">Evidência Moderada:</span> Alguns estudos mostram que suplementar com BCAA antes e depois do treino pode diminuir a dor muscular de início tardio e reduzir marcadores de dano muscular. Este é talvez o benefício mais bem suportado pela ciência, embora o efeito seja modesto.</p>
+                        </div>
+                        
+                         <div class="bg-white p-4 rounded-lg border border-gray-200">
+                             <h3 class="text-lg font-semibold mb-1">Melhora do Desempenho Atlético</h3>
+                             <p class="text-gray-600"><span class="font-bold text-red-700">Evidência Fraca:</span> Apesar da teoria da fadiga central, a maioria dos estudos não consegue demonstrar uma melhoria significativa na força, potência ou resistência em atletas que já consomem proteína adequada. O efeito, se existe, é mínimo.</p>
+                        </div>
+
+                         <div class="bg-white p-4 rounded-lg border border-gray-200">
+                             <h3 class="text-lg font-semibold mb-1">Efeito Anticatabólico (Preservar Músculos)</h3>
+                             <p class="text-gray-600"><span class="font-bold text-yellow-700">Evidência Limitada:</span> Em situações de déficit calórico, consumir BCAAs pode ajudar a sinalizar a preservação muscular. No entanto, o mesmo (ou melhor) efeito é alcançado com a ingestão de proteínas completas, que fornecem todos os blocos de construção necessários e promovem mais saciedade.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="riscos" class="content-section space-y-8">
+                <div class="bg-white/60 p-6 rounded-xl shadow-sm">
+                    <h2 class="text-2xl font-bold text-[#81B29A] mb-4">Pontos Fracos, Riscos e Controvérsias</h2>
+                    <p class="text-gray-700 leading-relaxed">A popularidade dos BCAAs contrasta com o crescente ceticismo da comunidade científica. A principal crítica é a redundância: se você já consome proteína suficiente de fontes completas (carne, ovos, whey, etc.), a suplementação de BCAA isolado oferece pouco ou nenhum benefício adicional. Além disso, existem potenciais desvantagens e riscos associados ao seu consumo crônico e em altas doses.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500">
+                        <h3 class="text-xl font-semibold mb-2">Riscos Metabólicos a Longo Prazo</h3>
+                        <p class="text-gray-600">Estudos epidemiológicos têm associado níveis cronicamente elevados de BCAAs no sangue a um maior risco de desenvolver resistência à insulina, obesidade e diabetes tipo 2. Acredita-se que o excesso de BCAAs pode interferir na sinalização da insulina e no metabolismo de lipídios.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500">
+                        <h3 class="text-xl font-semibold mb-2">Desequilíbrio de Aminoácidos</h3>
+                        <p class="text-gray-600">A ingestão excessiva de BCAAs pode prejudicar a absorção de outros aminoácidos importantes que usam os mesmos transportadores no intestino e no cérebro. Isso pode afetar negativamente a produção de neurotransmissores como a serotonina e a dopamina, impactando humor e função cognitiva.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-yellow-500">
+                        <h3 class="text-xl font-semibold mb-2">Efeitos Colaterais Comuns</h3>
+                        <p class="text-gray-600">Embora geralmente seguros nas doses recomendadas, alguns indivíduos podem experimentar distúrbios gastrointestinais, como náuseas, inchaço e diarreia, especialmente com o estômago vazio.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-yellow-500">
+                        <h3 class="text-xl font-semibold mb-2">Custo-Benefício Questionável</h3>
+                        <p class="text-gray-600">Considerando que os mesmos aminoácidos podem ser obtidos de forma mais barata e eficaz através de alimentos ou suplementos de proteína completa (que também oferecem outros nutrientes), o custo da suplementação isolada de BCAA é frequentemente injustificado.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="guia" class="content-section space-y-8">
+                 <div class="bg-white/60 p-6 rounded-xl shadow-sm">
+                    <h2 class="text-2xl font-bold text-[#81B29A] mb-4">Guia Prático de Suplementação</h2>
+                    <p class="text-gray-700 leading-relaxed mb-6">Embora a necessidade da suplementação de BCAA seja questionável para muitos, para aqueles que optam por usá-la, é fundamental entender como e quando tomar, as doses seguras e o que significam as diferentes proporções (ratios) anunciadas nos produtos. Esta seção oferece um guia prático baseado nas evidências disponíveis.</p>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Dosagem e Timing</h3>
+                            <p class="text-gray-600 mb-4">A dose eficaz geralmente varia de <strong>5 a 20 gramas por dia</strong>. O momento da ingestão depende do objetivo:</p>
+                            <ul class="space-y-3 list-disc list-inside text-gray-700">
+                                <li><strong>Pré/Intra-treino:</strong> Para potencialmente reduzir a fadiga e servir como fonte de energia.</li>
+                                <li><strong>Pós-treino:</strong> Para ajudar na redução da dor muscular (DOMS).</li>
+                            </ul>
+                            <p class="mt-4 text-sm text-gray-500">Importante: A dosagem ideal deve considerar o peso corporal e a ingestão total de proteína na dieta. Um profissional de nutrição pode ajudar a individualizar a recomendação.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Análise das Proporções (Ratios)</h3>
+                            <p class="text-gray-600 mb-4">Você verá produtos com ratios de Leucina:Isoleucina:Valina como 2:1:1, 4:1:1 ou até 10:1:1. A ênfase na Leucina se deve ao seu papel chave na síntese proteica. No entanto, não há evidências fortes de que ratios mais altos que 2:1:1 ou 3:1:1 ofereçam benefícios adicionais. O ratio <strong>2:1:1</strong> é o mais estudado e reflete a proporção natural encontrada na maioria das fontes de proteína.</p>
+                            <div class="space-y-4">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold" id="ratio-label">Ratio 2:1:1</span>
+                                        <div class="space-x-1">
+                                            <button class="ratio-btn bg-[#81B29A] text-white px-2 py-1 text-xs rounded-md" data-ratio="2:1:1">2:1:1</button>
+                                            <button class="ratio-btn bg-gray-300 text-gray-700 px-2 py-1 text-xs rounded-md" data-ratio="4:1:1">4:1:1</button>
+                                            <button class="ratio-btn bg-gray-300 text-gray-700 px-2 py-1 text-xs rounded-md" data-ratio="10:1:1">10:1:1</button>
+                                        </div>
+                                    </div>
+                                    <div id="ratio-visualizer" class="ratio-bar-container">
+                                        <div id="leucine-bar" class="ratio-bar bg-[#E07A5F]" style="width: 50%;">L</div>
+                                        <div id="isoleucine-bar" class="ratio-bar bg-[#3D405B]" style="width: 25%;">I</div>
+                                        <div id="valine-bar" class="ratio-bar bg-[#81B29A]" style="width: 25%;">V</div>
+                                    </div>
+                                    <p id="ratio-explanation" class="text-sm text-gray-600">A proporção mais clássica e estudada, similar à encontrada em alimentos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="fontes" class="content-section space-y-8">
+                 <div class="bg-white/60 p-6 rounded-xl shadow-sm">
+                    <h2 class="text-2xl font-bold text-[#81B29A] mb-4">Contexto Alimentar e Alternativas</h2>
+                    <p class="text-gray-700 leading-relaxed mb-6">Uma das razões pelas quais a suplementação de BCAA é frequentemente considerada desnecessária é sua abundância em alimentos comuns. Uma dieta rica em proteínas geralmente fornece todos os BCAAs necessários, muitas vezes em quantidades superiores às de uma dose de suplemento. Esta seção compara as fontes alimentares com os suplementos.</p>
+                    
+                    <div class="text-center mb-6">
+                        <button id="filter-all" class="bg-[#81B29A] text-white px-4 py-2 rounded-md mx-1">Todos</button>
+                        <button id="filter-animal" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md mx-1">Fontes Animais</button>
+                        <button id="filter-vegetal" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md mx-1">Fontes Vegetais</button>
+                    </div>
+
+                    <div class="chart-container" style="height: 500px; max-height: 600px;">
+                        <canvas id="foodSourcesChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-gray-500 mt-2">Conteúdo total de BCAA (g) por porção de 100g de alimento.</p>
+                </div>
+            </section>
+            
+            <section id="veredito" class="content-section space-y-8">
+                <div class="bg-white/60 p-6 rounded-xl shadow-sm">
+                    <h2 class="text-2xl font-bold text-[#81B29A] mb-4">Síntese e Veredito Final</h2>
+                    <p class="text-gray-700 leading-relaxed mb-6">Após analisar a bioquímica, os benefícios alegados, os riscos e as alternativas, podemos traçar um perfil claro sobre o papel do BCAA na nutrição moderna. Para quem a suplementação ainda pode fazer sentido? E para quem é um gasto desnecessário?</p>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
+                            <h3 class="text-xl font-semibold mb-3 text-green-800">✅ Para quem a suplementação PODE ser benéfica:</h3>
+                            <ul class="space-y-2 list-disc list-inside text-gray-700">
+                                <li><strong>Atletas de endurance:</strong> Durante treinos ou provas muito longas (mais de 2 horas), para fornecer energia e potencialmente reduzir a fadiga central.</li>
+                                <li><strong>Indivíduos com baixa ingestão de proteína:</strong> Veganos, vegetarianos ou idosos que não atingem a meta diária de proteína podem usar BCAA para garantir o estímulo à síntese proteica.</li>
+                                <li><strong>Em jejum:</strong> Para quem treina em jejum e deseja um estímulo anticatabólico sem consumir calorias significativas de uma refeição completa.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                            <h3 class="text-xl font-semibold mb-3 text-red-800">❌ Para quem a suplementação é provavelmente DESNECESSÁRIA:</h3>
+                            <ul class="space-y-2 list-disc list-inside text-gray-700">
+                                <li><strong>Praticantes de musculação recreacionais:</strong> Se você consome proteína suficiente ao longo do dia (ex: 1.6-2.2g/kg), os BCAAs da sua dieta já são mais que suficientes.</li>
+                                <li><strong>Pessoas que já usam whey protein:</strong> Uma dose de whey protein já contém uma quantidade de BCAA superior à maioria dos suplementos de BCAA isolados, além de todos os outros aminoácidos essenciais.</li>
+                                <li><strong>Indivíduos com foco em emagrecimento:</strong> Proteínas completas são mais eficazes para preservar a massa magra e promovem maior saciedade, o que é mais vantajoso em dietas com restrição calórica.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Conclusão: O Lugar do BCAA na Nutrição Esportiva</h3>
+                        <p class="text-gray-700 text-center max-w-3xl mx-auto leading-relaxed">Na era da otimização da ingestão de proteínas completas, a suplementação de BCAA isolado perdeu grande parte de sua relevância para a maioria das pessoas. Seu papel foi ofuscado pela ciência que demonstra a superioridade de um perfil completo de aminoácidos para a hipertrofia e recuperação. Embora possa ter aplicações de nicho, para o público geral, o veredito é claro: <strong>priorize a obtenção de BCAAs através de alimentos e suplementos de proteína completa.</strong> O dinheiro gasto em BCAA isolado seria, na maioria dos casos, melhor investido em comida de verdade ou em um pote de whey protein de qualidade.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 border-t pt-6">
+            <p class="text-sm text-gray-500">Este guia interativo foi compilado com base em pesquisas científicas. Consulte sempre um profissional de saúde ou nutrição.</p>
+            <p class="text-xs text-gray-400 mt-2">Gerado em: 21 de julho de 2025</p>
+        </footer>
+
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navButtons = document.querySelectorAll('.nav-button');
+        const contentSections = document.querySelectorAll('.content-section');
+        let hypertrophyChartInstance, foodSourcesChartInstance;
+
+        const ratioData = {
+            '2:1:1': { leucine: 50, isoleucine: 25, valine: 25, text: 'A proporção mais clássica e estudada, similar à encontrada em alimentos.' },
+            '4:1:1': { leucine: 66.6, isoleucine: 16.7, valine: 16.7, text: 'Ênfase maior na Leucina para maximizar o sinal de síntese proteica (mTOR).' },
+            '10:1:1': { leucine: 83.3, isoleucine: 8.35, valine: 8.35, text: 'Proporção extrema focada na Leucina. A necessidade dos outros dois aminoácidos torna sua eficácia questionável.' }
+        };
+        
+        const foodData = {
+            labels: ['Peito de Frango', 'Bife de Patinho', 'Salmão', 'Ovo (1 un)', 'Whey Protein (1 dose)', 'Leite (1 copo)', 'Queijo Cottage', 'Lentilha Cozida', 'Tofu Firme', 'Quinoa Cozida', 'Amêndoas'],
+            bcaa: [6.6, 6.2, 4.9, 1.3, 5.5, 2.0, 3.2, 2.5, 2.0, 1.2, 2.1],
+            type: ['animal', 'animal', 'animal', 'animal', 'animal', 'animal', 'animal', 'vegetal', 'vegetal', 'vegetal', 'vegetal']
+        };
+
+        const setActiveTab = (targetId) => {
+            navButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.target === targetId);
+            });
+            contentSections.forEach(section => {
+                section.classList.toggle('active', section.id === targetId);
+            });
+
+            if (targetId === 'beneficios' && !hypertrophyChartInstance) {
+                renderHypertrophyChart();
+            }
+            if (targetId === 'fontes' && !foodSourcesChartInstance) {
+                renderFoodSourcesChart(foodData.labels, foodData.bcaa);
+            }
+        };
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                setActiveTab(button.dataset.target);
+            });
+        });
+
+        function renderHypertrophyChart() {
+            const ctx = document.getElementById('hypertrophyChart').getContext('2d');
+            hypertrophyChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Resposta da Síntese Proteica'],
+                    datasets: [{
+                        label: 'BCAA Isolado',
+                        data: [3],
+                        backgroundColor: '#E07A5F',
+                        borderColor: '#E07A5F',
+                        borderWidth: 1
+                    }, {
+                        label: 'Proteína Completa (Whey)',
+                        data: [7],
+                        backgroundColor: '#81B29A',
+                        borderColor: '#81B29A',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Estímulo à Síntese Proteica Muscular (SPM)' },
+                        tooltip: { mode: 'index', intersect: false },
+                        legend: { position: 'top' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'SPM (unidades arbitrárias)' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderFoodSourcesChart(labels, data) {
+            if (foodSourcesChartInstance) {
+                foodSourcesChartInstance.destroy();
+            }
+            const ctx = document.getElementById('foodSourcesChart').getContext('2d');
+            foodSourcesChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'BCAA (g) por 100g',
+                        data: data,
+                        backgroundColor: '#81B29A',
+                        borderColor: '#3D405B',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                     plugins: {
+                        title: { display: true, text: 'Fontes Alimentares de BCAA' },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    return ` BCAA: ${context.raw}g`;
+                                }
+                            }
+                        },
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Gramas (g) de BCAA' }
+                        },
+                        y: {
+                            ticks: {
+                                autoSkip: false,
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        const filterButtons = document.querySelectorAll('#fontes button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.replace('bg-[#81B29A]', 'bg-gray-300').replace('text-white', 'text-gray-700'));
+                btn.classList.replace('bg-gray-300', 'bg-[#81B29A]').replace('text-gray-700', 'text-white');
+
+                let filteredLabels = [];
+                let filteredData = [];
+                
+                if (btn.id === 'filter-all') {
+                    filteredLabels = foodData.labels;
+                    filteredData = foodData.bcaa;
+                } else {
+                    const type = btn.id === 'filter-animal' ? 'animal' : 'vegetal';
+                    for(let i = 0; i < foodData.labels.length; i++) {
+                        if (foodData.type[i] === type) {
+                            filteredLabels.push(foodData.labels[i]);
+                            filteredData.push(foodData.bcaa[i]);
+                        }
+                    }
+                }
+                renderFoodSourcesChart(filteredLabels, filteredData);
+            });
+        });
+
+        const ratioButtons = document.querySelectorAll('.ratio-btn');
+        ratioButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const ratio = btn.dataset.ratio;
+                const data = ratioData[ratio];
+                
+                ratioButtons.forEach(b => b.classList.replace('bg-[#81B29A]', 'bg-gray-300').replace('text-white', 'text-gray-700'));
+                btn.classList.replace('bg-gray-300', 'bg-[#81B29A]').replace('text-gray-700', 'text-white');
+
+                document.getElementById('leucine-bar').style.width = `${data.leucine}%`;
+                document.getElementById('isoleucine-bar').style.width = `${data.isoleucine}%`;
+                document.getElementById('valine-bar').style.width = `${data.valine}%`;
+                
+                document.getElementById('ratio-label').textContent = `Ratio ${ratio}`;
+                document.getElementById('ratio-explanation').textContent = data.text;
+            });
+        });
+
+        setActiveTab('fundamentos');
+    });
+    </script>
+</body>
+</html>
