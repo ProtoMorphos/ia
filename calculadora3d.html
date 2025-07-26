@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Custos de Impressão 3D</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4A5568;
+            font-weight: 500;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            transition: border-color 0.2s;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #4299E1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+        }
+        .result-card {
+            background-color: #F7FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #EDF2F7;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .result-label {
+            color: #2D3748;
+            font-weight: 500;
+        }
+        .result-value {
+            color: #1A202C;
+            font-weight: 600;
+        }
+        .total-cost {
+            color: #2B6CB0;
+            font-size: 1.25rem;
+        }
+        .sale-price {
+            color: #2F855A;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Calculadora de Custos de Impressão 3D</h1>
+            <p class="text-gray-600 mt-2">Preencha os campos abaixo para obter o custo de produção e o preço de venda da sua peça.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Coluna de Entradas -->
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+                <!-- Custo do Material -->
+                <div class="input-group">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">1. Custo do Material</h2>
+                    <label for="preco_filamento" class="input-label">Preço do Rolo (R$)</label>
+                    <input type="number" id="preco_filamento" class="input-field" value="120">
+                    
+                    <label for="peso_rolo" class="input-label mt-4">Peso do Rolo (g)</label>
+                    <input type="number" id="peso_rolo" class="input-field" value="1000">
+
+                    <label for="peso_peca" class="input-label mt-4">Peso da Peça (g)</label>
+                    <input type="number" id="peso_peca" class="input-field" value="50">
+                </div>
+
+                <!-- Custo de Energia -->
+                <div class="input-group">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">2. Custo de Energia</h2>
+                    <label for="potencia_impressora" class="input-label">Potência da Impressora (W)</label>
+                    <input type="number" id="potencia_impressora" class="input-field" value="180">
+
+                    <label for="tempo_impressao" class="input-label mt-4">Tempo de Impressão (horas)</label>
+                    <input type="number" id="tempo_impressao" class="input-field" value="8">
+
+                    <label for="tarifa_energia" class="input-label mt-4">Tarifa de Energia (R$/kWh)</label>
+                    <input type="number" id="tarifa_energia" class="input-field" step="0.01" value="1.05">
+                </div>
+
+                <!-- Depreciação e Manutenção -->
+                <div class="input-group">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">3. Depreciação e Manutenção</h2>
+                    <label for="custo_impressora" class="input-label">Custo da Impressora (R$)</label>
+                    <input type="number" id="custo_impressora" class="input-field" value="5600">
+
+                    <label for="vida_util" class="input-label mt-4">Vida Útil da Impressora (horas)</label>
+                    <input type="number" id="vida_util" class="input-field" value="6000">
+                    
+                    <label for="custo_manutencao_hora" class="input-label mt-4">Custo de Manutenção (R$/hora)</label>
+                    <input type="number" id="custo_manutencao_hora" class="input-field" step="0.01" value="0.60">
+                </div>
+
+                <!-- Mão de Obra e Lucro -->
+                <div class="input-group">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">4. Mão de Obra e Lucro</h2>
+                    <label for="valor_hora_trabalho" class="input-label">Seu Valor por Hora (R$)</label>
+                    <input type="number" id="valor_hora_trabalho" class="input-field" value="30">
+
+                    <label for="tempo_trabalho" class="input-label mt-4">Tempo de Trabalho Manual (horas)</label>
+                    <input type="number" id="tempo_trabalho" class="input-field" step="0.1" value="0.75">
+                    
+                    <label for="margem_lucro" class="input-label mt-4">Margem de Lucro (%)</label>
+                    <input type="number" id="margem_lucro" class="input-field" value="150">
+                </div>
+                
+                <button id="calculateBtn" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-lg">
+                    Calcular Preço
+                </button>
+            </div>
+
+            <!-- Coluna de Resultados -->
+            <div class="sticky top-8 h-fit">
+                <div class="result-card shadow-lg">
+                    <h2 class="text-2xl font-bold text-center mb-6">Resultado do Cálculo</h2>
+                    
+                    <div id="results-container">
+                        <div class="result-item">
+                            <span class="result-label">Custo do Material:</span>
+                            <span id="materialCost" class="result-value">R$ 0,00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Custo de Energia:</span>
+                            <span id="energyCost" class="result-value">R$ 0,00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Depreciação da Máquina:</span>
+                            <span id="depreciationCost" class="result-value">R$ 0,00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Custo de Manutenção:</span>
+                            <span id="maintenanceCost" class="result-value">R$ 0,00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Custo de Mão de Obra:</span>
+                            <span id="laborCost" class="result-value">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t-2 border-dashed">
+                        <div class="text-center">
+                            <p class="text-lg text-gray-600 font-semibold">CUSTO TOTAL DE PRODUÇÃO</p>
+                            <p id="totalCost" class="font-bold my-2 total-cost">R$ 0,00</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-green-100 p-4 rounded-lg text-center">
+                        <p class="text-lg text-green-800 font-semibold">PREÇO DE VENDA SUGERIDO</p>
+                        <p id="salePrice" class="font-bold my-2 sale-price">R$ 0,00</p>
+                    </div>
+                     <div id="error-message" class="mt-4 text-center text-red-600 font-semibold"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para formatar números como moeda brasileira (BRL)
+        const formatCurrency = (value) => {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value);
+        };
+
+        // Função para obter o valor numérico de um campo de entrada
+        const getInputValue = (id) => {
+            const value = document.getElementById(id).value;
+            return parseFloat(value) || 0;
+        };
+
+        // Função principal de cálculo
+        const calculateCosts = () => {
+            // Limpa mensagens de erro
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = '';
+
+            // 1. Coleta de dados dos inputs
+            const precoFilamento = getInputValue('preco_filamento');
+            const pesoRolo = getInputValue('peso_rolo');
+            const pesoPeca = getInputValue('peso_peca');
+            const potenciaImpressora = getInputValue('potencia_impressora');
+            const tempoImpressao = getInputValue('tempo_impressao');
+            const tarifaEnergia = getInputValue('tarifa_energia');
+            const custoImpressora = getInputValue('custo_impressora');
+            const vidaUtil = getInputValue('vida_util');
+            const custoManutencaoHora = getInputValue('custo_manutencao_hora');
+            const valorHoraTrabalho = getInputValue('valor_hora_trabalho');
+            const tempoTrabalho = getInputValue('tempo_trabalho');
+            const margemLucro = getInputValue('margem_lucro');
+            
+            // Validação de entradas essenciais
+            if (pesoRolo <= 0 || vidaUtil <= 0) {
+                errorDiv.textContent = 'O peso do rolo e a vida útil da impressora devem ser maiores que zero.';
+                return;
+            }
+
+            // 2. Cálculos dos custos
+            // Custo do Material
+            const materialCost = (precoFilamento / pesoRolo) * pesoPeca;
+
+            // Custo de Energia
+            const energyCost = (potenciaImpressora / 1000) * tempoImpressao * tarifaEnergia;
+
+            // Custo de Depreciação
+            const depreciationCost = (custoImpressora / vidaUtil) * tempoImpressao;
+
+            // Custo de Manutenção
+            const maintenanceCost = custoManutencaoHora * tempoImpressao;
+            
+            // Custo de Mão de Obra
+            const laborCost = valorHoraTrabalho * tempoTrabalho;
+
+            // Custo Total
+            const totalCost = materialCost + energyCost + depreciationCost + maintenanceCost + laborCost;
+
+            // Preço de Venda
+            const salePrice = totalCost * (1 + (margemLucro / 100));
+
+            // 3. Exibição dos resultados formatados
+            document.getElementById('materialCost').textContent = formatCurrency(materialCost);
+            document.getElementById('energyCost').textContent = formatCurrency(energyCost);
+            document.getElementById('depreciationCost').textContent = formatCurrency(depreciationCost);
+            document.getElementById('maintenanceCost').textContent = formatCurrency(maintenanceCost);
+            document.getElementById('laborCost').textContent = formatCurrency(laborCost);
+            document.getElementById('totalCost').textContent = formatCurrency(totalCost);
+            document.getElementById('salePrice').textContent = formatCurrency(salePrice);
+        };
+
+        // Adiciona o listener ao botão
+        document.getElementById('calculateBtn').addEventListener('click', calculateCosts);
+        
+        // Calcula os custos iniciais ao carregar a página com os valores padrão
+        window.onload = calculateCosts;
+    </script>
+
+</body>
+</html>
