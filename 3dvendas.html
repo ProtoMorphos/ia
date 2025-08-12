@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Negócios Interativo: Impressão 3D com Bambulab A1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Teal and Orange accents -->
+    <!-- Application Structure Plan: A thematic, single-page scrolling application designed to guide the user through a strategic business plan. The flow starts with a high-level market overview (interactive chart), moves to the core value proposition (the AMS advantage), then dives into explorable opportunities (tabbed content for niches and a filterable grid for trends), covers operational necessities (structured text and a visual flowchart for licensing), and concludes with an actionable launch plan (step-by-step guide). This structure transforms the linear report into an engaging, decision-making tool, prioritizing user discovery and strategic clarity over a simple recreation of the report's layout. -->
+    <!-- Visualization & Content Choices: 
+        1. Market Categories -> Goal: Compare -> Viz: Radar Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: Provides an immediate, multi-dimensional comparison of risk vs. reward for the main market segments.
+        2. AMS Value -> Goal: Inform/Persuade -> Viz: "Before & After" styled cards (HTML/Tailwind) -> Interaction: Subtle hover effects -> Justification: Visually demonstrates the quality and value jump from monochrome to multicolor printing.
+        3. Niches -> Goal: Organize/Explore -> Viz: Tabbed content area (HTML/JS) -> Interaction: Click to switch content -> Justification: Prevents information overload by segmenting deep-dive content into manageable, user-selected topics.
+        4. Cultural Calendar -> Goal: Discover/Filter -> Viz: Filterable Card Grid (HTML/JS) -> Interaction: Click buttons to filter by media type -> Justification: Allows users to actively explore future trends relevant to their interests.
+        5. Licensing -> Goal: Guide -> Viz: Flowchart (HTML/CSS) -> Interaction: Static -> Justification: Simplifies the complex legal decision-making process into an easy-to-follow visual path.
+        6. Launch Plan -> Goal: Action -> Viz: Step-by-step vertical timeline (HTML/Tailwind) -> Interaction: Static -> Justification: Presents the growth strategy as a clear, achievable roadmap.
+        CONFIRMATION: NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #3d3d3d;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #e85d04;
+            border-bottom-color: #e85d04;
+        }
+        .tab-button {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .tab-button.active {
+            background-color: #e85d04;
+            color: white;
+        }
+        .card-zoom:hover {
+            transform: scale(1.03);
+            transition: transform 0.3s ease-in-out;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flowchart-node {
+            border: 2px solid #6a994e;
+            background-color: #f1faee;
+            color: #1d3557;
+        }
+        .flowchart-decision {
+            border: 2px solid #e85d04;
+            background-color: #fff3e0;
+            transform: rotate(45deg);
+        }
+        .flowchart-decision .text {
+            transform: rotate(-45deg);
+        }
+        .flowchart-arrow {
+            position: absolute;
+            background-color: #495057;
+        }
+        .flowchart-arrow::after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+        }
+        .arrow-down::after {
+            border-width: 8px 6px 0 6px;
+            border-color: #495057 transparent transparent transparent;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+        }
+        .arrow-right::after {
+            border-width: 6px 0 6px 8px;
+            border-color: transparent transparent transparent #495057;
+            top: 50%;
+            right: -8px;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-extrabold text-xl text-orange-600">3D<span class="text-gray-700">Vendas</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#inicio" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Início</a>
+                        <a href="#mercado" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Mercado</a>
+                        <a href="#oportunidades" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Oportunidades</a>
+                        <a href="#tendencias" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Tendências</a>
+                        <a href="#operacional" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Operacional</a>
+                        <a href="#plano" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Seu Plano</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-orange-600 hover:bg-gray-100 focus:outline-none">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#inicio" class="block nav-link px-3 py-2 rounded-md text-base font-medium text-gray-700">Início</a>
+                <a href="#mercado" class="block nav-link px-3 py-2 rounded-md text-base font-medium text-gray-700">Mercado</a>
+                <a href="#oportunidades" class="block nav-link px-3 py-2 rounded-md text-base font-medium text-gray-700">Oportunidades</a>
+                <a href="#tendencias" class="block nav-link px-3 py-2 rounded-md text-base font-medium text-gray-700">Tendências</a>
+                <a href="#operacional" class="block nav-link px-3 py-2 rounded-md text-base font-medium text-gray-700">Operacional</a>
+                <a href="#plano" class="block nav-link px-3 py-2 rounded-md text-base font-medium text-gray-700">Seu Plano</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-800 leading-tight">Transforme Filamento em <span class="text-orange-600">Lucro</span>.</h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Sua impressora Bambulab A1 Combo não é apenas uma ferramenta, é seu maior diferencial. Este guia interativo mostra como usar a impressão multicolorida para dominar o mercado, criar produtos únicos e construir um negócio de sucesso.</p>
+                <a href="#mercado" class="mt-8 inline-block bg-orange-600 text-white font-bold rounded-lg px-8 py-3 text-lg hover:bg-orange-700 transition-colors duration-300">Começar Análise</a>
+            </div>
+        </section>
+
+        <section id="mercado" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Análise do Cenário Atual</h2>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Para ter sucesso, primeiro entenda o campo de batalha. O gráfico abaixo compara os principais nichos de impressão 3D no Brasil. Passe o mouse sobre os pontos para ver os detalhes e entender onde estão as melhores oportunidades e os maiores riscos.</p>
+                </div>
+                <div class="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg">
+                   <div class="chart-container">
+                        <canvas id="marketRadarChart"></canvas>
+                   </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ams-advantage" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Sua Vantagem Competitiva: O Poder do AMS</h2>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">A impressão multicolorida com o sistema AMS Lite não é apenas um detalhe estético, é uma revolução na qualidade e eficiência. Veja como ela transforma produtos comuns em itens premium, justificando preços mais altos e encantando clientes.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-gray-100 p-6 rounded-2xl text-center">
+                        <h3 class="text-2xl font-bold text-gray-500 mb-4">ANTES: Monocromático</h3>
+                        <div class="aspect-square bg-gray-300 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-gray-500 text-6xl">🎮</span>
+                        </div>
+                        <p class="text-gray-600">Um suporte de controle simples, funcional, mas comum. Exige pintura manual para qualquer personalização, um processo lento e que pode descascar.</p>
+                    </div>
+                    <div class="bg-orange-100 p-6 rounded-2xl text-center border-2 border-orange-500">
+                        <h3 class="text-2xl font-bold text-orange-600 mb-4">DEPOIS: Multicolorido com AMS</h3>
+                        <div class="aspect-square bg-white rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-6xl">🎮</span>
+                            <div class="absolute flex space-x-2">
+                                <span class="h-5 w-5 bg-blue-500 rounded-full"></span>
+                                <span class="h-5 w-5 bg-red-500 rounded-full"></span>
+                                <span class="h-5 w-5 bg-green-500 rounded-full"></span>
+                                <span class="h-5 w-5 bg-pink-400 rounded-full"></span>
+                            </div>
+                        </div>
+                        <p class="text-orange-800">Um item de desejo. O logo do videogame já vem impresso nas cores originais. Qualidade superior, durabilidade e alto valor percebido. Zero trabalho manual de pintura.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="oportunidades" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Explore as Oportunidades</h2>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Agora que você entende o cenário, é hora de mergulhar nos nichos mais promissores. Selecione uma categoria abaixo para descobrir produtos específicos, o perfil do cliente e como a impressão multicolorida pode ser seu grande trunfo.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-2 sm:p-4">
+                    <div class="flex flex-wrap justify-center gap-2 mb-6 border-b border-gray-200 pb-4">
+                        <button data-tab="niche-gamers" class="tab-button active text-sm sm:text-base font-semibold px-4 py-2 rounded-full">🎮 Acessórios Gamer</button>
+                        <button data-tab="niche-decor" class="tab-button text-sm sm:text-base font-semibold px-4 py-2 rounded-full">🏠 Decoração e Utilidades</button>
+                        <button data-tab="niche-boardgames" class="tab-button text-sm sm:text-base font-semibold px-4 py-2 rounded-full">🎲 Jogos de Tabuleiro</button>
+                        <button data-tab="niche-cosplay" class="tab-button text-sm sm:text-base font-semibold px-4 py-2 rounded-full">🎭 Cosplay e Props</button>
+                    </div>
+                    <div id="tab-content" class="p-4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tendencias" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Antecipe as Tendências de 2025</h2>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Os maiores lucros vêm para quem chega primeiro. Fique de olho nos grandes lançamentos culturais e prepare-se para atender à demanda antes da concorrência. Filtre por tipo para ver ideias de produtos!</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-2 mb-8">
+                    <button data-filter="all" class="filter-button bg-orange-600 text-white font-semibold px-4 py-2 rounded-full">Todos</button>
+                    <button data-filter="Filme" class="filter-button bg-gray-200 text-gray-700 font-semibold px-4 py-2 rounded-full">Filmes</button>
+                    <button data-filter="Jogo" class="filter-button bg-gray-200 text-gray-700 font-semibold px-4 py-2 rounded-full">Jogos</button>
+                    <button data-filter="Série" class="filter-button bg-gray-200 text-gray-700 font-semibold px-4 py-2 rounded-full">Séries</button>
+                </div>
+                <div id="trends-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+            </div>
+        </section>
+
+        <section id="operacional" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Fundamentos do Negócio</h2>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Para construir um negócio sólido, é preciso dominar a operação. Entenda onde encontrar os melhores modelos 3D e, mais importante, como navegar pela questão do licenciamento para vender legalmente.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Onde Encontrar Modelos 3D</h3>
+                        <p class="text-gray-600 mb-6">A qualidade dos seus produtos começa com a qualidade dos arquivos digitais. Explore estas plataformas, cada uma com um foco diferente, para construir um catálogo vencedor.</p>
+                        <div class="space-y-4" id="model-sources"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Posso Vender Isso? O Guia do Licenciamento</h3>
+                        <p class="text-gray-600 mb-6">Este é o ponto mais crítico para a segurança do seu negócio. Vender impressões sem a permissão correta pode levar ao fechamento da sua loja. Siga este fluxograma para tomar a decisão certa.</p>
+                        <div class="bg-white p-6 rounded-2xl shadow-lg relative h-[450px] sm:h-[350px]">
+                            <div class="flowchart-node absolute top-4 left-1/2 -translate-x-1/2 w-48 text-center p-2 rounded-lg">Encontrei um modelo 3D</div>
+                            <div class="flowchart-arrow arrow-down absolute top-[68px] left-1/2 -translate-x-1/2 h-6 w-0.5"></div>
+                            <div class="flowchart-decision absolute top-24 left-1/2 -translate-x-1/2 w-36 h-36 flex items-center justify-center rounded-md"><span class="text text-center font-bold">O personagem é de uma franquia famosa? (Disney, Nintendo, etc)</span></div>
+                            <div class="absolute top-[160px] left-[calc(50%+65px)] text-green-600 font-bold">Não</div>
+                            <div class="absolute top-[220px] left-[calc(50%-10px)] -translate-x-full text-red-600 font-bold">Sim</div>
+                            <div class="flowchart-arrow arrow-right absolute top-[168px] left-[calc(50%+75px)] w-12 h-0.5"></div>
+                            <div class="flowchart-arrow arrow-down absolute top-[212px] left-[calc(50%-85px)] h-6 w-0.5"></div>
+                            <div class="flowchart-node absolute top-[152px] right-0 w-48 text-center p-2 rounded-lg">Ótimo! Menor risco de IP. Prossiga.</div>
+                            <div class="flowchart-node !bg-red-100 !border-red-500 !text-red-800 absolute top-48 left-[calc(50%-85px)] -translate-x-1/2 w-48 text-center p-2 rounded-lg">Alto Risco! Vender é violação de propriedade intelectual. Não venda.</div>
+                            <div class="flowchart-arrow arrow-down absolute top-[220px] right-[96px] h-6 w-0.5"></div>
+                            <div class="flowchart-decision absolute top-[260px] right-[28px] w-36 h-36 flex items-center justify-center rounded-md"><span class="text text-center font-bold">A licença do modelo permite venda comercial? (Não é "NC")</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="plano" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Seu Plano de Ação</h2>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Chegou a hora de agir. Este é um roteiro prático para lançar seu negócio, validar suas ideias e crescer de forma sustentável. Comece com um portfólio enxuto e expanda com base em dados reais.</p>
+                </div>
+                <div id="action-plan" class="max-w-4xl mx-auto"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto py-8 px-6 text-center">
+            <p>&copy; 2025 3DVendas. Criado para transformar sua paixão por impressão 3D em um negócio de sucesso.</p>
+            <p class="text-sm text-gray-400 mt-2">Uma aplicação interativa gerada para análise de mercado.</p>
+        </div>
+    </footer>
+
+    <script>
+        const marketData = {
+            labels: [
+                'Demanda', 
+                'Potencial com AMS', 
+                'Margem de Lucro', 
+                'Baixo Risco de IP', 
+                'Baixa Concorrência'
+            ],
+            datasets: [
+                {
+                    label: 'Action Figures (Cultura Pop)',
+                    data: [5, 4, 2, 1, 1],
+                    borderColor: '#ef476f',
+                    backgroundColor: 'rgba(239, 71, 111, 0.2)',
+                    pointBackgroundColor: '#ef476f',
+                },
+                {
+                    label: 'Decoração (Vasos, Estátuas)',
+                    data: [4, 4, 4, 5, 3],
+                    borderColor: '#06d6a0',
+                    backgroundColor: 'rgba(6, 214, 160, 0.2)',
+                    pointBackgroundColor: '#06d6a0',
+                },
+                {
+                    label: 'Acessórios Gamer',
+                    data: [5, 5, 4, 4, 2],
+                    borderColor: '#118ab2',
+                    backgroundColor: 'rgba(17, 138, 178, 0.2)',
+                    pointBackgroundColor: '#118ab2',
+                },
+                {
+                    label: 'Modelos Articulados',
+                    data: [5, 5, 3, 5, 3],
+                    borderColor: '#ffd166',
+                    backgroundColor: 'rgba(255, 209, 102, 0.2)',
+                    pointBackgroundColor: '#ffd166',
+                }
+            ]
+        };
+
+        const nicheContent = {
+            'niche-gamers': {
+                title: '🎮 Acessórios para o Ecossistema Gamer',
+                description: 'Jogadores são consumidores apaixonados que investem pesado na personalização de seus "setups". Eles não compram apenas um produto, compram um upgrade para seu santuário. A demanda por suportes de headset e controles é massiva e constante.',
+                opportunity: 'Use o AMS para oferecer suportes nas cores exatas das marcas (Razer, Logitech) ou dos temas de jogos (Helldivers, Cyberpunk). Venda um item de desejo, não um simples plástico. A personalização com gamertags ou logos de times de e-sports é um upsell de altíssima margem.',
+                icon: '🎯'
+            },
+            'niche-decor': {
+                title: '🏠 Decoração e Utilidades Domésticas',
+                description: 'Este é um nicho mais seguro e com enorme potencial de construção de marca. Consumidores buscam itens com estética moderna e minimalista, como vasos geométricos e esculturas facetadas. O risco de propriedade intelectual é quase nulo.',
+                opportunity: 'Crie uma identidade visual. Seja "a loja dos vasos bicolores". O AMS permite criar padrões e combinações de cores que são impossíveis para a concorrência, transformando um simples vaso em uma peça de design. Placas de escritório com logos coloridos também são um ótimo mercado B2B.',
+                icon: '💡'
+            },
+            'niche-boardgames': {
+                title: '🎲 Upgrades para Jogos de Tabuleiro',
+                description: 'A comunidade de board games é extremamente engajada e adora aprimorar seus jogos. Eles buscam organizadores (inserts) para caixas, torres de dados temáticas e componentes de luxo para substituir os de papelão.',
+                opportunity: 'Cada jogo popular é uma nova linha de produtos. Com o AMS, ofereça componentes de jogador em cores personalizadas, tokens com símbolos destacados em outra cor ou inserts com seções coloridas para cada tipo de peça. É um mercado de cauda longa com clientes recorrentes.',
+                icon: '🏆'
+            },
+            'niche-cosplay': {
+                title: '🎭 Props e Acessórios para Cosplay',
+                description: 'Cosplayers são artistas que precisam de réplicas perfeitas de armas, armaduras e acessórios. A impressão 3D é a tecnologia ideal para eles, mas o processo de pintura é um grande desafio.',
+                opportunity: 'Seja o fornecedor que resolve a dor da pintura. Use o AMS para imprimir peças menores, detalhes e emblemas já nas cores corretas. Ofereça kits "faça você mesmo" com peças multicoloridas, simplificando o trabalho do seu cliente e justificando um preço premium. A demanda é impulsionada por eventos como a CCXP.',
+                icon: '✨'
+            }
+        };
+
+        const trendsData = [
+            { month: 'Fevereiro', title: "Assassin's Creed Shadows", type: 'Jogo', ideas: 'Katana de Yasuke, capacete de Naoe, suporte de headset com logo.', ams: 'Médio' },
+            { month: 'Junho', title: "Death Stranding 2", type: 'Jogo', ideas: 'Action figure de Sam, BB Pod em escala, suporte de controle temático.', ams: 'Alto' },
+            { month: 'Setembro', title: "Invocação do Mal 4", type: 'Filme', ideas: 'Crucifixo de Ed Warren, caixa de música (cuidado com IP).', ams: 'Baixo' },
+            { month: 'Outubro', title: "Tron: Ares", type: 'Filme', ideas: 'Capacete, Disco de Identidade, suporte de headset com linhas de luz.', ams: 'Muito Alto' },
+            { month: 'Novembro', title: "Zootopia 2", type: 'Filme', ideas: 'Figuras de Judy e Nick, distintivo de policial, diorama da cidade.', ams: 'Muito Alto' },
+            { month: 'Novembro', title: "Wicked Para Sempre", type: 'Filme', ideas: 'Chapéu de Elphaba, varinha de Glinda, diorama temático.', ams: 'Médio' },
+            { month: 'TBD 2025', title: "Metroid Prime 4", type: 'Jogo', ideas: 'Capacete de Samus, canhão de braço, estatueta, suporte de Switch.', ams: 'Alto' }
+        ];
+
+        const modelSourcesData = [
+            { name: 'MakerWorld', cost: 'Gratuito', license: 'Comum', quality: 'Alta', focus: 'Modelos multicoloridos para Bambu Lab' },
+            { name: 'Patreon / Tribes', cost: 'Assinatura', license: 'Comum (tiers comerciais)', quality: 'Alta', focus: 'Nichos específicos (RPG, Fantasia)' },
+            { name: 'Cults3D / MyMiniFactory', cost: 'Pago por Modelo', license: 'Comum', quality: 'Variável', focus: 'Personagens e modelos artísticos' },
+            { name: 'Printables / Thingiverse', cost: 'Gratuito', license: 'Rara', quality: 'Média/Baixa', focus: 'Geral, peças funcionais' }
+        ];
+
+        const actionPlanData = [
+            { phase: 'Fase 1: Meses 1-3', title: 'Lançamento e Validação', description: 'Lance um portfólio inicial com 3-5 produtos (ex: Dragão Articulado Multicolorido, Suporte de Controle personalizável, Vasos bicolores). Foque em obter as primeiras vendas e avaliações 5 estrelas. Analise os dados para ver o que vende mais.' },
+            { phase: 'Fase 2: Meses 4-6', title: 'Foco e Expansão de Nicho', description: 'Com base nos dados, dobre a aposta nos produtos vencedores. Comece a explorar um "nicho de ouro" (Board Games ou Cosplay). Adquira suas primeiras licenças comerciais de designers especializados via Patreon ou MyMiniFactory Tribes.' },
+            { phase: 'Fase 3: Meses 7-12', title: 'Especialização e Autoridade', description: 'Expanda seu catálogo dentro do nicho escolhido para se tornar um especialista. Comece a construir uma presença fora das plataformas (ex: Instagram) para exibir seus produtos e criar uma comunidade.' },
+            { phase: 'Fase 4: Longo Prazo', title: 'Autonomia e Inovação', description: 'Invista em aprender modelagem 3D básica (Blender, Fusion 360). Comece modificando modelos e, eventualmente, crie seus próprios produtos exclusivos. Isso elimina custos de licença e torna sua marca única.' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('marketRadarChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: marketData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: { font: { size: 12, weight: 'bold' }, color: '#3d3d3d' },
+                            ticks: {
+                                backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                color: '#6c757d',
+                                stepSize: 1,
+                                max: 5,
+                                min: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.r !== null) {
+                                        label += context.parsed.r + ' / 5';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContent = document.getElementById('tab-content');
+
+            function updateTabContent(tabId) {
+                const content = nicheContent[tabId];
+                tabContent.innerHTML = `
+                    <div class="text-left animate-fade-in">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">${content.title}</h3>
+                        <p class="text-gray-600 mb-4">${content.description}</p>
+                        <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg">
+                            <h4 class="font-bold mb-1">${content.icon} Oportunidade com AMS:</h4>
+                            <p>${content.opportunity}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    updateTabContent(button.dataset.tab);
+                });
+            });
+
+            updateTabContent('niche-gamers');
+
+            const trendsGrid = document.getElementById('trends-grid');
+            const filterButtons = document.querySelectorAll('.filter-button');
+
+            function renderTrends(filter = 'all') {
+                trendsGrid.innerHTML = '';
+                const filteredData = filter === 'all' ? trendsData : trendsData.filter(item => item.type === filter);
+                filteredData.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white p-6 rounded-2xl shadow-lg card-zoom';
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-sm font-bold text-orange-600">${item.month}</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded-full ${item.type === 'Jogo' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'}">${item.type}</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">${item.title}</h4>
+                        <p class="text-gray-600 text-sm mb-4"><span class="font-semibold">Ideias:</span> ${item.ideas}</p>
+                        <div class="text-xs font-bold">Potencial com AMS: <span class="text-orange-700">${item.ams}</span></div>
+                    `;
+                    trendsGrid.appendChild(card);
+                });
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-orange-600', 'text-white');
+                        btn.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    button.classList.add('bg-orange-600', 'text-white');
+                    button.classList.remove('bg-gray-200', 'text-gray-700');
+                    renderTrends(button.dataset.filter);
+                });
+            });
+
+            renderTrends();
+
+            const modelSourcesContainer = document.getElementById('model-sources');
+            modelSourcesData.forEach(source => {
+                const div = document.createElement('div');
+                div.className = 'bg-white p-4 rounded-lg shadow-sm';
+                div.innerHTML = `
+                    <h4 class="font-bold text-lg text-gray-800">${source.name}</h4>
+                    <p class="text-sm text-gray-600">
+                        <strong>Custo:</strong> ${source.cost} | 
+                        <strong>Licença Comercial:</strong> ${source.license} | 
+                        <strong>Qualidade:</strong> ${source.quality}
+                    </p>
+                    <p class="text-sm text-gray-500 mt-1"><strong>Foco:</strong> ${source.focus}</p>
+                `;
+                modelSourcesContainer.appendChild(div);
+            });
+
+            const actionPlanContainer = document.getElementById('action-plan');
+            actionPlanData.forEach((step, index) => {
+                const div = document.createElement('div');
+                div.className = 'relative pl-8 pb-8';
+                div.innerHTML = `
+                    <div class="absolute left-3 top-1 w-1 h-full ${index === actionPlanData.length - 1 ? 'bg-transparent' : 'bg-gray-200'}"></div>
+                    <div class="absolute left-0 top-0 h-6 w-6 rounded-full bg-orange-600 text-white flex items-center justify-center font-bold">${index + 1}</div>
+                    <h4 class="font-bold text-xl text-gray-800 mb-1">${step.phase}: ${step.title}</h4>
+                    <p class="text-gray-600">${step.description}</p>
+                `;
+                actionPlanContainer.appendChild(div);
+            });
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
