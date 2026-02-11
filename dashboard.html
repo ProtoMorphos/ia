@@ -3,40 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Qualidade NIO</title>
+    <title>Painel de Qualidade NIO - Versão Estável</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <script type="importmap">
-    {
-        "imports": {
-            "react": "https://esm.sh/react@18.2.0",
-            "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-            "recharts": "https://esm.sh/recharts@2.12.0?external=react,react-dom",
-            "lucide-react": "https://esm.sh/lucide-react@0.309.0?external=react"
-        }
-    }
-    </script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/recharts@2.12.0/umd/Recharts.js"></script>
 
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    </style>
 </head>
 <body class="bg-slate-50">
     <div id="root"></div>
 
-    <script type="text/babel" data-type="module">
-        import React, { useState, useMemo } from 'react';
-        import { createRoot } from 'react-dom/client';
-        import { 
-          PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend 
-        } from 'recharts';
-        import { 
-          CheckCircle2, AlertCircle, Clock, CircleDashed, LayoutDashboard, List, 
-          Filter, Search, BarChart3, AlertTriangle, Ban, FileSpreadsheet, Activity, User
-        } from 'lucide-react';
+    <script type="text/babel">
+        // --- EXTRAÇÃO DAS VARIÁVEIS GLOBAIS (O segredo para não dar tela branca) ---
+        const { useState, useMemo } = React;
+        const { 
+            PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend 
+        } = Recharts;
 
-        // --- SEUS DADOS ---
+        // --- ÍCONES SVG (Embedados para evitar erros de importação) ---
+        const IconCheck = ({className, style}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>;
+        const IconAlert = ({className, style}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>;
+        const IconClock = ({className, style}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        const IconDashed = ({className, style}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}><circle cx="12" cy="12" r="10" strokeDasharray="4 4"/></svg>;
+        const IconBan = ({className, style}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>;
+        const IconSearch = ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
+        const IconActivity = ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>;
+
+        // --- DADOS ---
         const RAW_DATA = [
-          // --- FRONTEND ---
           { id: '1',  scenario: "Cadastrar CPF's/CNPJ's no Portal", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'Em andamento' },
           { id: '2',  scenario: "Alterar  de CPF's/CNPJ's no Portal", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'OK' }, 
           { id: '3',  scenario: "Cadastrar e alterar CPF's e CNPJ's via arquivo", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'Fora Escopo' },
@@ -51,8 +53,6 @@
           { id: '12', scenario: "Alterar localidade", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK' },
           { id: '13', scenario: "Consultar informações de processamento da carga da Receita", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK' },
           { id: '14', scenario: "Consultar informações de processamento da carga do DNE", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK' },
-
-          // --- BASE CORPORATIVA (Resp: Meta) ---
           { id: 'BC-1',  scenario: "Entrada: Carga inicial dos arquivos da Receita nas tabelas", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
           { id: 'BC-2',  scenario: "Entrada: Carga dos Arquivos da Receita nas tabelas", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
           { id: 'BC-3',  scenario: "Entrada: Carga de Arquivos da Receita nas tabelas", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
@@ -70,8 +70,6 @@
           { id: 'BC-14', scenario: "Saída: Extrair arquivos full de logradouros (mensal)", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
           { id: 'BC-15', scenario: "Saída: Extrair arquivos de movimento de logradouros (diário)", system: 'Base Corporativa', owner: 'Meta', priority: 'Não', status: 'Não iniciado' },
           { id: 'BC-16', scenario: "Saida: Extrair arquivos de localidades (mensal)", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
-
-          // --- WLA (Resp: Meta) ---
           { id: 'WLA-1',  scenario: "Verificar disponibilidade dos arquivos de pessoas físicas e jurídicas ", system: 'WLA/ Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
           { id: 'WLA-2',  scenario: "Copiar arquivos de pessoas físicas e jurídicas e disponibilizá-los no repositório destino do SIEBEL", system: 'WLA/ SIEBEL', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
           { id: 'WLA-3',  scenario: "Verificar disponibilidade dos arquivos de logradouros", system: 'WLA/ Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
@@ -80,8 +78,6 @@
           { id: 'WLA-6',  scenario: "Copiar arquivos de localidades e disponibilizá-los para o SIEBEL e ARBOR", system: 'WLA/ SIEBEL/ARBOR', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
           { id: 'WLA-7',  scenario: "Verificar disponibilidade do arquivo de empresas ", system: 'WLA/ Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
           { id: 'WLA-8',  scenario: "Copiar arquivos de empresas e disponibilizá-los para o SIEBEL e ARBOR", system: 'WLA/ARBOR', owner: 'Meta', priority: 'Sim', status: 'Não iniciado' },
-
-          // --- SIEBEL ---
           { id: 'SBL-1',  scenario: "Criar novo contato/conta no SIEBEL 6.3 ", system: 'SIEBEL 6.3', owner: '', priority: '', status: 'Não iniciado' },
           { id: 'SBL-2',  scenario: "Atualizar dados cadastrais  no SIEBEL 6.3 - manual", system: 'SIEBEL 6.3', owner: '', priority: '', status: 'Não iniciado' },
           { id: 'SBL-3',  scenario: "Atualizar dados cadastrais no SIEBEL 6.3 - massivo", system: 'SIEBEL 6.3', owner: '', priority: '', status: 'Não iniciado' },
@@ -98,11 +94,11 @@
 
         // --- CONFIGURAÇÃO VISUAL ---
         const STATUS_CONFIG = {
-          'OK': { color: '#22c55e', bg: 'bg-green-100', text: 'text-green-800', icon: CheckCircle2, label: 'Sucesso' },
-          'NOK': { color: '#ef4444', bg: 'bg-red-100', text: 'text-red-800', icon: AlertCircle, label: 'Falha/Erro' },
-          'Em andamento': { color: '#3b82f6', bg: 'bg-blue-100', text: 'text-blue-800', icon: Clock, label: 'Em Andamento' },
-          'Não iniciado': { color: '#9ca3af', bg: 'bg-gray-100', text: 'text-gray-800', icon: CircleDashed, label: 'Pendente' },
-          'Fora Escopo': { color: '#64748b', bg: 'bg-slate-200', text: 'text-slate-600', icon: Ban, label: 'Fora do Escopo' }
+          'OK': { color: '#22c55e', bg: 'bg-green-100', text: 'text-green-800', icon: IconCheck, label: 'Sucesso' },
+          'NOK': { color: '#ef4444', bg: 'bg-red-100', text: 'text-red-800', icon: IconAlert, label: 'Falha/Erro' },
+          'Em andamento': { color: '#3b82f6', bg: 'bg-blue-100', text: 'text-blue-800', icon: IconClock, label: 'Em Andamento' },
+          'Não iniciado': { color: '#9ca3af', bg: 'bg-gray-100', text: 'text-gray-800', icon: IconDashed, label: 'Pendente' },
+          'Fora Escopo': { color: '#64748b', bg: 'bg-slate-200', text: 'text-slate-600', icon: IconBan, label: 'Fora do Escopo' }
         };
 
         const getStatusIcon = (status) => {
@@ -122,7 +118,6 @@
           const [filterStatus, setFilterStatus] = useState('Todos');
 
           // --- CÁLCULOS E FILTROS ---
-
           const systems = useMemo(() => ['Todos', ...Array.from(new Set(RAW_DATA.map(i => i.system)))], []);
 
           const filteredData = useMemo(() => {
@@ -147,14 +142,10 @@
             const notStarted = RAW_DATA.filter(i => i.status === 'Não iniciado').length;
             const outOfScope = RAW_DATA.filter(i => i.status === 'Fora Escopo').length;
 
-            // Escopo Válido = Total - Fora Escopo
             const validTotal = total - outOfScope;
-            // Executados = OK + NOK
             const executed = ok + nok;
             
-            // KPIs
             const completionRate = validTotal > 0 ? Math.round((executed / validTotal) * 100) : 0;
-            // Taxa de Falha = NOK / Executados
             const failureRate = executed > 0 ? Math.round((nok / executed) * 100) : 0;
 
             return { total, ok, nok, progress, notStarted, outOfScope, completionRate, failureRate, validTotal };
@@ -169,7 +160,6 @@
           ].filter(i => i.value > 0);
 
           const chartDataBySystem = useMemo(() => {
-            // Agrupamento Visual Inteligente
             const normalizeSystem = (sys) => {
               if (sys.includes('SIEBEL')) return 'SIEBEL';
               if (sys.includes('WLA')) return 'WLA';
@@ -208,92 +198,42 @@
 
           return (
             <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-              {/* HEADER */}
               <header className="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="flex justify-between items-center h-16">
                     <div className="flex items-center space-x-3">
-                      <Activity className="w-6 h-6 text-indigo-600" />
+                      <IconActivity className="w-6 h-6 text-indigo-600" />
                       <div>
                         <h1 className="text-xl font-bold text-slate-800 leading-tight">Painel de Qualidade</h1>
                         <p className="text-xs text-slate-500">Baseado nos dados fornecidos</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 bg-slate-100 p-1 rounded-lg">
-                      <button
-                        onClick={() => setActiveTab('dashboard')}
-                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'dashboard' ? 'bg-white shadow text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}
-                      >
-                        Visão Geral
-                      </button>
-                      <button
-                        onClick={() => setActiveTab('list')}
-                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'list' ? 'bg-white shadow text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}
-                      >
-                        Lista
-                      </button>
+                      <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'dashboard' ? 'bg-white shadow text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}>Visão Geral</button>
+                      <button onClick={() => setActiveTab('list')} className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'list' ? 'bg-white shadow text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}>Lista</button>
                     </div>
                   </div>
                 </div>
               </header>
 
               <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                
-                {/* DASHBOARD VIEW */}
                 {activeTab === 'dashboard' && (
                   <div className="space-y-6">
-                    {/* CARDS */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                      <StatCard 
-                        title="Casos Válidos" 
-                        value={stats.validTotal} 
-                        icon={FileSpreadsheet} 
-                        colorClass="bg-indigo-500 text-indigo-600" 
-                        subtext={`(Exclui ${stats.outOfScope} fora do escopo)`}
-                      />
-                      <StatCard 
-                        title="Execução do Escopo" 
-                        value={`${stats.completionRate}%`} 
-                        icon={BarChart3} 
-                        colorClass="bg-blue-500 text-blue-600" 
-                        subtext={`${stats.notStarted} testes pendentes`}
-                      />
-                      <StatCard 
-                        title="Falhas/Erros" 
-                        value={stats.nok} 
-                        icon={AlertTriangle} 
-                        colorClass="bg-red-500 text-red-600" 
-                        subtext={`${stats.failureRate}% dos executados`}
-                      />
-                      <StatCard 
-                        title="Em Andamento" 
-                        value={stats.progress} 
-                        icon={Clock} 
-                        colorClass="bg-blue-400 text-blue-500" 
-                        subtext="Testes ativos no momento"
-                      />
+                      <StatCard title="Casos Válidos" value={stats.validTotal} icon={() => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h2"/><path d="M8 17h2"/><path d="M14 13h2"/><path d="M14 17h2"/></svg>} colorClass="bg-indigo-500 text-indigo-600" subtext={`(Exclui ${stats.outOfScope} fora do escopo)`} />
+                      <StatCard title="Execução do Escopo" value={`${stats.completionRate}%`} icon={() => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>} colorClass="bg-blue-500 text-blue-600" subtext={`${stats.notStarted} testes pendentes`} />
+                      <StatCard title="Falhas/Erros" value={stats.nok} icon={IconAlert} colorClass="bg-red-500 text-red-600" subtext={`${stats.failureRate}% dos executados`} />
+                      <StatCard title="Em Andamento" value={stats.progress} icon={IconClock} colorClass="bg-blue-400 text-blue-500" subtext="Testes ativos no momento" />
                     </div>
 
-                    {/* GRÁFICOS */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                      {/* PIE CHART */}
                       <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
                         <h3 className="text-lg font-semibold text-slate-800 mb-4">Distribuição de Status</h3>
                         <div className="h-64">
                           <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
-                              <Pie
-                                data={chartDataStatus}
-                                cx="50%"
-                                cy="50%"
-                                innerRadius={60}
-                                outerRadius={80}
-                                paddingAngle={5}
-                                dataKey="value"
-                              >
-                                {chartDataStatus.map((entry, index) => (
-                                  <Cell key={`cell-${index}`} fill={entry.color} />
-                                ))}
+                              <Pie data={chartDataStatus} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
+                                {chartDataStatus.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                               </Pie>
                               <Tooltip />
                               <Legend verticalAlign="bottom" height={36}/>
@@ -302,23 +242,15 @@
                         </div>
                       </div>
 
-                      {/* BAR CHART */}
                       <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 lg:col-span-2">
                         <h3 className="text-lg font-semibold text-slate-800 mb-4">Status por Sistema</h3>
                         <div className="h-64">
                           <ResponsiveContainer width="100%" height="100%">
-                            <BarChart
-                              data={chartDataBySystem}
-                              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                              layout="vertical"
-                            >
+                            <BarChart data={chartDataBySystem} margin={{ top: 20, right: 30, left: 20, bottom: 5 }} layout="vertical">
                               <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
                               <XAxis type="number" />
                               <YAxis dataKey="name" type="category" width={100} />
-                              <Tooltip 
-                                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                                cursor={{fill: '#f8fafc'}} 
-                              />
+                              <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} cursor={{fill: '#f8fafc'}} />
                               <Legend />
                               <Bar dataKey="OK" stackId="a" fill={STATUS_CONFIG['OK'].color} name="Sucesso" barSize={20} />
                               <Bar dataKey="NOK" stackId="a" fill={STATUS_CONFIG['NOK'].color} name="Falha/Erro" barSize={20} />
@@ -331,13 +263,9 @@
                       </div>
                     </div>
 
-                    {/* LISTA DE DEFEITOS (NOK) */}
                     <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
                       <div className="px-6 py-4 border-b border-slate-100 bg-red-50 flex justify-between items-center">
-                        <h3 className="text-lg font-semibold text-red-800 flex items-center gap-2">
-                          <AlertCircle className="w-5 h-5" />
-                          Falhas/Erros Identificados
-                        </h3>
+                        <h3 className="text-lg font-semibold text-red-800 flex items-center gap-2"><IconAlert className="w-5 h-5" />Falhas/Erros Identificados</h3>
                         <span className="px-3 py-1 bg-red-200 text-red-800 text-xs font-bold rounded-full">{stats.nok} Itens</span>
                       </div>
                       <div className="divide-y divide-slate-100 max-h-96 overflow-y-auto">
@@ -347,19 +275,12 @@
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-1">
                                   <span className="text-xs font-bold font-mono px-2 py-0.5 rounded bg-slate-200 text-slate-700">{item.id}</span>
-                                  <span className={`text-xs font-bold px-2 py-0.5 rounded border ${
-                                    item.system.includes('Frontend') ? 'bg-purple-100 text-purple-700 border-purple-200' : 
-                                    'bg-gray-100 text-gray-700 border-gray-200'
-                                  }`}>
-                                    {item.system}
-                                  </span>
+                                  <span className={`text-xs font-bold px-2 py-0.5 rounded border ${item.system.includes('Frontend') ? 'bg-purple-100 text-purple-700 border-purple-200' : 'bg-gray-100 text-gray-700 border-gray-200'}`}>{item.system}</span>
                                 </div>
                                 <h4 className="text-sm font-semibold text-slate-900">{item.scenario}</h4>
                               </div>
                               <div className="flex md:flex-col items-center md:items-end justify-between md:justify-start min-w-[120px]">
-                                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 border border-red-200 whitespace-nowrap">
-                                    Falha/Erro
-                                  </span>
+                                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 border border-red-200 whitespace-nowrap">Falha/Erro</span>
                                   <span className="text-xs text-slate-400 mt-0 md:mt-2">Resp: {item.owner}</span>
                               </div>
                             </div>
@@ -370,41 +291,19 @@
                   </div>
                 )}
 
-                {/* LIST VIEW */}
                 {activeTab === 'list' && (
                   <div className="space-y-4">
-                    {/* SEARCH & FILTERS */}
                     <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-4 items-center justify-between sticky top-20 z-10">
                       <div className="relative w-full md:w-96">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
-                        <input 
-                          type="text" 
-                          placeholder="Pesquisar ID, Cenário ou Sistema..." 
-                          className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                          value={searchTerm}
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                        />
+                        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"><IconSearch className="w-4 h-4" /></div>
+                        <input type="text" placeholder="Pesquisar ID, Cenário ou Sistema..." className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                       </div>
                       <div className="flex gap-2 w-full md:w-auto">
-                        <select 
-                          className="px-3 py-2 border border-slate-200 rounded-lg text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-1/2 md:w-auto"
-                          value={filterSystem}
-                          onChange={(e) => setFilterSystem(e.target.value)}
-                        >
-                          {systems.map(sys => <option key={sys} value={sys}>{sys}</option>)}
-                        </select>
-                        <select 
-                          className="px-3 py-2 border border-slate-200 rounded-lg text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-1/2 md:w-auto"
-                          value={filterStatus}
-                          onChange={(e) => setFilterStatus(e.target.value)}
-                        >
-                          <option value="Todos">Status</option>
-                          {Object.keys(STATUS_CONFIG).map(s => <option key={s} value={s}>{getStatusLabel(s)}</option>)}
-                        </select>
+                        <select className="px-3 py-2 border border-slate-200 rounded-lg text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-1/2 md:w-auto" value={filterSystem} onChange={(e) => setFilterSystem(e.target.value)}>{systems.map(sys => <option key={sys} value={sys}>{sys}</option>)}</select>
+                        <select className="px-3 py-2 border border-slate-200 rounded-lg text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-1/2 md:w-auto" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}><option value="Todos">Status</option>{Object.keys(STATUS_CONFIG).map(s => <option key={s} value={s}>{getStatusLabel(s)}</option>)}</select>
                       </div>
                     </div>
 
-                    {/* TABLE */}
                     <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
                       <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-slate-200">
@@ -420,31 +319,11 @@
                           <tbody className="bg-white divide-y divide-slate-200">
                             {filteredData.map((item) => (
                               <tr key={item.id + item.scenario} className="hover:bg-slate-50">
-                                <td className="px-6 py-4">
-                                  <div className="flex items-center gap-2">
-                                     <span className="text-xs font-mono font-bold text-slate-400">{item.id}</span>
-                                  </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                  <div className="text-sm font-medium text-slate-900">{item.scenario}</div>
-                                </td>
-                                <td className="px-6 py-4 hidden md:table-cell">
-                                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                    item.system.includes('Frontend') ? 'bg-purple-100 text-purple-800' : 
-                                    item.system.includes('Base Corporativa') ? 'bg-green-100 text-green-800' :
-                                    'bg-slate-100 text-slate-800'
-                                  }`}>
-                                    {item.system}
-                                  </span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${STATUS_CONFIG[item.status].bg} ${STATUS_CONFIG[item.status].text} border-transparent`}>
-                                    {getStatusLabel(item.status)}
-                                  </span>
-                                </td>
-                                <td className="px-6 py-4 text-sm text-slate-500 hidden md:table-cell whitespace-nowrap">
-                                  {item.owner}
-                                </td>
+                                <td className="px-6 py-4"><div className="flex items-center gap-2"><span className="text-xs font-mono font-bold text-slate-400">{item.id}</span></div></td>
+                                <td className="px-6 py-4"><div className="text-sm font-medium text-slate-900">{item.scenario}</div></td>
+                                <td className="px-6 py-4 hidden md:table-cell"><span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.system.includes('Frontend') ? 'bg-purple-100 text-purple-800' : item.system.includes('Base Corporativa') ? 'bg-green-100 text-green-800' : 'bg-slate-100 text-slate-800'}`}>{item.system}</span></td>
+                                <td className="px-6 py-4 whitespace-nowrap"><span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${STATUS_CONFIG[item.status].bg} ${STATUS_CONFIG[item.status].text} border-transparent`}>{getStatusLabel(item.status)}</span></td>
+                                <td className="px-6 py-4 text-sm text-slate-500 hidden md:table-cell whitespace-nowrap">{item.owner}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -458,8 +337,7 @@
           );
         }
 
-        // --- RENDERIZAÇÃO NO HTML ---
-        const root = createRoot(document.getElementById('root'));
+        const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<DashboardTestesNio />);
     </script>
 </body>
