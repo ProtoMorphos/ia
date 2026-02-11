@@ -3,58 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel NIO - Diagnóstico</title>
+    <title>Painel de Qualidade NIO</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; }
-        #error-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 9999; padding: 2rem; overflow: auto; }
-        .error-box { border: 2px solid #ef4444; background: #fef2f2; padding: 1.5rem; border-radius: 0.5rem; color: #991b1b; max-width: 800px; margin: 0 auto; font-family: monospace; }
+        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
     </style>
-
-    <script>
-        window.onerror = function(msg, url, line, col, error) {
-            document.getElementById('root').style.display = 'none';
-            const overlay = document.getElementById('error-overlay');
-            const msgBox = document.getElementById('error-message');
-            overlay.style.display = 'block';
-            msgBox.innerHTML = `<strong>ERRO DETECTADO:</strong><br>${msg}<br><br><strong>Local:</strong> Linha ${line}<br><small>${url}</small>`;
-            return false;
-        };
-    </script>
 
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-    
     <script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
-    
     <script crossorigin src="https://unpkg.com/recharts@2.12.0/umd/Recharts.js"></script>
-
+    
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body class="bg-slate-50">
-    <div id="error-overlay">
-        <div class="error-box">
-            <h2 class="text-xl font-bold mb-2">Ops! Ocorreu um erro.</h2>
-            <p>Tire um print desta tela e mande para análise.</p>
-            <hr class="border-red-200 my-4">
-            <div id="error-message"></div>
-        </div>
-    </div>
-
-    <div id="root">Carregando painel...</div>
+    <div id="root"></div>
 
     <script type="text/babel">
-        // --- VERIFICAÇÃO DE SEGURANÇA ---
-        if (!window.React) throw new Error("React não foi carregado corretamente.");
-        if (!window.ReactDOM) throw new Error("ReactDOM não foi carregado corretamente.");
-        if (!window.Recharts) throw new Error("A biblioteca Recharts falhou ao carregar. O link CDN pode estar bloqueado ou instável.");
-
-        console.log("Bibliotecas carregadas com sucesso!");
-
-        // --- INÍCIO DO CÓDIGO DO PAINEL ---
+        // --- CONFIGURAÇÃO INICIAL ---
         const { useState, useMemo } = React;
-        // Extração segura do objeto global Recharts
         const { 
             PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend 
         } = window.Recharts;
