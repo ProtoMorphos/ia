@@ -9,16 +9,16 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- 2. Prop-Types (Essencial para Recharts UMD) -->
+    <!-- 2. Prop-Types -->
     <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
     
-    <!-- 3. Recharts (Gráficos) -->
+    <!-- 3. Recharts -->
     <script src="https://unpkg.com/recharts@2.12.0/umd/Recharts.js"></script>
     
-    <!-- 4. Babel (Compilador JSX) -->
+    <!-- 4. Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-    <!-- 5. Tailwind CSS (Estilos) -->
+    <!-- 5. Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- 6. Lucide Icons -->
@@ -26,7 +26,6 @@
 
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; }
-        /* Scrollbar personalizada */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -37,14 +36,12 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // Acesso seguro às variáveis globais
         const { useState, useEffect, useMemo, useRef } = React;
         const Recharts = window.Recharts || {};
         const { 
             PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend 
         } = Recharts;
 
-        // Componente Wrapper para Ícones Lucide
         const Icon = ({ name, className }) => {
             const iconRef = useRef(null);
             useEffect(() => {
@@ -59,7 +56,7 @@
             return <i data-lucide={name} ref={iconRef} className={className}></i>;
         };
 
-        // --- DADOS ATUALIZADOS (Sincronizados com a última versão) ---
+        // --- DADOS COMPLETOS ---
         const RAW_DATA = [
             // --- FRONTEND ---
             { id: 'FE-1',  scenario: "Cadastrar CPF's/CNPJ's no Portal", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'Em andamento', deadline: '11/02/2026' },
@@ -132,15 +129,12 @@
 
         const getStatusLabel = (status) => STATUS_CONFIG[status]?.label || status;
 
-        // Persistência com LocalStorage
         const useStickyState = (defaultValue, key) => {
             const [value, setValue] = useState(() => {
                 try {
                     const stickyValue = window.localStorage.getItem(key);
                     return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue;
-                } catch (e) {
-                    return defaultValue;
-                }
+                } catch (e) { return defaultValue; }
             });
             useEffect(() => {
                 try { window.localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
@@ -148,16 +142,15 @@
             return [value, setValue];
         };
 
-        // --- COMPONENTE PRINCIPAL ---
         function DashboardTestesNio() {
-            const [data, setData] = useStickyState(RAW_DATA, 'dashboard-nio-v6-github');
+            // Chave alterada para v11 para garantir o reset do visual
+            const [data, setData] = useStickyState(RAW_DATA, 'dashboard-nio-v11-stacked-clean');
             const [activeTab, setActiveTab] = useState('dashboard');
             const [searchTerm, setSearchTerm] = useState('');
             const [filterSystem, setFilterSystem] = useState('Todos');
             const [filterStatus, setFilterStatus] = useState('Todos');
             const fileInputRef = useRef(null);
 
-            // Handlers
             const handleStatusChange = (id) => {
                 setData(prevData => prevData.map(item => {
                     if (item.id !== id) return item;
@@ -189,7 +182,6 @@
                 reader.readAsText(file);
             };
 
-            // Cálculos
             const systems = useMemo(() => ['Todos', ...Array.from(new Set(data.map(i => i.system)))], [data]);
             
             const filteredData = useMemo(() => {
@@ -206,7 +198,7 @@
                 const total = data.length;
                 const ok = data.filter(i => i.status === 'OK').length;
                 const nok = data.filter(i => i.status === 'NOK').length;
-                const progress = data.filter(i => i.status === 'Em andamento').length;
+                const progress = data.filter(i => i.status.toLowerCase() === 'em andamento').length;
                 const notStarted = data.filter(i => i.status === 'Não iniciado').length;
                 const outOfScope = data.filter(i => i.status === 'Fora Escopo').length;
                 const validTotal = total - outOfScope;
@@ -239,7 +231,7 @@
                         name: sysName,
                         OK: items.filter(i => i.status === 'OK').length,
                         NOK: items.filter(i => i.status === 'NOK').length,
-                        Andamento: items.filter(i => i.status === 'Em andamento').length,
+                        Andamento: items.filter(i => i.status.toLowerCase() === 'em andamento').length,
                         Pendente: items.filter(i => i.status === 'Não iniciado').length,
                         ForaEscopo: items.filter(i => i.status === 'Fora Escopo').length,
                     };
@@ -261,7 +253,6 @@
 
             return (
                 <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-4 md:p-8">
-                    {/* HEADER */}
                     <header className="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm rounded-xl mb-6 p-4">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                             <div className="flex items-center space-x-3">
@@ -270,7 +261,7 @@
                                     <h1 className="text-xl font-bold text-slate-800 leading-tight">Painel de Qualidade Nio</h1>
                                     <p className="text-xs text-slate-500 flex items-center gap-1">
                                         <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                                        Online v6.0
+                                        Online v11.0
                                     </p>
                                 </div>
                             </div>
@@ -295,14 +286,14 @@
                         </div>
                     </header>
 
-                    {/* DASHBOARD TAB */}
                     {activeTab === 'dashboard' && (
                         <div className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                                 <StatCard title="Casos Válidos" value={stats.validTotal} iconName="file-spreadsheet" colorClass="bg-indigo-500 text-indigo-600" subtext={`(Exclui ${stats.outOfScope} fora do escopo)`} />
                                 <StatCard title="Execução do Escopo" value={`${stats.completionRate}%`} iconName="bar-chart-3" colorClass="bg-blue-500 text-blue-600" subtext={`${stats.notStarted} testes pendentes`} />
                                 <StatCard title="Falhas/Erros" value={stats.nok} iconName="alert-triangle" colorClass="bg-red-500 text-red-600" subtext={`${stats.failureRate}% dos executados`} />
                                 <StatCard title="Em Andamento" value={stats.progress} iconName="clock" colorClass="bg-blue-400 text-blue-500" subtext="Testes ativos no momento" />
+                                <StatCard title="Sucesso (OK)" value={stats.ok} iconName="check-circle-2" colorClass="bg-green-500 text-green-600" subtext="Casos aprovados" />
                             </div>
 
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -330,6 +321,7 @@
                                                 <YAxis dataKey="name" type="category" width={100} />
                                                 <Tooltip cursor={{fill: '#f8fafc'}} />
                                                 <Legend />
+                                                {/* StackId adicionado novamente e labels removidos */}
                                                 <Bar dataKey="OK" stackId="a" fill={STATUS_CONFIG['OK'].color} name="Sucesso" barSize={20} />
                                                 <Bar dataKey="NOK" stackId="a" fill={STATUS_CONFIG['NOK'].color} name="Falha/Erro" barSize={20} />
                                                 <Bar dataKey="Andamento" stackId="a" fill={STATUS_CONFIG['Em andamento'].color} name="Andamento" barSize={20} />
@@ -377,7 +369,6 @@
                         </div>
                     )}
 
-                    {/* LIST TAB */}
                     {activeTab === 'list' && (
                         <div className="space-y-4">
                             <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-4 items-center justify-between">
