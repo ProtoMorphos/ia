@@ -59,66 +59,94 @@
         // --- DADOS ATUALIZADOS ---
         const RAW_DATA = [
             // --- FRONTEND ---
-            { id: 'FE-1',  scenario: "Cadastrar CPF's/CNPJ's no Portal", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'OK', deadline: '09/02/2026' },
-            { id: 'FE-2',  scenario: "Alterar  de CPF's/CNPJ's no Portal", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'OK', deadline: '09/02/2026' },
-            { id: 'FE-4',  scenario: "Incluir e excluir CPF's e CNPJ's na blocklist", system: 'Frontend', owner: 'Simara', priority: 'Não', status: 'NOK', deadline: '20/02/2026' },
-            { id: 'FE-5',  scenario: "Cadastrar novo logradouro", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK', deadline: '20/02/2026' },
-            { id: 'FE-6',  scenario: "Consultar logradouro ", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK', deadline: '20/02/2026' },
-            { id: 'FE-7',  scenario: "Alterar logradouro", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK', deadline: '20/02/2026' },
-            { id: 'FE-8',  scenario: "Excluir logradouro definitivamente", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK', deadline: '20/02/2026' },
-            { id: 'FE-10', scenario: "Armazenar o histórico das atualizações", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'Em homologação', deadline: '18/02/2026' },
-            { id: 'FE-11', scenario: "Cadastrar localidade", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK', deadline: '20/02/2026' },
-            { id: 'FE-12', scenario: "Alterar localidade", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK', deadline: '20/02/2026' },
-            { id: 'FE-13', scenario: "Consultar informações de processamento da carga da Receita", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK', deadline: '20/02/2026' },
-            { id: 'FE-14', scenario: "Consultar informações de processamento da carga do DNE", system: 'Frontend', owner: 'Simara', priority: 'Sim', status: 'NOK', deadline: '27/02/2026' },
+            { id: 'FE-1',  scenario: "Cadastrar novos CPF's e CNPJ's na Base Receita Nio", system: 'Frontend', owner: 'Simara', status: 'OK', deadline: '09/02/2026' },
+            { id: 'FE-2',  scenario: "Alterar dados cadastrais de clientes pessoa física e jurídica, na base da Receita", system: 'Frontend', owner: 'Simara', status: 'OK', deadline: '09/02/2026' },
+            { id: 'FE-4',  scenario: "Criar novos logradouros na Base Corporativa Nio via portal", system: 'Frontend', owner: 'Simara', status: 'NOK', deadline: '20/02/2026' },
+            { id: 'FE-5',  scenario: "Consultar logradouro na Base Corporativa Nio", system: 'Frontend', owner: 'Simara', status: 'NOK', deadline: '20/02/2026' },
+            { id: 'FE-6',  scenario: "Alterar logradouro existente na Base Corporativa", system: 'Frontend', owner: 'Simara', status: 'NOK', deadline: '20/02/2026' },
+            { id: 'FE-7',  scenario: "Excluir logradouro", system: 'Frontend', owner: 'Simara', status: 'NOK', deadline: '20/02/2026' },
+            { id: 'FE-8',  scenario: "Realizar acerto de duplicidade entre logradouro", system: 'Frontend', owner: 'Simara', status: 'NOK', deadline: '20/02/2026' },
+            { id: 'FE-10', scenario: "Armazenar o histórico das atualizações realizadas na Base Corporativa Nio", system: 'Frontend', owner: 'Simara', status: 'Em Andamento', deadline: '18/02/2026' },
+            { id: 'FE-11', scenario: "Realizar o cadastro de uma nova localidade", system: 'Frontend', owner: 'Simara', status: 'NOK', deadline: '20/02/2026' },
+            { id: 'FE-12', scenario: "Realizar a alteração de uma localidade", system: 'Frontend', owner: 'Simara', status: 'NOK', deadline: '20/02/2026' },
+            { id: 'FE-13', scenario: "Consultar relatório de carga da Receita", system: 'Frontend', owner: 'Meta', status: 'NOK', deadline: '20/02/2026' },
+            { id: 'FE-14', scenario: "Consultar relatório de carga do DNE (Correios)", system: 'Frontend', owner: 'Meta', status: 'NOK', deadline: '27/02/2026' },
 
             // --- BASE CORPORATIVA ---
-            { id: 'BC-1',  scenario: "Entrada: Carga inicial dos arquivos da Receita nas tabelas", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
-            { id: 'BC-2',  scenario: "Entrada: Carga de Arquivos da Receita nas tabelas [PF]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
-            { id: 'BC-3',  scenario: "Entrada: Carga de Arquivos da Receita nas tabelas [PJ]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
-            { id: 'BC-4',  scenario: "Entrada: Carga de Arquivos da Receita nas tabelas [Registro de falhas]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
-            { id: 'BC-5',  scenario: "Entrada: Carga inicial dos arquivos inicial da BDC Oi Services", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
-            { id: 'BC-6',  scenario: "Entrada: Carga do arquivo Delta do DNE/Correios [Carga]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado', deadline: '27/02/2026' },
-            { id: 'BC-7',  scenario: "Entrada: Carga do arquivo Delta do DNE/Correios [Alteração]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado', deadline: '27/02/2026' },
-            { id: 'BC-10', scenario: "Entrada: Carga inicial do arquivo de Empresas", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
-            { id: 'BC-11', scenario: "Saida: Extrair arquivo de pessoas físicas [Full]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'BC-12', scenario: "Saída: Extrair arquivo de pessoas jurídicas [Full]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'BC-13', scenario: "Saida: Extrair arquivo de pessoas físicas [Atualização]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'BC-14', scenario: "Saída: Extrair arquivo de pessoas jurídicas [Atualização]", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'BC-15', scenario: "Saída: Extrair arquivos full de logradouros (mensal)", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
-            { id: 'BC-16', scenario: "Saída: Extrair arquivos de movimento de logradouros (diário)", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
-            { id: 'BC-17', scenario: "Saida: Extrair arquivos de localidades (mensal)", system: 'Base Corporativa', owner: 'Meta', priority: 'Sim', status: 'Em homologação', deadline: '20/02/2026' },
+            { id: 'BC-1',  scenario: "CT01- Evidenciar a carga de todos os CPF's na tabela de pessoas físicas, contendo todos os atributos cadastrais.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-2',  scenario: "CT02- Evidenciar a carga de todos os CNPJ's do arquivo na tabela de pessoas jurídicas contendo todos os atributos cadastrais.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-3',  scenario: "CT03- Evidenciar a carga do arquivo de PEP's", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-4',  scenario: "CT04- Evidenciar a carga dos CNAE's", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-5',  scenario: "CT01- Evidenciar a identificação e inclusão de novos CPF's na tabela a partir do arquivo de pessoas físicas", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-6',  scenario: "CT02- Evidenciar a identificação e alteração de CPF's a partir do arquivo de pessoas físicas. Atributos a serem validados: Nome civil, nome da mãe e situação cadastral.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-7',  scenario: "CT03- Evidenciar que CPF's cadastrados na blocklist (Portal) não sofreram atualização.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-8',  scenario: "CT01- Evidenciar a inserção de novos CNPJ's na tabela a partir do arquivo de pessoas jurídicas", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-9',  scenario: "CT02- Evidenciar a alteração de CNPJ's a partir do arquivo de pessoas físicas. Atributos a serem validados: Razão Social, situação cadastral e data de fundação", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-10', scenario: "CT03- Evidenciar que CNPJ's cadastrados na blocklist (Portal) não sofreram atualização.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-11', scenario: "CT01- Evidenciar as informações de processamento dos arquivos de pessoa física e jurídica: data/hora do processamento e o status", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-12', scenario: "CT02- Evidenciar o resumo do processamento, a quantidade de registros lidos, criticados, carregados, novos e atualizados.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-13', scenario: "CT03- Disponibilizar um arquivo contendo os registros criticados", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-14', scenario: "CT01- Evidenciar a carga do arquivo de logradouros na Base de Logradouros Nio.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-15', scenario: "CT02- Evidenciar a carga do arquivo de Bairros na Base de Logradouros Nio.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-16', scenario: "CT03- Evidenciar a carga do arquivo de CEP's na Base de Logradouros Nio.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-17', scenario: "CT04- Evidenciar a carga do arquivo de Títulos na Base de Logradouros Nio.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-18', scenario: "CT05- Evidenciar a carga do arquivo de Tipos na Base de Logradouros Nio.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-19', scenario: "CT01- Evidenciar as informações de processamento do arquivo do DNE: data/hora do processamento e o status", system: 'Base Corporativa', owner: 'Meta', status: 'Não iniciado', deadline: '27/02/2026' },
+            { id: 'BC-20', scenario: "CT02- Evidenciar o resumo do processamento, a quantidade de registros lidos, criticados, carregados, novos e atualizados.", system: 'Base Corporativa', owner: 'Meta', status: 'Não iniciado', deadline: '27/02/2026' },
+            { id: 'BC-21', scenario: "CT01- Evidenciar a criação de novos logradouros na base de Logradouros Nio partir do arquivo DNE recebido.", system: 'Base Corporativa', owner: 'Meta', status: 'Não iniciado', deadline: '27/02/2026' },
+            { id: 'BC-22', scenario: "CT02- Evidenciar a atualização automática dos logradouros existentes a partir do arquivo DNE recebido, utilizando a código DNE como chave: atualizações de bairro, CEP e nome do logradouro", system: 'Base Corporativa', owner: 'Meta', status: 'Não iniciado', deadline: '27/02/2026' },
+            { id: 'BC-23', scenario: "CT03- Evidenciar o armazenamento do campo código DNE nos logradouros criados ou alterados a partir do arquivo DNE", system: 'Base Corporativa', owner: 'Meta', status: 'Não iniciado', deadline: '27/02/2026' },
+            { id: 'BC-24', scenario: "CT04- Evidenciar a adequação dos logradouros cadastrados/atualizados a partir do DNE, de acordo com o domínio dos campos da BDC", system: 'Base Corporativa', owner: 'Meta', status: 'Não iniciado', deadline: '27/02/2026' },
+            { id: 'BC-25', scenario: "CT01- Evenciar a carga do arquivo de empresas na base corporativa Nio", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-26', scenario: "CT01- Evidenciar a geração do arquivo de pessoas físicas, para consumo do SIEBEL 6.3 e SIEBEL 8, considerando o layout e nomenclatura esperadas", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-27', scenario: "CT01- Evidenciar a geração do arquivo de pessoas jurídicas para consumo do SIEBEL 6.3 e SIEBEL 8, considerando o layout e nomenclatura esperadas", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-28', scenario: "CT01- Evidenciar a geração do arquivo de atualizações de pessoas físicas, para consumo do SIEBEL 6.3 e SIEBEL 8, considerando o layout e nomenclatura esperadas", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-29', scenario: "CT01- Evidenciar a geração do arquivo de atualizações pessoas jurídicas para consumo do SIEBEL 6.3 e SIEBEL 8, considerando o layout e nomenclatura esperadas", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-30', scenario: "CT01- Evidenciar a geração do arquivo full de bairros, para consumo do SIEBEL 6.3 e SIEBEL 8, contendo a totalidade de bairros da BDC, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-31', scenario: "CT02- Evidenciar a geração do arquivo full de logradouros, para consumo do SIEBEL 6.3 e SIEBEL 8, contendo a totalidade dos logradouros da BDC, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-32', scenario: "CT03- Evidenciar a geração do arquivo logradouros-cep para consumo do SIEBEL 6.3 e SIEBEL 8, contendo a totalidade dos CEP's e o logradouro correspondente, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-33', scenario: "CT04- Evidenciar a geração do arquivo full logradouros-bairro para consumo do SIEBEL 6.3 e SIEBEL 8, contendo a totalidade de bairros e o logradouro correspondente, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-34', scenario: "CT05- Evidenciar a geração do arquivo de tipos, para consumo do SIEBEL 6.3 e SIEBEL 8, contendo a totalidade dos tipos de logradouro, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-35', scenario: "CT06- Evidenciar a geração do arquivo títulos de logradouro, para consumo do SIEBEL 6.3 e SIEBEL 8, contendo a totalidade de títulos de logradouros, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-36', scenario: "CT01- Evidenciar a geração do arquivo de atualização de bairros, contendo os bairros alterados e novos, para consumo do SIEBEL 6.3 e SIEBEL 8, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-37', scenario: "CT02- Evidenciar a geração do arquivo de CEP's, para consumo do SIEBEL 6.3 e SIEBEL 8, contendo os logradouros que sofreram atualização de CEP, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-38', scenario: "CT03- Evidenciar a geração do arquivo de atualização de logradouros, para consumo do SIEBEL 6.3 e SIEBEL 8, contendo os logradouros alterados no dia, considerando o layout e nomenclatura esperadas.", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-39', scenario: "CT01- Evidenciar a geração do arquivo de localidades, para consumo do SIEBEL 6.3 e Siebel 8, considerando o layout e nomenclatura esperadas", system: 'Base Corporativa', owner: 'Meta', status: 'Em Andamento', deadline: '20/02/2026' },
+            { id: 'BC-40', scenario: "Falta acesso das aplicações no GKE ao bucket ( ID11 - ID17)", system: 'Base Corporativa', owner: 'NIO', status: 'Em Andamento', deadline: '19/02/2026' },
 
             // --- WLA ---
-            { id: 'WLA-1',  scenario: "Verificar disponibilidade dos arquivos de pessoas físicas e jurídicas ", system: 'WLA', owner: 'Meta', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'WLA-2',  scenario: "Copiar arquivos de pessoas físicas e jurídicas e disponibilizá-los no repositório destino do SIEBEL", system: 'WLA', owner: 'NIO', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'WLA-3',  scenario: "Verificar disponibilidade dos arquivos de logradouros", system: 'WLA', owner: 'NIO', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'WLA-4',  scenario: "Copiar arquivos de pessoas logradouros e disponibilizá-los para o SIEBEL", system: 'WLA', owner: 'NIO', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'WLA-5',  scenario: "Verificar disponibilidade do arquivo de localidades ", system: 'WLA', owner: 'NIO', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'WLA-6',  scenario: "Copiar arquivos de localidades e disponibilizá-los para o SIEBEL e ARBOR", system: 'WLA', owner: 'NIO', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'WLA-7',  scenario: "Verificar disponibilidade do arquivo de empresas ", system: 'WLA', owner: 'NIO', priority: 'Sim', status: 'Não iniciado', deadline: '' },
-            { id: 'WLA-8',  scenario: "Copiar arquivos de empresas e disponibilizá-los para o SIEBEL e ARBOR", system: 'WLA', owner: 'NIO', priority: 'Sim', status: 'Não iniciado', deadline: '' },
+            { id: 'WLA-1',  scenario: "CT01- Evidenciar a disponibilidade dos arquivos de pessoas físicas e jurídicas no diretório de recebimento", system: 'WLA', owner: 'Meta', status: 'Não iniciado', deadline: '' },
+            { id: 'WLA-2',  scenario: "CT01- Evidenciar a disponibilização dos arquivos de pessoas físicas e jurídicas para o SIEBEL", system: 'WLA', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'WLA-3',  scenario: "CT01- Evidenciar a disponibilidade dos arquivos de logradouros no diretório de recebimento", system: 'WLA', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'WLA-4',  scenario: "CT01- Evidenciar a disponibilização dos arquivos de logradouros para o SIEBEL", system: 'WLA', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'WLA-5',  scenario: "CT01- Evidenciar a disponibilidade do arquivo de localidade no diretório de recebimento", system: 'WLA', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'WLA-6',  scenario: "CT01- Evidenciar a disponibilizaçãodo arquivo de localidades para o SIEBEL e ARBOR", system: 'WLA', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'WLA-7',  scenario: "CT01- Evidenciar a disponibilidade do arquivo de empresas no diretório de recebimento", system: 'WLA', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'WLA-8',  scenario: "CT01- Evidenciar a disponibilizaçãodo arquivo de empresas para o ARBOR", system: 'WLA', owner: 'NIO', status: 'Não iniciado', deadline: '' },
 
             // --- SIEBEL ---
-            { id: 'SBL-1',  scenario: "Criar novo contato/conta no SIEBEL 6.3 ", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-2',  scenario: "Atualizar dados cadastrais  no SIEBEL 6.3 - manual", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-3',  scenario: "Atualizar dados cadastrais no SIEBEL 6.3 - massivo", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-4',  scenario: "Criar novo contato/conta no SIEBEL 8 ", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-5',  scenario: "Atualizar dados cadastrais  no SIEBEL 8 - manual", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-6',  scenario: "Atualizar dados cadastrais no SIEBEL 8 - massivo", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-7',  scenario: "Alterar endereço de clientes no para um novo logradouro SIEBEL 6.3", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-8',  scenario: "Alterar endereço de clientes no para um novo logradouro SIEBEL 8", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-9',  scenario: "Atualizar dados de endereços de clientes a partir de atualizações da base corporativa- manual SIEBEL 6.3", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-10', scenario: "Atualizar dados de endereços de clientes a partir de atualizações da base corporativa- manual SIEBEL 8", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-11', scenario: "Atualizar dados de endereços de clientes no SIEBEL 6.3 a partir de atualizações da base corporativa- automática", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
-            { id: 'SBL-12', scenario: "Atualizar dados de endereços de clientes no SIEBEL 6.8 a partir de atualizações da base corporativa- automática", system: 'SIEBEL', owner: 'NIO', priority: '', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-1',  scenario: "CT01- Evidenciar a criação do contrato com sucesso no SIEBEL para um novo CPF da Base Receita.", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-2',  scenario: "CT02- Evidenciar a criação do contrato com sucesso no SIEBEL para um CNPJ novo na Base Receita", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-3',  scenario: "CT01- Evidenciar a atualização manual do nome/razão social de clientes ativos no SIEBEL, a partir da atualização da base da Receita Nio", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-4',  scenario: "CT01- Evidenciar a atualização automática do nome/razão social de clientes ativos no SIEBEL, a partir da atualização da base da Receita Nio", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-5',  scenario: "CT01- Evidenciar a criação do contrato com sucesso no SIEBEL para um novo CPF da Base Receita.", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-6',  scenario: "CT02- Evidenciar a criação do contrato com sucesso no SIEBEL para um CNPJ novo na Base Receita", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-7',  scenario: "CT01- Evidenciar a atualização manual do nome/razão social de clientes ativos no SIEBEL, a partir da atualização da base da Receita Nio", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-8',  scenario: "CT01- Evidenciar a atualização automática do nome/razão social de clientes ativos no SIEBEL, a partir da atualização da base da Receita Nio", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-9',  scenario: "CT01- Evidenciar a alteração de endereços de contratos do SIEBEL onde o logradouro utilizado seja novo na base corporativa Nio.", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-10', scenario: "CT01- Evidenciar a alteração de endereços de contratos do SIEBEL onde o logradouro utilizado seja novo na base corporativa Nio.", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-11', scenario: "CT01- Evidenciar a alteração manual de endereços de contratos do SIEBEL onde o logradouro utilizado tenha sido alterado na base corporativa Nio (alteração de nome da rua e CEP). Utilizar endereços de UF's das regiões 1 e 2", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-12', scenario: "CT01- Evidenciar a alteração manual de endereços de contratos do SIEBEL onde o logradouro utilizado tenha sido alterado na base corporativa Nio (alteração de nome da rua e CEP). Utilizar endereços de UF's das regiões 1 e 2", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-13', scenario: "CT01- Evidenciar a alteração de endereços de contratos do SIEBEL onde o logradouro utilizado tenha sido alterado na base corporativa Nio (alteração de nome da rua e CEP). Utilizar UF's da Região 1, como RJ e MG", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
+            { id: 'SBL-14', scenario: "CT01- Evidenciar a alteração de endereços de contratos do SIEBEL onde o logradouro utilizado tenha sido alterado na base corporativa Nio (alteração de nome da rua e CEP). Utilizar UF's da Região 1, como RJ e MG", system: 'SIEBEL', owner: 'NIO', status: 'Não iniciado', deadline: '' },
         ];
 
         // --- CONFIGURAÇÃO ---
         const STATUS_CONFIG = {
             'OK': { color: '#22c55e', bg: 'bg-green-100', text: 'text-green-800', label: 'Sucesso' },
             'NOK': { color: '#ef4444', bg: 'bg-red-100', text: 'text-red-800', label: 'Falha/Erro' },
-            'Em homologação': { color: '#f59e0b', bg: 'bg-amber-100', text: 'text-amber-800', label: 'Homologação' },
+            'Em andamento': { color: '#3b82f6', bg: 'bg-blue-100', text: 'text-blue-800', label: 'Em Andamento' },
+            'Em Andamento': { color: '#3b82f6', bg: 'bg-blue-100', text: 'text-blue-800', label: 'Em Andamento' },
             'Não iniciado': { color: '#9ca3af', bg: 'bg-gray-100', text: 'text-gray-800', label: 'Pendente' }
         };
 
@@ -138,8 +166,8 @@
         };
 
         function DashboardTestesNio() {
-            // Chave atualizada para v16 para puxar a nova base de dados corretamente do cache
-            const [data, setData] = useStickyState(RAW_DATA, 'dashboard-nio-v16-homolog');
+            // Chave atualizada para v18 para puxar a nova base de dados corretamente do cache
+            const [data, setData] = useStickyState(RAW_DATA, 'dashboard-nio-v18-new-scenarios');
             const [activeTab, setActiveTab] = useState('dashboard');
             const [searchTerm, setSearchTerm] = useState('');
             const [filterSystem, setFilterSystem] = useState('Todos');
@@ -149,8 +177,7 @@
             const handleStatusChange = (id) => {
                 setData(prevData => prevData.map(item => {
                     if (item.id !== id) return item;
-                    // Alterna entre os status disponíveis
-                    const statusCycle = ['Não iniciado', 'Em homologação', 'OK', 'NOK'];
+                    const statusCycle = ['Não iniciado', 'Em Andamento', 'OK', 'NOK'];
                     const nextIndex = (statusCycle.indexOf(item.status) + 1) % statusCycle.length;
                     return { ...item, status: statusCycle[nextIndex] };
                 }));
@@ -194,18 +221,18 @@
                 const total = data.length;
                 const ok = data.filter(i => i.status === 'OK').length;
                 const nok = data.filter(i => i.status === 'NOK').length;
-                const homologacao = data.filter(i => i.status.toLowerCase() === 'em homologação').length;
+                const progress = data.filter(i => i.status.toLowerCase() === 'em andamento').length;
                 const notStarted = data.filter(i => i.status === 'Não iniciado').length;
                 const executed = ok + nok;
                 const completionRate = total > 0 ? Math.round((executed / total) * 100) : 0;
                 const failureRate = executed > 0 ? Math.round((nok / executed) * 100) : 0;
-                return { total, ok, nok, homologacao, notStarted, completionRate, failureRate };
+                return { total, ok, nok, progress, notStarted, completionRate, failureRate };
             }, [data]);
 
             const chartDataStatus = [
                 { name: 'Sucesso', value: stats.ok, color: STATUS_CONFIG['OK'].color },
                 { name: 'Falha/Erro', value: stats.nok, color: STATUS_CONFIG['NOK'].color },
-                { name: 'Homologação', value: stats.homologacao, color: STATUS_CONFIG['Em homologação'].color },
+                { name: 'Andamento', value: stats.progress, color: STATUS_CONFIG['Em andamento'].color },
                 { name: 'Pendente', value: stats.notStarted, color: STATUS_CONFIG['Não iniciado'].color }
             ].filter(i => i.value > 0);
 
@@ -224,7 +251,7 @@
                         name: sysName,
                         OK: items.filter(i => i.status === 'OK').length,
                         NOK: items.filter(i => i.status === 'NOK').length,
-                        Homologação: items.filter(i => i.status.toLowerCase() === 'em homologação').length,
+                        Andamento: items.filter(i => i.status.toLowerCase() === 'em andamento').length,
                         Pendente: items.filter(i => i.status === 'Não iniciado').length
                     };
                 });
@@ -253,7 +280,7 @@
                                     <h1 className="text-xl font-bold text-slate-800 leading-tight">Painel de Qualidade Nio</h1>
                                     <p className="text-xs text-slate-500 flex items-center gap-1">
                                         <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                                        Online v16.0
+                                        Online v18.0
                                     </p>
                                 </div>
                             </div>
@@ -285,7 +312,7 @@
                                 <StatCard title="Execução Geral" value={`${stats.completionRate}%`} iconName="bar-chart-3" colorClass="bg-blue-500 text-blue-600" subtext={`${stats.notStarted} testes pendentes`} />
                                 <StatCard title="Sucesso (OK)" value={stats.ok} iconName="check-circle-2" colorClass="bg-green-500 text-green-600" subtext="Casos aprovados" />
                                 <StatCard title="Falhas/Erros" value={stats.nok} iconName="alert-triangle" colorClass="bg-red-500 text-red-600" subtext={`${stats.failureRate}% dos executados`} />
-                                <StatCard title="Em Homologação" value={stats.homologacao} iconName="clock" colorClass="bg-amber-500 text-amber-600" subtext="Testes em validação" />
+                                <StatCard title="Em Andamento" value={stats.progress} iconName="clock" colorClass="bg-blue-400 text-blue-500" subtext="Testes ativos no momento" />
                             </div>
 
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -315,7 +342,7 @@
                                                 <Legend />
                                                 <Bar dataKey="OK" stackId="a" fill={STATUS_CONFIG['OK'].color} name="Sucesso" barSize={20} />
                                                 <Bar dataKey="NOK" stackId="a" fill={STATUS_CONFIG['NOK'].color} name="Falha/Erro" barSize={20} />
-                                                <Bar dataKey="Homologação" stackId="a" fill={STATUS_CONFIG['Em homologação'].color} name="Homologação" barSize={20} />
+                                                <Bar dataKey="Andamento" stackId="a" fill={STATUS_CONFIG['Em andamento'].color} name="Andamento" barSize={20} />
                                                 <Bar dataKey="Pendente" stackId="a" fill={STATUS_CONFIG['Não iniciado'].color} name="Pendente" barSize={20} />
                                             </BarChart>
                                         </ResponsiveContainer>
