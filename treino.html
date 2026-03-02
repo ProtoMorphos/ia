@@ -47,7 +47,7 @@
                 <h1 class="text-xl font-bold text-white">Treino Otimizado</h1>
                 <p class="text-xs text-slate-400">Anderson | 47 anos | 78kg</p>
             </div>
-            <div class="bg-blue-600 p-2 rounded-lg">
+            <div class="bg-blue-600 p-2 rounded-lg shadow-lg shadow-blue-500/20">
                 <i data-lucide="dumbbell" class="text-white w-6 h-6"></i>
             </div>
         </div>
@@ -64,31 +64,32 @@
         
         <!-- TREINO A -->
         <div id="treino-a" class="space-y-4">
-            <div class="bg-blue-900/20 p-3 rounded-lg border border-blue-500/30 mb-4 text-sm">
-                <span class="font-bold text-blue-400">Foco:</span> Peito, Ombros, Tríceps e Quadríceps.
+            <div class="bg-blue-900/20 p-3 rounded-lg border border-blue-500/30 mb-4 text-sm flex items-center gap-2">
+                <i data-lucide="info" class="w-4 h-4 text-blue-400"></i>
+                <span>Foco: <span class="text-blue-400 font-bold">Peito, Ombros, Tríceps e Quadríceps</span></span>
             </div>
 
-            <!-- Exercício 1 -->
+            <!-- Ex 1 -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-a1">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">1. Quadríceps</span>
                         <h3 class="text-lg font-bold">Leg Press Inclinado</h3>
                     </div>
-                    <input type="checkbox" id="check-a1" onchange="toggleComplete('ex-a1')" class="w-6 h-6 rounded border-slate-600 bg-slate-700 text-green-500 focus:ring-green-500">
+                    <input type="checkbox" onchange="toggleComplete('ex-a1')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm">
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-4 h-4 text-blue-400"></i> 3 Séries</div>
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-4 h-4 text-blue-400"></i> 10-12 Reps</div>
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-4 h-4"></i> 82kg</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i> 10-12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 82kg</div>
                 </div>
                 <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
                     <strong class="text-white not-italic">Postura:</strong> Pés na largura dos ombros. Não estenda totalmente os joelhos no topo para proteger a articulação.
                 </div>
             </div>
 
-            <!-- Exercício 2 -->
-            <div class="exercise-card p-4 rounded-2xl" id="ex-a2">
+            <!-- Ex 2 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-a2">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">2. Peitoral</span>
@@ -96,18 +97,18 @@
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-a2')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm">
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded">3 Séries</div>
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded">8-10 Reps</div>
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold">35kg</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i> 8-10 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 35kg</div>
                 </div>
-                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 italic">
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
                     <strong class="text-white not-italic">Postura:</strong> Escápulas "travadas" no banco, peito estufado. Tente chegar próximo à falha na última série.
                 </div>
             </div>
 
-            <!-- Exercício 3 -->
-            <div class="exercise-card p-4 rounded-2xl" id="ex-a3">
+            <!-- Ex 3 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-a3">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">3. Ombros</span>
@@ -115,18 +116,18 @@
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-a3')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm">
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded">3 Séries</div>
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded">12 Reps</div>
-                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold">8-10kg</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i> 12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 8-10kg</div>
                 </div>
-                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 italic">
-                    <strong class="text-white not-italic">Postura:</strong> Controle a descida. Tente progredir de carga (anteriormente 5kg).
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Dica:</strong> Controle a descida lenta para aumentar o tempo sob tensão.
                 </div>
             </div>
 
-            <!-- Outros do Treino A simplificados para o código -->
-            <div class="exercise-card p-4 rounded-2xl" id="ex-a4">
+            <!-- Ex 4 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-a4">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">4. Quadríceps</span>
@@ -134,10 +135,18 @@
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-a4')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x15 | 38kg | Segurar 1s no topo.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i> 15 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 38kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Dica:</strong> "Esmague" o quadríceps no topo segurando por 1 segundo.
+                </div>
             </div>
 
-            <div class="exercise-card p-4 rounded-2xl" id="ex-a5">
+            <!-- Ex 5 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-a5">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">5. Peitoral</span>
@@ -145,10 +154,18 @@
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-a5')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 44kg | Alongue bem o peitoral.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i> 12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 44kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Postura:</strong> Cotovelos na linha do ombro, sinta o alongamento no final do movimento.
+                </div>
             </div>
 
-            <div class="exercise-card p-4 rounded-2xl" id="ex-a6">
+            <!-- Ex 6 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-a6">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">6. Tríceps</span>
@@ -156,28 +173,64 @@
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-a6')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x15 | 12-15kg | Cotovelos colados.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i> 15 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 12-15kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Postura:</strong> Afaste as pontas da corda no final da extensão para maior contração.
+                </div>
             </div>
-            
-            <div class="exercise-card p-4 rounded-2xl" id="ex-a7">
+
+            <!-- Ex 7 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-a7">
                 <div class="flex justify-between items-start mb-3">
                     <div>
-                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">7. Core</span>
-                        <h3 class="text-lg font-bold">Abdominal Supra</h3>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">7. Adutores</span>
+                        <h3 class="text-lg font-bold">Banco Adutor</h3>
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-a7')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x Falha | Sinta o músculo, não o pescoço.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i> 15 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 38kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Dica:</strong> Movimento controlado, sem bater as placas.
+                </div>
+            </div>
+
+            <!-- Ex 8 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-a8">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">8. Core</span>
+                        <h3 class="text-lg font-bold">Abdominal Supra</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-a8')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i> Até Falha</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> S/ Peso</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Dica:</strong> Imagine levar o peito ao teto, contraindo o abdômen intensamente.
+                </div>
             </div>
         </div>
 
         <!-- TREINO B -->
         <div id="treino-b" class="hidden space-y-4">
-            <div class="bg-green-900/20 p-3 rounded-lg border border-green-500/30 mb-4 text-sm">
-                <span class="font-bold text-green-400">Foco:</span> Costas, Bíceps, Posterior de Coxa e Core.
+            <div class="bg-green-900/20 p-3 rounded-lg border border-green-500/30 mb-4 text-sm flex items-center gap-2">
+                <i data-lucide="info" class="w-4 h-4 text-green-400"></i>
+                <span>Foco: <span class="text-green-400 font-bold">Costas, Bíceps, Posterior e Core</span></span>
             </div>
 
-            <div class="exercise-card p-4 rounded-2xl" id="ex-b1">
+            <!-- Ex 1 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-b1">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">1. Costas</span>
@@ -185,10 +238,18 @@
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-b1')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 35kg | Puxe ao peito (frente).</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i> 10-12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 35kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Postura:</strong> Puxe em direção ao peito, mantendo o tronco levemente inclinado para trás.
+                </div>
             </div>
 
-            <div class="exercise-card p-4 rounded-2xl" id="ex-b2">
+            <!-- Ex 2 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-b2">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">2. Costas</span>
@@ -196,10 +257,18 @@
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-b2')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 50kg | Fechar bem as escápulas.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i> 12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 50kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Dica:</strong> Feche as escápulas ("aperte as costas") no final da puxada.
+                </div>
             </div>
 
-            <div class="exercise-card p-4 rounded-2xl" id="ex-b3">
+            <!-- Ex 3 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-b3">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">3. Posterior</span>
@@ -207,40 +276,109 @@
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-b3')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x15 | 38kg | Quadril firme no banco.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i> 15 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 38kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Postura:</strong> Mantenha o quadril pressionado contra o banco para isolar os isquiotibiais.
+                </div>
             </div>
 
-            <div class="exercise-card p-4 rounded-2xl" id="ex-b4">
+            <!-- Ex 4 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-b4">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">4. Posterior</span>
-                        <h3 class="text-lg font-bold">Flexão de Joelho em Pé</h3>
+                        <h3 class="text-lg font-bold">Flexão em Pé</h3>
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-b4')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 10kg | Foco na contração lenta.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i> 12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 10kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Dica:</strong> Subida explosiva e descida controlada. Tente progredir de carga.
+                </div>
             </div>
 
-            <div class="exercise-card p-4 rounded-2xl" id="ex-b5">
+            <!-- Ex 5 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-b5">
                 <div class="flex justify-between items-start mb-3">
                     <div>
-                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">5. Bíceps</span>
-                        <h3 class="text-lg font-bold">Bíceps Barra Montada</h3>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">5. Abdutores</span>
+                        <h3 class="text-lg font-bold">Banco Abdutor</h3>
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-b5')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 15kg | Sem balanço corporal.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i> 15 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 42kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Dica:</strong> Foco na parte externa do glúteo ao abrir as pernas.
+                </div>
             </div>
 
-            <div class="exercise-card p-4 rounded-2xl" id="ex-b6">
+            <!-- Ex 6 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-b6">
                 <div class="flex justify-between items-start mb-3">
                     <div>
-                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">6. Core</span>
-                        <h3 class="text-lg font-bold">Prancha Abdominal</h3>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">6. Bíceps</span>
+                        <h3 class="text-lg font-bold">Bíceps Barra Montada</h3>
                     </div>
                     <input type="checkbox" onchange="toggleComplete('ex-b6')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
                 </div>
-                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x 60 segundos | Corpo reto.</div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i> 12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 15kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Postura:</strong> Joelhos levemente flexionados para estabilizar o tronco. Sem "roubar" com a coluna.
+                </div>
+            </div>
+
+            <!-- Ex 7 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-b7">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">7. Antebraço/Bíceps</span>
+                        <h3 class="text-lg font-bold">Rosca Martelo</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-b7')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i> 12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> 8kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Dica:</strong> Pegada neutra (palmas viradas uma para a outra) o tempo todo.
+                </div>
+            </div>
+
+            <!-- Ex 8 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-b8">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">8. Core</span>
+                        <h3 class="text-lg font-bold">Prancha Abdominal</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-b8')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-2 mb-3 text-[11px] sm:text-xs">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="timer" class="w-3 h-3 text-green-400"></i> 60 Seg</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-3 h-3"></i> Isométrica</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Postura:</strong> Alinhe cabeça, tronco e quadril. Respire de forma controlada.
+                </div>
             </div>
         </div>
 
@@ -250,21 +388,21 @@
                 <h3 class="font-bold text-orange-400 mb-2 flex items-center gap-2">
                     <i data-lucide="zap" class="w-5 h-5"></i> HIIT (Terça/Sábado)
                 </h3>
-                <p class="text-sm text-slate-300">20 min total. 30s pedalada/corrida máxima + 90s caminhada lenta.</p>
+                <p class="text-sm text-slate-300">20 min total. 30s esforço máximo + 90s caminhada lenta.</p>
             </div>
             
             <div class="bg-blue-900/20 p-4 rounded-2xl border border-blue-500/30">
                 <h3 class="font-bold text-blue-400 mb-2 flex items-center gap-2">
                     <i data-lucide="timer" class="w-5 h-5"></i> LISS (Quinta)
                 </h3>
-                <p class="text-sm text-slate-300">45 min caminhada rápida ou bike ritmo constante. Frequência moderada.</p>
+                <p class="text-sm text-slate-300">45 min caminhada rápida em ritmo constante. Frequência moderada.</p>
             </div>
         </div>
 
     </main>
 
     <!-- Floating Reset Button -->
-    <button onclick="resetChecks()" class="fixed bottom-6 right-6 bg-red-600 p-4 rounded-full shadow-lg z-50">
+    <button onclick="resetChecks()" class="fixed bottom-6 right-6 bg-red-600 p-4 rounded-full shadow-lg z-50 hover:scale-110 active:scale-95 transition-all">
         <i data-lucide="rotate-ccw" class="text-white"></i>
     </button>
 
@@ -273,12 +411,10 @@
         lucide.createIcons();
 
         function switchTab(tabId) {
-            // Esconde todos
             document.getElementById('treino-a').classList.add('hidden');
             document.getElementById('treino-b').classList.add('hidden');
             document.getElementById('cardio').classList.add('hidden');
             
-            // Remove classes ativas
             document.getElementById('btn-a').classList.remove('tab-active', 'text-blue-500');
             document.getElementById('btn-b').classList.remove('tab-active', 'text-blue-500');
             document.getElementById('btn-cardio').classList.remove('tab-active', 'text-blue-500');
@@ -286,19 +422,20 @@
             document.getElementById('btn-b').classList.add('text-slate-400');
             document.getElementById('btn-cardio').classList.add('text-slate-400');
 
-            // Mostra o selecionado
             document.getElementById(tabId).classList.remove('hidden');
             const activeBtn = tabId === 'treino-a' ? 'btn-a' : (tabId === 'treino-b' ? 'btn-b' : 'btn-cardio');
             document.getElementById(activeBtn).classList.add('tab-active');
             document.getElementById(activeBtn).classList.remove('text-slate-400');
+            
+            if (tabId === 'treino-a') document.getElementById(activeBtn).classList.add('text-blue-500');
+            if (tabId === 'treino-b') document.getElementById(activeBtn).classList.add('text-green-500');
+            if (tabId === 'cardio') document.getElementById(activeBtn).classList.add('text-orange-500');
         }
 
         function toggleComplete(cardId) {
             const card = document.getElementById(cardId);
             card.classList.toggle('completed');
-            
-            // Feedback vibratório simples se disponível no celular
-            if (navigator.vibrate) navigator.vibrate(50);
+            if (navigator.vibrate) navigator.vibrate(30);
         }
 
         function resetChecks() {
