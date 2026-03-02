@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Treino Otimizado | Anderson</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tab-active {
+            border-bottom: 4px solid #3b82f6;
+            color: #3b82f6;
+        }
+
+        .exercise-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-card.completed {
+            border-color: #22c55e;
+            opacity: 0.6;
+        }
+
+        .checkbox-custom:checked + label {
+            background-color: #22c55e;
+            border-color: #22c55e;
+        }
+    </style>
+</head>
+<body class="pb-20">
+
+    <!-- Header -->
+    <header class="p-6 bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-white">Treino Otimizado</h1>
+                <p class="text-xs text-slate-400">Anderson | 47 anos | 78kg</p>
+            </div>
+            <div class="bg-blue-600 p-2 rounded-lg">
+                <i data-lucide="dumbbell" class="text-white w-6 h-6"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tabs Nav -->
+    <nav class="flex border-b border-slate-800 bg-slate-900 sticky top-[73px] z-40">
+        <button onclick="switchTab('treino-a')" id="btn-a" class="flex-1 py-4 font-semibold text-sm uppercase tracking-wider tab-active">Treino A</button>
+        <button onclick="switchTab('treino-b')" id="btn-b" class="flex-1 py-4 font-semibold text-sm uppercase tracking-wider text-slate-400">Treino B</button>
+        <button onclick="switchTab('cardio')" id="btn-cardio" class="flex-1 py-4 font-semibold text-sm uppercase tracking-wider text-slate-400">Cardio</button>
+    </nav>
+
+    <main class="p-4 max-w-md mx-auto">
+        
+        <!-- TREINO A -->
+        <div id="treino-a" class="space-y-4">
+            <div class="bg-blue-900/20 p-3 rounded-lg border border-blue-500/30 mb-4 text-sm">
+                <span class="font-bold text-blue-400">Foco:</span> Peito, Ombros, Tríceps e Quadríceps.
+            </div>
+
+            <!-- Exercício 1 -->
+            <div class="exercise-card p-4 rounded-2xl relative" id="ex-a1">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">1. Quadríceps</span>
+                        <h3 class="text-lg font-bold">Leg Press Inclinado</h3>
+                    </div>
+                    <input type="checkbox" id="check-a1" onchange="toggleComplete('ex-a1')" class="w-6 h-6 rounded border-slate-600 bg-slate-700 text-green-500 focus:ring-green-500">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="layers" class="w-4 h-4 text-blue-400"></i> 3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded"><i data-lucide="repeat" class="w-4 h-4 text-blue-400"></i> 10-12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold"><i data-lucide="weight" class="w-4 h-4"></i> 82kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 leading-relaxed italic">
+                    <strong class="text-white not-italic">Postura:</strong> Pés na largura dos ombros. Não estenda totalmente os joelhos no topo para proteger a articulação.
+                </div>
+            </div>
+
+            <!-- Exercício 2 -->
+            <div class="exercise-card p-4 rounded-2xl" id="ex-a2">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">2. Peitoral</span>
+                        <h3 class="text-lg font-bold">Supino Inc. Máquina</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-a2')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded">3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded">8-10 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold">35kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 italic">
+                    <strong class="text-white not-italic">Postura:</strong> Escápulas "travadas" no banco, peito estufado. Tente chegar próximo à falha na última série.
+                </div>
+            </div>
+
+            <!-- Exercício 3 -->
+            <div class="exercise-card p-4 rounded-2xl" id="ex-a3">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">3. Ombros</span>
+                        <h3 class="text-lg font-bold">Desenv. Articulado</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-a3')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm">
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded">3 Séries</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded">12 Reps</div>
+                    <div class="flex items-center gap-1 bg-slate-800 px-2 py-1 rounded text-orange-400 font-bold">8-10kg</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl text-xs text-slate-300 italic">
+                    <strong class="text-white not-italic">Postura:</strong> Controle a descida. Tente progredir de carga (anteriormente 5kg).
+                </div>
+            </div>
+
+            <!-- Outros do Treino A simplificados para o código -->
+            <div class="exercise-card p-4 rounded-2xl" id="ex-a4">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">4. Quadríceps</span>
+                        <h3 class="text-lg font-bold">Banco Extensor</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-a4')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x15 | 38kg | Segurar 1s no topo.</div>
+            </div>
+
+            <div class="exercise-card p-4 rounded-2xl" id="ex-a5">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">5. Peitoral</span>
+                        <h3 class="text-lg font-bold">Voador (Peck Deck)</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-a5')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 44kg | Alongue bem o peitoral.</div>
+            </div>
+
+            <div class="exercise-card p-4 rounded-2xl" id="ex-a6">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">6. Tríceps</span>
+                        <h3 class="text-lg font-bold">Tríceps Corda</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-a6')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x15 | 12-15kg | Cotovelos colados.</div>
+            </div>
+            
+            <div class="exercise-card p-4 rounded-2xl" id="ex-a7">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-blue-500 font-bold text-xs uppercase tracking-tighter">7. Core</span>
+                        <h3 class="text-lg font-bold">Abdominal Supra</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-a7')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x Falha | Sinta o músculo, não o pescoço.</div>
+            </div>
+        </div>
+
+        <!-- TREINO B -->
+        <div id="treino-b" class="hidden space-y-4">
+            <div class="bg-green-900/20 p-3 rounded-lg border border-green-500/30 mb-4 text-sm">
+                <span class="font-bold text-green-400">Foco:</span> Costas, Bíceps, Posterior de Coxa e Core.
+            </div>
+
+            <div class="exercise-card p-4 rounded-2xl" id="ex-b1">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">1. Costas</span>
+                        <h3 class="text-lg font-bold">Puxada Aberta Pronada</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-b1')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 35kg | Puxe ao peito (frente).</div>
+            </div>
+
+            <div class="exercise-card p-4 rounded-2xl" id="ex-b2">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">2. Costas</span>
+                        <h3 class="text-lg font-bold">Remada Artic. Neutra</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-b2')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 50kg | Fechar bem as escápulas.</div>
+            </div>
+
+            <div class="exercise-card p-4 rounded-2xl" id="ex-b3">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">3. Posterior</span>
+                        <h3 class="text-lg font-bold">Mesa Flexora</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-b3')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x15 | 38kg | Quadril firme no banco.</div>
+            </div>
+
+            <div class="exercise-card p-4 rounded-2xl" id="ex-b4">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">4. Posterior</span>
+                        <h3 class="text-lg font-bold">Flexão de Joelho em Pé</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-b4')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 10kg | Foco na contração lenta.</div>
+            </div>
+
+            <div class="exercise-card p-4 rounded-2xl" id="ex-b5">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">5. Bíceps</span>
+                        <h3 class="text-lg font-bold">Bíceps Barra Montada</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-b5')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x12 | 15kg | Sem balanço corporal.</div>
+            </div>
+
+            <div class="exercise-card p-4 rounded-2xl" id="ex-b6">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-green-500 font-bold text-xs uppercase tracking-tighter">6. Core</span>
+                        <h3 class="text-lg font-bold">Prancha Abdominal</h3>
+                    </div>
+                    <input type="checkbox" onchange="toggleComplete('ex-b6')" class="w-6 h-6 rounded border-slate-600 bg-slate-700">
+                </div>
+                <div class="flex gap-4 mb-3 text-sm text-orange-400 font-bold italic">3x 60 segundos | Corpo reto.</div>
+            </div>
+        </div>
+
+        <!-- CARDIO -->
+        <div id="cardio" class="hidden space-y-4">
+            <div class="bg-orange-900/20 p-4 rounded-2xl border border-orange-500/30">
+                <h3 class="font-bold text-orange-400 mb-2 flex items-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5"></i> HIIT (Terça/Sábado)
+                </h3>
+                <p class="text-sm text-slate-300">20 min total. 30s pedalada/corrida máxima + 90s caminhada lenta.</p>
+            </div>
+            
+            <div class="bg-blue-900/20 p-4 rounded-2xl border border-blue-500/30">
+                <h3 class="font-bold text-blue-400 mb-2 flex items-center gap-2">
+                    <i data-lucide="timer" class="w-5 h-5"></i> LISS (Quinta)
+                </h3>
+                <p class="text-sm text-slate-300">45 min caminhada rápida ou bike ritmo constante. Frequência moderada.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Floating Reset Button -->
+    <button onclick="resetChecks()" class="fixed bottom-6 right-6 bg-red-600 p-4 rounded-full shadow-lg z-50">
+        <i data-lucide="rotate-ccw" class="text-white"></i>
+    </button>
+
+    <script>
+        // Inicializa ícones
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            // Esconde todos
+            document.getElementById('treino-a').classList.add('hidden');
+            document.getElementById('treino-b').classList.add('hidden');
+            document.getElementById('cardio').classList.add('hidden');
+            
+            // Remove classes ativas
+            document.getElementById('btn-a').classList.remove('tab-active', 'text-blue-500');
+            document.getElementById('btn-b').classList.remove('tab-active', 'text-blue-500');
+            document.getElementById('btn-cardio').classList.remove('tab-active', 'text-blue-500');
+            document.getElementById('btn-a').classList.add('text-slate-400');
+            document.getElementById('btn-b').classList.add('text-slate-400');
+            document.getElementById('btn-cardio').classList.add('text-slate-400');
+
+            // Mostra o selecionado
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = tabId === 'treino-a' ? 'btn-a' : (tabId === 'treino-b' ? 'btn-b' : 'btn-cardio');
+            document.getElementById(activeBtn).classList.add('tab-active');
+            document.getElementById(activeBtn).classList.remove('text-slate-400');
+        }
+
+        function toggleComplete(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('completed');
+            
+            // Feedback vibratório simples se disponível no celular
+            if (navigator.vibrate) navigator.vibrate(50);
+        }
+
+        function resetChecks() {
+            if(confirm("Deseja resetar o progresso do treino de hoje?")) {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => {
+                    cb.checked = false;
+                    cb.parentElement.parentElement.classList.remove('completed');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
