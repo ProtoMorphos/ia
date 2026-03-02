@@ -56,6 +56,11 @@
             padding: 8px;
             border-radius: 10px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
         }
     </style>
 </head>
@@ -63,7 +68,7 @@
 
     <!-- Header -->
     <header class="p-6 bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
-        <div class="flex justify-between items-center text-center sm:text-left">
+        <div class="flex justify-between items-center">
             <div>
                 <h1 class="text-xl font-bold text-white uppercase tracking-tight">Treino Pro</h1>
                 <p class="text-xs text-slate-400 font-medium">Anderson | 47 anos | 78kg</p>
@@ -77,7 +82,7 @@
     <!-- Tabs Nav -->
     <nav class="flex border-b border-slate-800 bg-slate-900 sticky top-[73px] z-40">
         <button onclick="switchTab('treino-a')" id="btn-a" class="flex-1 py-4 font-semibold text-xs uppercase tracking-wider tab-active-a">Treino A</button>
-        <button onclick="switchTab('btn-b')" id="btn-b" class="flex-1 py-4 font-semibold text-xs uppercase tracking-wider text-slate-400">Treino B</button>
+        <button onclick="switchTab('treino-b')" id="btn-b" class="flex-1 py-4 font-semibold text-xs uppercase tracking-wider text-slate-400">Treino B</button>
         <button onclick="switchTab('cardio')" id="btn-cardio" class="flex-1 py-4 font-semibold text-xs uppercase tracking-wider text-slate-400">Cardio</button>
     </nav>
 
@@ -101,20 +106,30 @@
                 </div>
                 <div class="illustration-box"><img src="https://iili.io/qB2LAl4.png" alt="[Leg Press Inclinado]"></div>
                 <div class="grid grid-cols-3 gap-2 mb-3">
-                    <div class="stat-badge"><span class="text-[9px] text-slate-400 block font-bold">SÉRIES</span><span class="text-sm font-bold">3</span></div>
-                    <div class="stat-badge"><span class="text-[9px] text-slate-400 block font-bold">REPS</span><span class="text-sm font-bold">10-12</span></div>
-                    <div class="stat-badge border border-orange-500/30"><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">82kg</span></div>
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">10-12</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">82kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-blue-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Pés na largura dos ombros. Não estenda totalmente os joelhos no topo para proteger a articulação.
                 </div>
             </div>
 
             <!-- Ex A2: Supino -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-a2">
                 <div class="flex justify-between items-start mb-3">
-                    <div><span class="text-blue-500 font-bold text-[10px] uppercase bg-blue-500/10 px-2 py-0.5 rounded">Peitoral</span><h3 class="text-lg font-bold mt-1">2. Supino Inc. Máquina</h3></div>
+                    <div><span class="text-blue-500 font-bold text-[10px] uppercase bg-blue-500/10 px-2 py-0.5 rounded">Peitoral</span><h3 class="text-lg font-bold mt-1 tracking-tight">2. Supino Inc. Máquina</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-a2')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
-                <div class="illustration-box"><img src="https://iili.io/qB2Luff.png" alt="[Supino Inclinado]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">8-10 REPS</div><div class="stat-badge text-orange-400 font-bold">35kg</div></div>
+                <div class="illustration-box"><img src="https://iili.io/qB2Luff.png" alt="[Supino Inclinado Máquina]"></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">8-10</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">35kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-blue-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Escápulas "travadas" no banco, peito estufado. Tente chegar próximo à falha na última série.
+                </div>
             </div>
 
             <!-- Ex A3: Desenvolvimento -->
@@ -123,8 +138,15 @@
                     <div><span class="text-blue-500 font-bold text-[10px] uppercase bg-blue-500/10 px-2 py-0.5 rounded">Ombros</span><h3 class="text-lg font-bold mt-1">3. Desenv. Articulado</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-a3')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
-                <div class="illustration-box"><img src="https://iili.io/qB2Lxxn.png" alt="[Desenvolvimento]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">12 REPS</div><div class="stat-badge text-orange-400 font-bold">10kg</div></div>
+                <div class="illustration-box"><img src="https://iili.io/qB2Lxxn.png" alt="[Desenvolvimento Articulado]"></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">12</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">10kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-blue-500 leading-relaxed">
+                    <strong class="text-white not-italic">Dica:</strong> Controle a descida lenta para aumentar o tempo sob tensão muscular.
+                </div>
             </div>
 
             <!-- Ex A4: Extensor -->
@@ -134,17 +156,31 @@
                     <input type="checkbox" onchange="toggleComplete('ex-a4')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="https://iili.io/qB2LKSp.png" alt="[Banco Extensor]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">15 REPS</div><div class="stat-badge text-orange-400 font-bold">38kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">15</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">38kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-blue-500 leading-relaxed">
+                    <strong class="text-white not-italic">Dica:</strong> No topo da extensão, segure por 1 segundo ("esmague") antes de descer.
+                </div>
             </div>
 
             <!-- Ex A5: Voador -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-a5">
                 <div class="flex justify-between items-start mb-3">
-                    <div><span class="text-blue-500 font-bold text-[10px] uppercase bg-blue-500/10 px-2 py-0.5 rounded">Peitoral</span><h3 class="text-lg font-bold mt-1">5. Voador</h3></div>
+                    <div><span class="text-blue-500 font-bold text-[10px] uppercase bg-blue-500/10 px-2 py-0.5 rounded">Peitoral</span><h3 class="text-lg font-bold mt-1">5. Voador (Peck Deck)</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-a5')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="https://iili.io/qB2LBRI.png" alt="[Voador]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">12 REPS</div><div class="stat-badge text-orange-400 font-bold">44kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">12</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">44kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-blue-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Cotovelos na linha do ombro, sinta o alongamento do peitoral no final do movimento.
+                </div>
             </div>
 
             <!-- Ex A6: Tríceps -->
@@ -154,27 +190,48 @@
                     <input type="checkbox" onchange="toggleComplete('ex-a6')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="https://iili.io/qB2LCNt.png" alt="[Tríceps Corda]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">15 REPS</div><div class="stat-badge text-orange-400 font-bold">12kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">15</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">12kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-blue-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Cotovelos colados ao corpo. Afaste as pontas da corda no final da extensão.
+                </div>
             </div>
 
-            <!-- Ex A7: Adutor (IMAGEM ATUALIZADA) -->
+            <!-- Ex A7: Adutor -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-a7">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-blue-500 font-bold text-[10px] uppercase bg-blue-500/10 px-2 py-0.5 rounded">Pernas</span><h3 class="text-lg font-bold mt-1">7. Banco Adutor</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-a7')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="https://iili.io/qB3zkhP.png" alt="[Banco Adutor]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">15 REPS</div><div class="stat-badge text-orange-400 font-bold">38kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">15</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">38kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-blue-500 leading-relaxed">
+                    <strong class="text-white not-italic">Dica:</strong> Movimento controlado. Mantenha a postura ereta no encosto durante a contração.
+                </div>
             </div>
 
-            <!-- Ex A8: Abdominal (IMAGEM ATUALIZADA) -->
+            <!-- Ex A8: Abdominal Supra -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-a8">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-blue-500 font-bold text-[10px] uppercase bg-blue-500/10 px-2 py-0.5 rounded">Core</span><h3 class="text-lg font-bold mt-1">8. Abdominal Supra</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-a8')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="https://iili.io/qB2LnDX.png" alt="[Abdominal Supra]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge font-bold">FALHA</div><div class="stat-badge">S/ PESO</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="zap" class="w-3 h-3 text-blue-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Esforço</span><span class="text-sm font-bold">Falha</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">Livre</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-blue-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Não puxe o pescoço. Imagine o peito indo em direção ao teto.
+                </div>
             </div>
         </div>
 
@@ -185,76 +242,140 @@
                 Foco: Costas, Bíceps e Posterior
             </div>
 
+            <!-- Ex B1: Puxada -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-b1">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Costas</span><h3 class="text-lg font-bold mt-1">1. Puxada Aberta Pronada</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-b1')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="1000681760.jpg" alt="[Puxada Aberta Pronada]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">12 REPS</div><div class="stat-badge text-orange-400 font-bold">35kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">12</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">35kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-green-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Puxe em direção ao peito, não por trás da nuca. Mantenha os cotovelos alinhados.
+                </div>
             </div>
 
+            <!-- Ex B2: Remada -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-b2">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Costas</span><h3 class="text-lg font-bold mt-1">2. Remada Artic. Neutra</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-b2')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="1000681758.jpg" alt="[Remada Articulada]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">12 REPS</div><div class="stat-badge text-orange-400 font-bold">50kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">12</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">50kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-green-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Peito apoiado no estofado. Feche bem as escápulas ao puxar.
+                </div>
             </div>
 
+            <!-- Ex B3: Mesa Flexora -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-b3">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Posterior</span><h3 class="text-lg font-bold mt-1">3. Mesa Flexora</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-b3')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="1000681766.jpg" alt="[Mesa Flexora]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">15 REPS</div><div class="stat-badge text-orange-400 font-bold">38kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">15</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">38kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-green-500 leading-relaxed">
+                    <strong class="text-white not-italic">Dica:</strong> Mantenha o quadril pressionado contra o banco. Controle a descida das pernas.
+                </div>
             </div>
 
+            <!-- Ex B4: Flexão em Pé -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-b4">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Posterior</span><h3 class="text-lg font-bold mt-1">4. Flexão em Pé</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-b4')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="1000681768.jpg" alt="[Flexão em Pé]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge">12 REPS</div><div class="stat-badge text-orange-400 font-bold">10kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">12</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">10kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-green-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Joelho da perna de apoio levemente flexionado. Subida explosiva e descida lenta.
+                </div>
             </div>
 
+            <!-- Ex B5: Abdutor -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-b5">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Glúteos</span><h3 class="text-lg font-bold mt-1">5. Banco Abdutor</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-b5')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="1000681770.jpg" alt="[Banco Abdutor]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge font-bold">15 REPS</div><div class="stat-badge text-orange-400 font-bold">42kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">15</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">42kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-green-500 leading-relaxed">
+                    <strong class="text-white not-italic">Dica:</strong> Foco na parte lateral do glúteo. Segure a contração máxima por 1 segundo ao abrir.
+                </div>
             </div>
 
+            <!-- Ex B6: Bíceps Barra -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-b6">
                 <div class="flex justify-between items-start mb-3">
-                    <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Bíceps</span><h3 class="text-lg font-bold mt-1">6. Bíceps Barra</h3></div>
+                    <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Bíceps</span><h3 class="text-lg font-bold mt-1">6. Bíceps Barra Montada</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-b6')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="1000681762.jpg" alt="[Bíceps Barra]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge font-bold">12 REPS</div><div class="stat-badge text-orange-400 font-bold">15kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">12</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">15kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-green-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Coluna reta e joelhos levemente flexionados. Não use o impulso do corpo.
+                </div>
             </div>
 
+            <!-- Ex B7: Rosca Martelo -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-b7">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Bíceps</span><h3 class="text-lg font-bold mt-1">7. Rosca Martelo</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-b7')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
                 <div class="illustration-box"><img src="1000681764.jpg" alt="[Rosca Martelo]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge font-bold">12 REPS</div><div class="stat-badge text-orange-400 font-bold">8kg</div></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="repeat" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Reps</span><span class="text-sm font-bold">12</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Peso</span><span class="text-sm font-bold text-orange-400">8kg</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-green-500 leading-relaxed">
+                    <strong class="text-white not-italic">Dica:</strong> Pegada neutra. Mantém a tensão constante no antebraço durante toda a descida.
+                </div>
             </div>
 
+            <!-- Ex B8: Prancha -->
             <div class="exercise-card p-4 rounded-2xl relative" id="ex-b8">
                 <div class="flex justify-between items-start mb-3">
                     <div><span class="text-green-500 font-bold text-[10px] uppercase bg-green-500/10 px-2 py-0.5 rounded">Core</span><h3 class="text-lg font-bold mt-1">8. Abdominal Prancha</h3></div>
                     <input type="checkbox" onchange="toggleComplete('ex-b8')" class="w-7 h-7 rounded-full border-slate-600 bg-slate-700">
                 </div>
-                <div class="illustration-box"><img src="1000681772.jpg" alt="[Prancha]"></div>
-                <div class="grid grid-cols-3 gap-2 mb-3"><div class="stat-badge">3 SÉRIES</div><div class="stat-badge font-bold uppercase">60 SEG</div><div class="stat-badge">CORE</div></div>
+                <div class="illustration-box"><img src="1000681772.jpg" alt="[Abdominal Prancha]"></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="stat-badge"><i data-lucide="layers" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Séries</span><span class="text-sm font-bold">3</span></div>
+                    <div class="stat-badge"><i data-lucide="timer" class="w-3 h-3 text-green-400"></i><span class="text-[9px] text-slate-400 block font-bold uppercase">Tempo</span><span class="text-sm font-bold">60s</span></div>
+                    <div class="stat-badge border border-orange-500/30"><i data-lucide="weight" class="w-3 h-3 text-orange-400"></i><span class="text-[9px] text-orange-400 block font-bold uppercase">Carga</span><span class="text-sm font-bold text-orange-400">Livre</span></div>
+                </div>
+                <div class="bg-slate-800/40 p-3 rounded-xl text-[11px] text-slate-300 italic border-l-2 border-green-500 leading-relaxed">
+                    <strong class="text-white not-italic">Postura:</strong> Mantenha o corpo reto como uma tábua. Não deixe o quadril cair ou subir demais.
+                </div>
             </div>
         </div>
 
