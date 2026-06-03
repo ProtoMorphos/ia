@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cronograma de Suplementação Otimizado</title>
+    <title>Cronograma de Suplementação Otimizado - V3</title>
     <style>
         :root {
             --bg-principal: #0b0f19;
@@ -13,7 +13,7 @@
             --texto-secundario: #94a3b8;
             --cor-acento: #38bdf8;
             --cor-sucesso: #10b981;
-            --cor-alerta: #f59e0b;
+            --cor-alerta: #ef4444;
             --cor-borda: #24334d;
         }
 
@@ -135,6 +135,22 @@
             font-size: 0.9rem;
             margin-left: 0.5rem;
         }
+        
+        .alerta-critico {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid var(--cor-alerta);
+            padding: 0.75rem 1rem;
+            margin-top: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .alerta-critico strong {
+            color: var(--cor-alerta);
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
 
         .info-block {
             background-color: rgba(15, 23, 42, 0.6);
@@ -154,7 +170,7 @@
         }
 
         .acompanhamento strong { color: var(--cor-sucesso); }
-        .porquê strong { color: var(--cor-alerta); }
+        .porquê strong { color: #f59e0b; }
         
         .info-block p {
             color: var(--texto-secundario);
@@ -185,50 +201,55 @@
     <div class="container">
         <header>
             <h1>Cronograma de Suplementação <span>Definitivo</span></h1>
-            <p>Otimização de absorção, sinergia de nutrientes e performance</p>
+            <p>Otimização de absorção com Peptídeos e Formulações Sublinguais</p>
         </header>
 
         <div class="timeline">
 
-            <!-- AO ACORDAR -->
+            <!-- AO ACORDAR / PRÉ-CORRIDA -->
             <div class="timeline-item">
                 <div class="item-header">
                     <span class="period-title">Ao Acordar (Jejum)</span>
-                    <span class="time-badge">07:30 / 08:00</span>
+                    <span class="time-badge">Aprox. 07:00</span>
                 </div>
                 <ul class="suplementos-lista">
                     <li>UC II (Colágeno Tipo 2) <span class="dosagem">40mg — 1 cápsula</span></li>
                 </ul>
                 <div class="info-block acompanhamento">
                     <strong>Acompanhamento / Logística:</strong>
-                    <p>Tomar com um copo de água. Aguardar de 20 a 30 minutos antes de realizar a primeira refeição sólida.</p>
+                    <p>Tomar com bastante água (400ml - 500ml). Partir para a corrida na praça (Método Run/Walk para proteger do impacto com o Olympikus Grafeno 2).</p>
                 </div>
                 <div class="info-block porquê">
                     <strong>Fundamento Científico:</strong>
-                    <p>Age por tolerância oral no intestino para desinflamar as articulações. O jejum total evita a competição com outras proteínas da dieta, garantindo a integridade do ativo.</p>
+                    <p>A água aumenta o volume sanguíneo para o aeróbico, enquanto o jejum garante absorção 100% íntegra do colágeno e acessa a gordura visceral como combustível primário do cardio.</p>
                 </div>
             </div>
 
             <!-- CAFÉ DA MANHÃ -->
             <div class="timeline-item">
                 <div class="item-header">
-                    <span class="period-title">Café da Manhã</span>
+                    <span class="period-title">Pós-Corrida / Café da Manhã</span>
                     <span class="time-badge">Aprox. 08:30</span>
                 </div>
                 <ul class="suplementos-lista">
+                    <li>Vitamina B12 Metilcobalamina <span class="dosagem">1.000mcg — Sublingual</span></li>
                     <li>Feno Grego <span class="dosagem">1ª cápsula</span></li>
-                    <li>Vitamina D3 + K2 MK-7 <span class="dosagem">1 dose</span></li>
                     <li>Coenzima Q10 <span class="dosagem">1 dose</span></li>
-                    <li>Vitamina B12 (Metilcobalamina) <span class="dosagem">1 dose</span></li>
-                    <li>Biotina + Ácido Pantotênico + Ácido Fólico <span class="dosagem">1 dose</span></li>
+                    <li>Vitamina D3 (50.000 UI) <span class="dosagem" style="color: #ef4444; font-weight: bold;">[APENAS 1X POR SEMANA]</span></li>
                 </ul>
+                
+                <div class="alerta-critico">
+                    <strong>⚠️ Alerta de Dosagem - Vitamina D3</strong>
+                    <p style="color: #f8fafc; font-size: 0.9rem;">Tome APENAS 1 dia por semana (ex: todo domingo) para evitar hipercalcemia e toxidade renal.</p>
+                </div>
+
                 <div class="info-block acompanhamento">
                     <strong>Acompanhamento / Logística:</strong>
-                    <p>Junto com a refeição densa: Bananas amassadas, aveia, gergelim (preto/branco), chia, farinha de banana verde, pasta de amendoim e semente de girassol (opcional: pão integral com queijo branco).</p>
+                    <p>Deixe a B12 dissolver debaixo da língua primeiro. Depois, tome o restante junto com a refeição sólida densa (bananas, aveia, e a <strong>pasta de amendoim</strong> na medida correta para controle calórico e de colesterol).</p>
                 </div>
                 <div class="info-block porquê">
                     <strong>Fundamento Científico:</strong>
-                    <p>A D3+K2 e a CoQ10 são lipossolúveis e exigem as gorduras saudáveis (pasta de amendoim, gergelim, girassol, chia) para máxima absorção. O complexo B garante aporte energético matinal. O Feno Grego junto com as fibras modula a resposta glicêmica da refeição.</p>
+                    <p>A via sublingual fornece B12 instantânea ao cérebro e músculos. As gorduras da pasta de amendoim são vitais para puxar a CoQ10 e a D3 para dentro das células.</p>
                 </div>
             </div>
 
@@ -243,11 +264,7 @@
                 </ul>
                 <div class="info-block acompanhamento">
                     <strong>Acompanhamento / Logística:</strong>
-                    <p>Diluído em água ou conforme preferência de consistência.</p>
-                </div>
-                <div class="info-block porquê">
-                    <strong>Fundamento Científico:</strong>
-                    <p>Garante um pool de aminoácidos circulantes no sangue para proteção da massa magra (anticatabolismo) e síntese proteica antes do estímulo mecânico do treino.</p>
+                    <p>Diluído em água ou conforme preferência.</p>
                 </div>
             </div>
 
@@ -261,45 +278,38 @@
                     <li>Arginina <span class="dosagem">1 dose</span></li>
                 </ul>
                 <div class="info-block acompanhamento">
-                    <strong>Acompanhamento / Logística:</strong>
-                    <p>Tomar com água cerca de 30 a 45 minutos antes do início do treino.</p>
-                </div>
-                <div class="info-block porquê">
-                    <strong>Fundamento Científico:</strong>
-                    <p>Tempo ideal para a metabolização e conversão em óxido nítrico, garantindo a vasodilatação máxima, oxigenação muscular e o efeito de <em>pump</em> durante a atividade física.</p>
+                    <strong>Atenção ao Anlodipino:</strong>
+                    <p>Se tiver tomado o seu anti-hipertensivo neste dia, <strong>NÃO</strong> tome a Arginina para evitar choque de vasodilatadores e queda de pressão perigosa.</p>
                 </div>
             </div>
 
             <!-- TREINO -->
             <div class="timeline-item" style="border-left: 4px solid var(--cor-acento);">
                 <div class="item-header">
-                    <span class="period-title">⚡ Horário do Treino</span>
+                    <span class="period-title">⚡ Treino de Força</span>
                     <span class="time-badge">12:30</span>
-                </div>
-                <div class="info-block acompanhamento">
-                    <strong>Foco Total:</strong>
-                    <p>Hidratação constante com água durante toda a sessão de treinamento.</p>
                 </div>
             </div>
 
             <!-- ALMOÇO / PÓS-TREINO -->
             <div class="timeline-item">
                 <div class="item-header">
-                    <span class="period-title">Almoço (Pós-Treino Sólido)</span>
+                    <span class="period-title">Almoço (Pós-Treino Otimizado)</span>
                     <span class="time-badge">Aprox. 14:00</span>
                 </div>
                 <ul class="suplementos-lista">
+                    <li>Peptistrong <span class="dosagem">1 sachê (Sabor Laranja)</span></li>
                     <li>Creatina <span class="dosagem">1 dose (3g a 5g)</span></li>
                     <li>Zinco <span class="dosagem">50mg — 1 cápsula</span></li>
                     <li>Feno Grego <span class="dosagem">2ª cápsula</span></li>
                 </ul>
                 <div class="info-block acompanhamento">
                     <strong>Acompanhamento / Logística:</strong>
-                    <p>Refeição sólida completa (rica em proteínas animais e carboidratos). <strong>Evitar laticínios</strong> nesta refeição específica para que o cálcio não bloqueie o zinco.</p>
+                    <p>Misture o Peptistrong e a Creatina no mesmo copo d'água gelada e tome imediatamente após o treino ou junto com a refeição sólida (almoço).</p>
                 </div>
                 <div class="info-block porquê">
                     <strong>Fundamento Científico:</strong>
-                    <p>O pico de insulina gerado pelos carboidratos do almoço otimiza o transporte da creatina para dentro das células musculares. O Zinco é obrigatoriamente ingerido com estômago cheio para evitar náuseas graves causadas pela dosagem de 50mg.</p>
+                    <p>O Peptistrong atua em uma via de sinalização de hipertrofia paralela. Combinado com o pico de insulina gerado pelo almoço, ele e a creatina são empurrados simultaneamente para o músculo ávido por nutrientes. O Zinco precisa do estômago cheio para não causar náuseas.</p>
                 </div>
             </div>
 
@@ -311,22 +321,17 @@
                 </div>
                 <ul class="suplementos-lista">
                     <li>Feno Grego <span class="dosagem">3ª cápsula (Finalização do ciclo diário de 1000mg)</span></li>
-                    <li>Vitamina C <span class="dosagem">Opcional / Apenas se necessário</span></li>
                 </ul>
                 <div class="info-block acompanhamento">
                     <strong>Acompanhamento / Logística:</strong>
-                    <p>Junto com a refeição noturna sólida.</p>
-                </div>
-                <div class="info-block porquê">
-                    <strong>Fundamento Científico:</strong>
-                    <p>O Feno Grego fracionado mantém os níveis hormonais e a modulação da insulina estáveis. A Vitamina C (se utilizada para finalizar o pote) entra aqui para ficar o mais distante possível da janela do treino, evitando mitigar os radicais livres necessários para a sinalização da hipertrofia.</p>
+                    <p>Junto com a refeição noturna sólida para controle do pico glicêmico antes do repouso.</p>
                 </div>
             </div>
 
             <!-- ANTES DE DORMIR -->
             <div class="timeline-item">
                 <div class="item-header">
-                    <span class="period-title">Janela de Repouso e Regeneração</span>
+                    <span class="period-title">Regeneração Profunda</span>
                     <span class="time-badge">1h a 2h antes de deitar</span>
                 </div>
                 <ul class="suplementos-lista">
@@ -335,11 +340,11 @@
                 </ul>
                 <div class="info-block acompanhamento">
                     <strong>Acompanhamento / Logística:</strong>
-                    <p>Tomar com um copo de água pura</p>
+                    <p>Tomar com um copo de água pura.</p>
                 </div>
                 <div class="info-block porquê">
                     <strong>Fundamento Científico:</strong>
-                    <p>O Magnésio Treonato atravessa a barreira hematoencefálica, acalmando o sistema nervoso. Junto com o Inositol, atua na modulação de neurotransmissores promotores de relaxamento, reduzindo a ansiedade e garantindo a arquitetura profunda do sono (fases REM e ondas lentas), período crítico para a máxima secreção de GH e recuperação tecidual.</p>
+                    <p>Garante a arquitetura profunda do sono, reduz a ansiedade (ação no sistema nervoso central) e processa as gorduras do fígado acumuladas durante o dia.</p>
                 </div>
             </div>
 
@@ -352,3 +357,5 @@
 
 </body>
 </html>
+
+print(f"Arquivo gerado com sucesso: {file_path}")
