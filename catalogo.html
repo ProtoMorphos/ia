@@ -1,0 +1,865 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Exclusivo de Perfumes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {{
+            --bg-color: #faf8f5;
+            --text-main: #1c1b1a;
+            --text-light: #666;
+            --gold: #d4af37;
+            --gold-light: #e8d08c;
+            --white: #ffffff;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
+        }}
+
+        * {{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }}
+
+        body {{
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }}
+
+        h1, h2, h3, .serif {{
+            font-family: 'Playfair Display', serif;
+        }}
+
+        /* Hero Section */
+        .hero {{
+            background-color: var(--text-main);
+            color: var(--gold);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }}
+
+        .hero::before {{
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, rgba(28, 27, 26, 1) 70%);
+            z-index: 1;
+        }}
+
+        .hero-content {{
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }}
+
+        .hero h1 {{
+            font-size: 3.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }}
+
+        .hero p {{
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }}
+
+        /* Controls Section */
+        .controls-container {{
+            max-width: 1200px;
+            margin: -30px auto 40px;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+        }}
+
+        .control-group {{
+            display: flex;
+            flex-direction: column;
+        }}
+
+        .control-group label {{
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 600;
+        }}
+
+        input, select {{
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            transition: var(--transition);
+        }}
+
+        input:focus, select:focus {{
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }}
+
+        /* Stats */
+        .stats {{
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }}
+
+        /* Catalog Grid */
+        .catalog-grid {{
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }}
+
+        /* Perfume Card */
+        .card {{
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }}
+
+        .card:hover {{
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+        }}
+
+        .card-img-placeholder {{
+            background-color: #f4f0ea;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }}
+
+        .card-img-placeholder svg {{
+            width: 80px;
+            height: 80px;
+            stroke: var(--gold);
+            opacity: 0.8;
+            transition: var(--transition);
+        }}
+
+        .card:hover .card-img-placeholder svg {{
+            transform: scale(1.1);
+            opacity: 1;
+        }}
+
+        .card-content {{
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }}
+
+        .card-category {{
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }}
+
+        .card-title {{
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+            color: var(--text-main);
+            line-height: 1.3;
+        }}
+
+        .card-brand {{
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }}
+
+        .card-footer {{
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }}
+
+        .card-code {{
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 600;
+        }}
+
+        .buy-btn {{
+            background-color: var(--text-main);
+            color: var(--gold);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }}
+
+        .card:hover .buy-btn {{
+            background-color: var(--gold);
+            color: var(--white);
+        }}
+
+        /* No results */
+        .no-results {{
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }}
+
+        /* Responsive */
+        @media (max-width: 768px) {{
+            .hero h1 {{ font-size: 2.2rem; }}
+            .hero p {{ font-size: 1rem; }}
+            .controls-container {{
+                margin: 20px;
+                grid-template-columns: 1fr;
+            }}
+        }}
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Catálogo 2026</h1>
+            <p>Coleção Exclusiva de Perfumes</p>
+        </div>
+    </header>
+
+    <div class="controls-container">
+        <div class="control-group">
+            <label for="searchInput">Buscar</label>
+            <input type="text" id="searchInput" placeholder="Nome ou código...">
+        </div>
+        <div class="control-group">
+            <label for="categoryFilter">Categoria</label>
+            <select id="categoryFilter">
+                <option value="all">Todas as Categorias</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="brandFilter">Grife</label>
+            <select id="brandFilter">
+                <option value="all">Todas as Grifes</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="sortSelect">Ordenar por</label>
+            <select id="sortSelect">
+                <option value="name_asc">Nome (A-Z)</option>
+                <option value="name_desc">Nome (Z-A)</option>
+                <option value="code_asc">Código (Crescente)</option>
+                <option value="brand_asc">Grife (A-Z)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="stats" id="statsDisplay"></div>
+
+    <main class="catalog-grid" id="catalogGrid">
+        <!-- Cards will be injected here via JS -->
+    </main>
+
+    <script>
+        const perfumesData = {perfumes_json};
+
+        const grid = document.getElementById('catalogGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const brandFilter = document.getElementById('brandFilter');
+        const sortSelect = document.getElementById('sortSelect');
+        const statsDisplay = document.getElementById('statsDisplay');
+
+        // Initialize Dropdowns
+        function initFilters() {{
+            const categories = [...new Set(perfumesData.map(p => p.Categoria))].sort();
+            const brands = [...new Set(perfumesData.map(p => p.Grife))].sort();
+
+            categories.forEach(cat => {{
+                let option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat;
+                categoryFilter.appendChild(option);
+            }});
+
+            brands.forEach(brand => {{
+                let option = document.createElement('option');
+                option.value = brand;
+                option.textContent = brand;
+                brandFilter.appendChild(option);
+            }});
+        }}
+
+        // SVG Icon for Perfume Bottle
+        const perfumeSVG = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 2v3a1 1 0 0 1-1 1H7a1 1 0 0 0-1 1v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7a1 1 0 0 0-1-1h-2a1 1 0 0 1-1-1V2"/>
+                <path d="M6 11v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8"/>
+                <path d="M12 2v3"/>
+                <path d="M9 15h6"/>
+                <path d="M9 18h6"/>
+            </svg>
+        `;
+
+        function renderCards(data) {{
+            grid.innerHTML = '';
+            
+            if (data.length === 0) {{
+                grid.innerHTML = '<div class="no-results serif">Nenhum perfume encontrado com estes filtros.</div>';
+                statsDisplay.textContent = '0 perfumes';
+                return;
+            }}
+
+            statsDisplay.textContent = `Mostrando ${{data.length}} perfumes`;
+
+            data.forEach(perfume => {{
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-img-placeholder">
+                        ${{perfumeSVG}}
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">${{perfume.Categoria}}</div>
+                        <h2 class="card-title serif">${{perfume['Inspirado em']}}</h2>
+                        <div class="card-brand">${{perfume.Grife}}</div>
+                        <div class="card-footer">
+                            <div class="card-code">Cód: ${{perfume['Código']}}</div>
+                            <button class="buy-btn">Eu Quero</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            }});
+        }}
+
+        function filterAndSort() {{
+            const term = searchInput.value.toLowerCase();
+            const cat = categoryFilter.value;
+            const brand = brandFilter.value;
+            const sort = sortSelect.value;
+
+            // Filter
+            let filtered = perfumesData.filter(p => {{
+                const matchSearch = p['Inspirado em'].toLowerCase().includes(term) || p['Código'].toLowerCase().includes(term);
+                const matchCat = cat === 'all' || p.Categoria === cat;
+                const matchBrand = brand === 'all' || p.Grife === brand;
+                return matchSearch && matchCat && matchBrand;
+            }});
+
+            // Sort
+            filtered.sort((a, b) => {{
+                if (sort === 'name_asc') return a['Inspirado em'].localeCompare(b['Inspirado em']);
+                if (sort === 'name_desc') return b['Inspirado em'].localeCompare(a['Inspirado em']);
+                if (sort === 'code_asc') return a['Código'].localeCompare(b['Código']);
+                if (sort === 'brand_asc') return a.Grife.localeCompare(b.Grife);
+                return 0;
+            }});
+
+            renderCards(filtered);
+        }}
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterAndSort);
+        categoryFilter.addEventListener('change', filterAndSort);
+        brandFilter.addEventListener('change', filterAndSort);
+        sortSelect.addEventListener('change', filterAndSort);
+
+        // Initial Render
+        initFilters();
+        filterAndSort();
+
+    </script>
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("index.html created successfully.")
+
+
+```
+
+```text
+index.html created successfully.
+
+
+```
+
+Sua página para o GitHub Pages está pronta e o código HTML contém tudo o que você precisa em um único arquivo (responsivo, moderno e totalmente funcional).
+
+[file-tag: code-generated-file-265e56ad-8bf2-423b-9b4c-ce4a3b6f91cf]
+
+### O que o seu site possui:
+
+* **Design Luxuoso:** Cores elegantes (Off-white, Preto e Dourado), fontes tipográficas clássicas para os nomes (Serifadas) e modernas para a leitura (Sem serifa), e um belo fundo escuro para a sessão principal ("Hero").
+* **Grid de Produtos (Responsivo):** Os perfumes ficam organizados em formato de "cards" super elegantes com o desenho minimalista do frasco, exibindo Categoria, Inspirado em, Grife e o seu Código. Se a pessoa abrir no celular, eles se adaptam perfeitamente à tela.
+* **Filtros Dinâmicos:** Um painel superior que permite pesquisar o perfume digitando o nome ou código, filtrar pela categoria desejada, filtrar pela grife e ordenar os perfumes (De A-Z, Código, Grife, etc.). Tudo isso funciona instantaneamente, sem precisar recarregar a página.
+* **Botão de Ação:** Há um botão "Eu quero" em cada card estimulando a intenção de compra do cliente.
+
+### Como hospedar no GitHub:
+
+1. Crie um repositório no seu GitHub com qualquer nome (por exemplo, `catalogo-perfumes`).
+2. Faça o upload desse arquivo no repositório, garantindo que o nome do arquivo seja exatamente `index.html`.
+3. Vá nas configurações do repositório (`Settings` > `Pages`), escolha o branch `main` e salve.
+4. Em alguns minutos, a página estará no ar disponível para seus clientes acessarem pelo link!
+
+There is a file you can reference named "index.html". Refer to this file by its name verbatim.
+[source: 7]
+
+```
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    h1, h2, h3, .serif {
+        font-family: 'Playfair Display', serif;
+    }
+
+    /* Hero Section */
+    .hero {
+        background-color: var(--text-main);
+        color: var(--gold);
+        padding: 80px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, rgba(28, 27, 26, 1) 70%);
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        color: var(--gold-light);
+        font-weight: 300;
+        letter-spacing: 2px;
+    }
+
+    /* Controls Section */
+    .controls-container {
+        max-width: 1200px;
+        margin: -30px auto 40px;
+        background: var(--white);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .control-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .control-group label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        color: var(--text-light);
+        font-weight: 600;
+    }
+
+    input, select {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        background-color: var(--bg-color);
+        transition: var(--transition);
+    }
+
+    input:focus, select:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    }
+
+    /* Stats */
+    .stats {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 0.9rem;
+        color: var(--text-light);
+        letter-spacing: 1px;
+    }
+
+    /* Catalog Grid */
+    .catalog-grid {
+        max-width: 1200px;
+        margin: 0 auto 60px;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    /* Perfume Card */
+    .card {
+        background: var(--white);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: var(--gold);
+        box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+    }
+
+    .card-img-placeholder {
+        background-color: #f4f0ea;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .card-img-placeholder svg {
+        width: 80px;
+        height: 80px;
+        stroke: var(--gold);
+        opacity: 0.8;
+        transition: var(--transition);
+    }
+
+    .card:hover .card-img-placeholder svg {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    .card-content {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-category {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--gold);
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 5px;
+        color: var(--text-main);
+        line-height: 1.3;
+    }
+
+    .card-brand {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .card-footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+    }
+
+    .card-code {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        color: var(--gold);
+        font-weight: 600;
+    }
+
+    .buy-btn {
+        background-color: var(--text-main);
+        color: var(--gold);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .card:hover .buy-btn {
+        background-color: var(--gold);
+        color: var(--white);
+    }
+
+    /* No results */
+    .no-results {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 60px 20px;
+        font-size: 1.2rem;
+        color: var(--text-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero h1 { font-size: 2.2rem; }
+        .hero p { font-size: 1rem; }
+        .controls-container {
+            margin: 20px;
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+```
+
+```
+<header class="hero">
+    <div class="hero-content">
+        <h1>Catálogo 2026</h1>
+        <p>Coleção Exclusiva de Perfumes</p>
+    </div>
+</header>
+
+<div class="controls-container">
+    <div class="control-group">
+        <label for="searchInput">Buscar</label>
+        <input type="text" id="searchInput" placeholder="Nome ou código...">
+    </div>
+    <div class="control-group">
+        <label for="categoryFilter">Categoria</label>
+        <select id="categoryFilter">
+            <option value="all">Todas as Categorias</option>
+        </select>
+    </div>
+    <div class="control-group">
+        <label for="brandFilter">Grife</label>
+        <select id="brandFilter">
+            <option value="all">Todas as Grifes</option>
+        </select>
+    </div>
+    <div class="control-group">
+        <label for="sortSelect">Ordenar por</label>
+        <select id="sortSelect">
+            <option value="name_asc">Nome (A-Z)</option>
+            <option value="name_desc">Nome (Z-A)</option>
+            <option value="code_asc">Código (Crescente)</option>
+            <option value="brand_asc">Grife (A-Z)</option>
+        </select>
+    </div>
+</div>
+
+<div class="stats" id="statsDisplay"></div>
+
+<main class="catalog-grid" id="catalogGrid">
+    <!-- Cards will be injected here via JS -->
+</main>
+
+<script>
+    const perfumesData = [{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"82","Inspirado em":"D & G INTENSO","Grife":"DOLCE & GABBANA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"379","Inspirado em":"212 ACQUA","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5661","Inspirado em":"212 HEROES","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5392","Inspirado em":"212 HEROES","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"134","Inspirado em":"212 MEN","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"261","Inspirado em":"212 NYC","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5274","Inspirado em":"212 NYC","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"181","Inspirado em":"212 SEXY","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"221","Inspirado em":"212 SEXY","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"806","Inspirado em":"212 VIP","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"137","Inspirado em":"212 VIP","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5189","Inspirado em":"212 VIP BLACK","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"6057","Inspirado em":"212 VIP BLACK ELIXIR","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"735","Inspirado em":"212 VIP ROSE","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5947","Inspirado em":"212 VIP ROSE ELIXIR","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5723","Inspirado em":"212 VIP ROS\u00c9 LOVE NY","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5646","Inspirado em":"212 VIP WINS","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5645","Inspirado em":"212 VIP WINS","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"220","Inspirado em":"212 WOMAN","Grife":"CAROLINA HERRERA"},{"Categoria":"NACIONAL MASCULINO","C\u00f3digo":"5883","Inspirado em":"214 AFRICAN","Grife":"BOTIC\u00c1RIO"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"5822","Inspirado em":"214 AFRICAN","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"525","Inspirado em":"ABERCROMBIE & FITCH","Grife":"ABERCROMBRIE"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"423","Inspirado em":"ABSINTO","Grife":"BOTIC\u00c1RIO"},{"Categoria":"INFANTIL","C\u00f3digo":"5290","Inspirado em":"ACQUA BEB\u00ca","Grife":"BOTIC\u00c1RIO"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5281","Inspirado em":"ACQUA CHEIROS","Grife":"BOTIC\u00c1RIO"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5283","Inspirado em":"ACQUA DI COLONIA FLORAL","Grife":"BOTIC\u00c1RIO"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5285","Inspirado em":"ACQUA DI COLONIA FRUTAL","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"807","Inspirado em":"ACQUA DI GIO","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5233","Inspirado em":"ACQUA DI GIO ABSOLUT","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5882","Inspirado em":"ACQUA DI GIO PARFUM","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5330","Inspirado em":"ACQUA DI GIO PROFUMO","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"123","Inspirado em":"ACQUA DI GOIA","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5415","Inspirado em":"ACQUA DI PARMA","Grife":"N\/A"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"422","Inspirado em":"ACQUA FRESCA","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5329","Inspirado em":"ACQUA KENZO","Grife":"KENZO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"48","Inspirado em":"ADDICT","Grife":"DIOR"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5865","Inspirado em":"AL DANA NICHE EMERATI","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"6068","Inspirado em":"AL NOBLE - AMEER","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"6066","Inspirado em":"AL NOBLE - SAFEER","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"6067","Inspirado em":"AL NOBLE - WAZEER","Grife":"LATTAFA"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"187","Inspirado em":"ALFAZEMA","Grife":"NATURA"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5770","Inspirado em":"ALGOD\u00c3O","Grife":"BOTIC\u00c1RIO"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"189","Inspirado em":"ALGOD\u00c3O","Grife":"NATURA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5565","Inspirado em":"ALIEN","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"56","Inspirado em":"ALIEN","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5220","Inspirado em":"ALIEN EAU SUBLIME","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"276","Inspirado em":"ALLURE","Grife":"CHANEL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"832","Inspirado em":"ALLURE BLANCHE","Grife":"CHANEL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"988","Inspirado em":"ALLURE FEM.","Grife":"CHANEL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5207","Inspirado em":"ALLURE HOMME SPORT EXTREME","Grife":"CHANEL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"341","Inspirado em":"ALLURE SPORT","Grife":"CHANEL"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"518","Inspirado em":"ALMISCAR SELVAGEM","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"108","Inspirado em":"AMARIGE","Grife":"GIVENCHY"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"AMBER ROMANCE","Grife":"FEM."},{"Categoria":"\u00c1RABE","C\u00f3digo":"5825","Inspirado em":"AMEERAT AL ARAB PRIVE ROS","Grife":"PRIVE ROSE"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5835","Inspirado em":"AMEERATTI \/ AL WATANIAH","Grife":"AMEERATI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5852","Inspirado em":"AMNIA AL","Grife":"AL WATANIAH"},{"Categoria":"NACIONAL MASCULINO","C\u00f3digo":"213","Inspirado em":"AMOR AMASSO","Grife":"NATURA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"103","Inspirado em":"AMOR AMOR","Grife":"CACHARREL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5259","Inspirado em":"AMOR FERRAGANO","Grife":"SALVATORE"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5656","Inspirado em":"AMOUAGE MEMOIR","Grife":"AMOUAGE"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"129","Inspirado em":"AMO CHAMEGO","Grife":"NATURA"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"131","Inspirado em":"AMO XOD\u00d3","Grife":"NATURA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"104","Inspirado em":"ANAIS ANAIS","Grife":"CACHARREL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5245","Inspirado em":"ANAIS ANAIS PREMIER DELICE","Grife":"CACHARREL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"124","Inspirado em":"ANGEL","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"809","Inspirado em":"ANGEL","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5945","Inspirado em":"ANGEL ELIXIR","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"355","Inspirado em":"ANGEL INNOCENT","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5173","Inspirado em":"ANGEL MUSE","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5360","Inspirado em":"ANGEL NOVA","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"105","Inspirado em":"ANGEL OU DEMON","Grife":"THIERRY MUGLER"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"5624","Inspirado em":"ANGEL'S","Grife":"FEM."},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5976","Inspirado em":"ANGEL'S SHARE","Grife":"KILIAN"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5965","Inspirado em":"ANI","Grife":"NICHANE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"302","Inspirado em":"ANIMALE","Grife":"ANIMALE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"901","Inspirado em":"ANIMALE","Grife":"ANIMALE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6050","Inspirado em":"AQUA ALLEGORIA ROSA VERDE","Grife":"GUERLAIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"106","Inspirado em":"ARMANI CODE","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5809","Inspirado em":"ARABIAN WOODS SENGTOM","Grife":"FORD"},{"Categoria":"NACIONAL MASCULINO","C\u00f3digo":"34","Inspirado em":"ARBO","Grife":"BOTIC\u00c1RIO"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"132","Inspirado em":"ARBO","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"902","Inspirado em":"ARMANI","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"904","Inspirado em":"ARMANI CODE BLACK","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"118","Inspirado em":"ARMANI CODE PROFUMO","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"182","Inspirado em":"ARMANI EAU NUIT","Grife":"GIORGIO ARMANI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5826","Inspirado em":"ASAD","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"6058","Inspirado em":"ASAD BOURBON","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"6091","Inspirado em":"ASAD ELIXIR","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"6052","Inspirado em":"ATHENA","Grife":"MAISON ALHAMBRA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5867","Inspirado em":"ATTAR AL WESAL","Grife":"AL WATANIAH"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"905","Inspirado em":"ATTITUDE","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5222","Inspirado em":"AURA LOEWE","Grife":"LOEWE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"186","Inspirado em":"AURA MUGLER","Grife":"THIERRY MUGLER"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"6053","Inspirado em":"AURA ALBA","Grife":"NATURA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"995","Inspirado em":"AVENTUS CREED","Grife":"CREED"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5317","Inspirado em":"AVENTUS CREED FOR HER","Grife":"CREED"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"907","Inspirado em":"AZZARO CHROMO","Grife":"AZZARO LORIS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"394","Inspirado em":"AZARRO MADEIMOSELLE","Grife":"AZZARO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"229","Inspirado em":"AZZARO POUR ELLE","Grife":"AZZARO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"461","Inspirado em":"AZZARO POUR HOMME","Grife":"AZZARO LORIS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"172","Inspirado em":"AZZARO SILVER BLACK","Grife":"AZZARO LORIS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5728","Inspirado em":"AZZARO THE MOST WANTED","Grife":"AZZARO LORIS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"835","Inspirado em":"AZZARO VISIT","Grife":"AZZARO LORIS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5232","Inspirado em":"AZZARO WANTED BY NIGHT","Grife":"AZZARO LORIS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5774","Inspirado em":"AZZARO WANTED EDP","Grife":"AZZARO LORIS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"417","Inspirado em":"AZZARO WANTED EDT","Grife":"AZZARO LORIS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5432","Inspirado em":"AZZARO WANTED GIRL","Grife":"AZZARO"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5712","Inspirado em":"BACCARAT ROUGE 540","Grife":"MAISON ALHAMBRA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5335","Inspirado em":"BAD BOY","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5746","Inspirado em":"BAD BOY COBALT","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5434","Inspirado em":"BAD BOY LE PARFUM","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5414","Inspirado em":"BAD BOY SUPERSTARS","Grife":"CAROLINA HERRERA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5876","Inspirado em":"BADEE AL OF GLORY","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5863","Inspirado em":"BADEE AL OUD AMETHYST","Grife":"LATTAFA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5376","Inspirado em":"BAISER VOL\u00c9","Grife":"CARTIER"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"736","Inspirado em":"BANG BANG","Grife":"MARC JACOBS"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"BARE VANILLA","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"834","Inspirado em":"BEAUTY","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5230","Inspirado em":"BECAUSE IT'S YOU","Grife":"ARMANI"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5716","Inspirado em":"BEIJINHO","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5979","Inspirado em":"BEIJOS DE SOL","Grife":"SOL DE JANEIRO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5218","Inspirado em":"BELIEVE","Grife":"BRITNEY SPEARS"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5771","Inspirado em":"BENDITO CACTO","Grife":"BOTIC\u00c1RIO"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5294","Inspirado em":"BERGAMOTA BASILIC","Grife":"L'OCCITANE"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"BERRY KISS","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5643","Inspirado em":"BIARRITZ","Grife":"CHANEL"},{"Categoria":"NACIONAL MASCULINO","C\u00f3digo":"264","Inspirado em":"BIOGRAFIA","Grife":"NATURA"},{"Categoria":"NACIONAL FEMININO","C\u00f3digo":"52","Inspirado em":"BIOGRAFIA","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5426","Inspirado em":"BITTER PEACH","Grife":"TOM FORD"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5948","Inspirado em":"BLACK FIG","Grife":"VETIVER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5179","Inspirado em":"BLACK OPIUN","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5374","Inspirado em":"BLACK ORCHID","Grife":"TOM FORD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"803","Inspirado em":"BLACK XS","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"179","Inspirado em":"BLACK XS","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"908","Inspirado em":"BLEU","Grife":"CHANEL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"364","Inspirado em":"BLUE SEDUCTION","Grife":"\u0391\u039d\u03a4\u039f\u039d\u0399\u039f BANDERAS"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5716","Inspirado em":"BOA NOITE","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"4","Inspirado em":"BODY KOUROS","Grife":"YVES S. LAURENT"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"BOMBSHELL","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"2131","Inspirado em":"BONBON COUTURE","Grife":"VIKTOR & ROLF"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"252","Inspirado em":"BOSS","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5339","Inspirado em":"BOSS BOTTLED NIGHT","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5153","Inspirado em":"BOSS BOTTLED TONIC","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5195","Inspirado em":"BOSS IN MOTION","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"363","Inspirado em":"BOSS THE SCENTER","Grife":"BOSS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5215","Inspirado em":"BOSS THE SCENTER FOR HER","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5845","Inspirado em":"BOSS THE SCENTER LE PARFUM","Grife":"BOSS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5322","Inspirado em":"BURBERRY","Grife":"BURBERRY"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"275","Inspirado em":"BURBERRY MEN","Grife":"BURBERRY"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"72","Inspirado em":"BVLGARI AQUA MARINE","Grife":"BVLGARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"277","Inspirado em":"BVLGARI BLACK","Grife":"BVLGARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"992","Inspirado em":"BVLGARI EXTREME","Grife":"BVLGARI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"201","Inspirado em":"BVLGARI FEM","Grife":"BVLGARI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5385","Inspirado em":"BVLGARI GOLDEA","Grife":"BVLGARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"19","Inspirado em":"BVLGARI IN THE BLACK","Grife":"BVLGARI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5972","Inspirado em":"BVLGARI OMNIA (CORAL)","Grife":"BVLGARI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6082","Inspirado em":"BVLGARI OMNIA CRYSTALLINE","Grife":"BVLGARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"330","Inspirado em":"BVLGARI POUR HOMME","Grife":"BVLGARI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"824","Inspirado em":"BVLGARI VERT","Grife":"BVLGARI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5313","Inspirado em":"BY DELICIOUS","Grife":"DONNA KARAN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"479","Inspirado em":"CALANDRE","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"749","Inspirado em":"CAF\u00c9 CAF\u00c9","Grife":"YVES S. LAURENT"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"CANDY BABY","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5620","Inspirado em":"CARAT","Grife":"CARTIER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5975","Inspirado em":"CARIOCA CRUSH","Grife":"SOL DE JANEIRO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5946","Inspirado em":"CARMINA CREED","Grife":"CREED"},{"Categoria":"NACIONAL MASCULINO","C\u00f3digo":"271","Inspirado em":"CARPIE DIEM","Grife":"BOTIC\u00c1RIO"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5716","Inspirado em":"CEREJA","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"204","Inspirado em":"CH","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"282","Inspirado em":"CH MEN","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"997","Inspirado em":"CH PRIV\u00ca","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"273","Inspirado em":"CH PRIV\u00ca","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5419","Inspirado em":"CH UNDER THE SEA","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"205","Inspirado em":"CHANCE","Grife":"CHANEL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"206","Inspirado em":"CHANEL 5","Grife":"CHANEL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5255","Inspirado em":"CHEAP AND CHIC","Grife":"MOSCHINO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5315","Inspirado em":"CHERRY IN THE AIR","Grife":"ESCADA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"722","Inspirado em":"CHIC","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"365","Inspirado em":"CHIC MEN","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5209","Inspirado em":"CHLO\u00c9 1975","Grife":"CHLO\u00c9"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5359","Inspirado em":"CHLO\u00c9 ABS. PARFUM","Grife":"CHLO\u00c9"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5319","Inspirado em":"CHLO\u00c9 EDP","Grife":"CHLO\u00c9"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"257","Inspirado em":"CHLO\u00c9 INOCENCE","Grife":"CHLO\u00c9"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"161","Inspirado em":"CHLO\u00c9 LOVE","Grife":"CHLO\u00c9"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5298","Inspirado em":"CHLO\u00c9 N\u00d4MADE","Grife":"CHLO\u00c9"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"203","Inspirado em":"CINEM\u00c1","Grife":"YVES S. LAURENT"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5289","Inspirado em":"CITRUS VERBENA SUMMER","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5722","Inspirado em":"CK BE","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"751","Inspirado em":"CK FREE","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"348","Inspirado em":"CK IN 2","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"140","Inspirado em":"CK ONE","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5227","Inspirado em":"CK SUMMER","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"404","Inspirado em":"CLASSIQUE","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5428","Inspirado em":"CLASSIQUE INTENSE","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5644","Inspirado em":"CLEAN CLASSIC","Grife":"CLEAN CLASSIQUE"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5938","Inspirado em":"CLUB DE NUIT MAN","Grife":"ARMAF"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5939","Inspirado em":"CLUB DE NUIT WOMAN","Grife":"ARMAF"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"208","Inspirado em":"COCO MADEMOISELLE","Grife":"CHANEL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"398","Inspirado em":"COCO NOIR","Grife":"CHANEL"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"COCONUT PASSION","Grife":"FEM."},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"353","Inspirado em":"COOL WATER","Grife":"DAVIDOFF"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"991","Inspirado em":"D&G POUR FEMME","Grife":"DOLCE & GABANNA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"497","Inspirado em":"D&G THE ONE","Grife":"DOLCE & GABANNA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"435","Inspirado em":"D&G THE ONE ROSE","Grife":"DOLCE & GABANNA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"833","Inspirado em":"DAHLIA NOIR","Grife":"GIVENCHY"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5345","Inspirado em":"DAMA DA NOITE","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5216","Inspirado em":"DE LANCOME","Grife":"LANCOME"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5716","Inspirado em":"DE LEITE","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"286","Inspirado em":"DECADENCE","Grife":"MARC JACOBS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5751","Inspirado em":"DELINA EAU THE PARFUM","Grife":"PARFUMS DE MARLY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5427","Inspirado em":"DELINA EXCLUSIF","Grife":"PARFUMS DE MARLY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5752","Inspirado em":"DELINA LA ROS\u00c9E","Grife":"PARFUMS DE MARLY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"993","Inspirado em":"DESEO","Grife":"JENNIFER LOPEZ"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5641","Inspirado em":"DEUVILLE FRANCE","Grife":"MICHEL GUERMAIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5840","Inspirado em":"DEVOTION D&G","Grife":"DOLCE & GABANNA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"279","Inspirado em":"DIAMONDS","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"823","Inspirado em":"DIESEL FUEL FOR LIFE","Grife":"DIESEL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"467","Inspirado em":"DIOR HOMME INTENSE","Grife":"DIOR"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"259","Inspirado em":"DIOR HOMME SPORT","Grife":"DIOR"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5772","Inspirado em":"DIVINE","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"323","Inspirado em":"DOLCE","Grife":"DOLCE & GABANNA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"446","Inspirado em":"DOLCE & GABBANA \u039c\u0395\u039d","Grife":"DOLCE & GABBANA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"39","Inspirado em":"DOLCE & GABBANA","Grife":"DOLCE & GABANNA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"770","Inspirado em":"DOLCE GARDEN","Grife":"DOLCE & GABANNA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"712","Inspirado em":"DOWNTOWN","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"248","Inspirado em":"DRAKKAR NOIR","Grife":"GUY LAROCHE"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5731","Inspirado em":"DUBAI MAJALIS","Grife":"OF DUBAI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5730","Inspirado em":"DUBAI TURATH","Grife":"OF DUBAI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5874","Inspirado em":"DUHA","Grife":"AL WATANIAH"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"303","Inspirado em":"DUNE","Grife":"DIOR"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5935","Inspirado em":"DURRAT AL AROOS","Grife":"AL WATANIAH"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5291","Inspirado em":"EAU CAPTIVANTE","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"714","Inspirado em":"EAU DE STAR","Grife":"THIERRY MUGLER"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5299","Inspirado em":"EAU RAVISSANTE","Grife":"L'OCCITANE"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5288","Inspirado em":"EAU UNIVERSELLE","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"177","Inspirado em":"EDEM FEM.","Grife":"CACHARREL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5256","Inspirado em":"ELIE SAAB","Grife":"ELIE SAAB"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"466","Inspirado em":"EMBLEM","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"424","Inspirado em":"EMP\u00d3RIO ARMANI","Grife":"ARMANI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"195","Inspirado em":"EMP\u00d3RIO FEM.","Grife":"GIORGIO ARMANI"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"ENDLESS LOVE","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5802","Inspirado em":"ENGLISH PEAR E FREESIA","Grife":"JO MALONE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5781","Inspirado em":"ERBA PURA","Grife":"XERJOFF"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"472","Inspirado em":"ESCAPE","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"741","Inspirado em":"ETERNITY","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"304","Inspirado em":"ETERNITY","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5381","Inspirado em":"ETERNITY FLAME","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"305","Inspirado em":"EUPHORIA","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5260","Inspirado em":"EUPHORIA FORBBIDEN","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"340","Inspirado em":"EUPHORIA MEN","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5267","Inspirado em":"EXPLORER","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"476","Inspirado em":"FAHRENHEIT","Grife":"DIOR"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5830","Inspirado em":"FAKHAR BLACK","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5868","Inspirado em":"FAKHAR GOLD EXTRAIT","Grife":"LATTAFA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5523","Inspirado em":"FAME","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5821","Inspirado em":"FAME PARFUM","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"434","Inspirado em":"FAN DI FENDI","Grife":"FENDI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"306","Inspirado em":"FANTASY","Grife":"BRITNEY SPEARS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"804","Inspirado em":"FANTASY HIDDEN","Grife":"BRITNEY SPEARS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"495","Inspirado em":"FEMME INDIVIDUELLE","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5786","Inspirado em":"FENTY FENTY","Grife":"RIHANNA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"188","Inspirado em":"FERRARI BLACK ORIG","Grife":"FERRARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"90","Inspirado em":"FERRARI BLACK PERF","Grife":"FERRARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"368","Inspirado em":"FERRARI RED","Grife":"FERRARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"595","Inspirado em":"FIERCE CONFIDENCE","Grife":"FIERCE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"210","Inspirado em":"FIRST INSTINTCT","Grife":"ABERCROMBRIE"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5872","Inspirado em":"FLEUR MAJESTY","Grife":"KAYALI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"223","Inspirado em":"FLEUR DE MALESENJEAN","Grife":"PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5788","Inspirado em":"FLORA BY GUCCI","Grife":"GUCCI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"433","Inspirado em":"FLORA GORGEOUS GARDENIA","Grife":"GUCCI"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5297","Inspirado em":"FLOR DE CEREJEIRA","Grife":"L'OCCITANE"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5957","Inspirado em":"FLOR DE LIM\u00c3O ENGIAS","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"307","Inspirado em":"FLOWER BOMB","Grife":"VICTOR & ROLF"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"308","Inspirado em":"FLOWER BY KENZO","Grife":"KENZO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5560","Inspirado em":"FLOWER BY KENZO LEGERE","Grife":"KENZO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5186","Inspirado em":"FRESH CONTURE","Grife":"MOSCHINO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5812","Inspirado em":"FUCKING FABULOUS","Grife":"TOM FORD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5171","Inspirado em":"GABRIELE CHANEL","Grife":"CHANEL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"309","Inspirado em":"GABRIELLA SABATINI","Grife":"GABRIELLA SABATINE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"159","Inspirado em":"GENTLEMEN ONLY ABSOLUT","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"16","Inspirado em":"GINGEMBRE","Grife":"ROGER & GALLET"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"480","Inspirado em":"GLOW","Grife":"JENNIFER LOPEZ"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5796","Inspirado em":"GODDES BURBERRY","Grife":"BURBERRY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"802","Inspirado em":"GOOD GIRL","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5710","Inspirado em":"GOOD GIRL BLUSH","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"470","Inspirado em":"GOOD GIRL LEGERE","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6054","Inspirado em":"GOOD GIRL SPARKLING ICE","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5411","Inspirado em":"GOOD GIRL SUPERSTAR","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5379","Inspirado em":"GOOD GIRL SUPREME","Grife":"CAROLINA HERRERA"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5295","Inspirado em":"GREEN TEA","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5807","Inspirado em":"GREENLEY","Grife":"PARFUMS DE MARLY"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5814","Inspirado em":"GREY VETIVER","Grife":"TOM FORD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5246","Inspirado em":"GUCCI BLOOM","Grife":"GUCCI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5777","Inspirado em":"GUCCI GUILTY ELIXIR","Grife":"GUCCI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5793","Inspirado em":"GUINDANCE","Grife":"AMOUAGE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5172","Inspirado em":"GUILTY GUCCI ABSOLUTY","Grife":"GUCCI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5778","Inspirado em":"GUILTY GUCCI ELIXIR","Grife":"GUCCI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"300","Inspirado em":"GUILTY GUCCI","Grife":"GUCCI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5827","Inspirado em":"HAYA","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5940","Inspirado em":"HAYATI","Grife":"LATTAFA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"107","Inspirado em":"HEAT RUSH","Grife":"BEYONC\u00c9"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5237","Inspirado em":"HIPNOSE","Grife":"DIOR"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"402","Inspirado em":"HIPNOSE MEN","Grife":"LANC\u00d4ME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"406","Inspirado em":"HIPNOSE SENSES","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"599","Inspirado em":"HIPNOTIC POISON","Grife":"DIOR"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5292","Inspirado em":"HONEY MIEL & LEMON CITRON","Grife":"L'OCCITANE"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5967","Inspirado em":"HONOUR MAN","Grife":"AMOUAGE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"250","Inspirado em":"HUGO BOSS","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5254","Inspirado em":"HUGO DARK BLUE","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"386","Inspirado em":"HUGO ENERGISE","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5247","Inspirado em":"HUGO ICED","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"490","Inspirado em":"ICE MEN","Grife":"THIERRY MUGLER"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5846","Inspirado em":"ICHNUSA PROFUMUM ROMA","Grife":"ICHNUSA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5681","Inspirado em":"IDOLE INTENSE","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5276","Inspirado em":"ID\u00d4LE","Grife":"LANCOME"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"6092","Inspirado em":"IMAGINATION","Grife":"LOUIS VUITTON"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5284","Inspirado em":"IMMORTELLE DE CORSE","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"332","Inspirado em":"INDIVIDUEL","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"410","Inspirado em":"INFUSION D'IRIS","Grife":"PRADA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"192","Inspirado em":"INSOLENCE EDP","Grife":"GUERLAIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5243","Inspirado em":"INSOLENCE EDT","Grife":"GUERLAIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"474","Inspirado em":"INVICTUS","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5178","Inspirado em":"INVICTUS ACQUA","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5409","Inspirado em":"INVICTUS VICTORY","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5819","Inspirado em":"INVICTUS VICTORY ELIXIR","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5431","Inspirado em":"IRRESISTIBLE","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"754","Inspirado em":"ISSEY MIYAKE","Grife":"L'EAU D'ISSEY"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5561","Inspirado em":"ISSEY MIYAKE EAU FRAICHE","Grife":"L'EAU D'ISSEY"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"994","Inspirado em":"ISSEY MIYAKE SPORT","Grife":"L'EAU D'ISSEY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"73","Inspirado em":"J'ADORE","Grife":"DIOR"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5185","Inspirado em":"J'ADORE IN JOY","Grife":"DIOR"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5764","Inspirado em":"J'ADORE L'OR","Grife":"DIOR"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5749","Inspirado em":"J'ADORE PARFUM","Grife":"DIOR"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"462","Inspirado em":"JAMES BOND 007","Grife":"JAMES BOND"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"349","Inspirado em":"JAZZ","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5226","Inspirado em":"JHON VARVATOS (ULTIMAS UNIDADES)","Grife":"JHON"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"335","Inspirado em":"JIMMY CHOO","Grife":"JIMMY CHOO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5265","Inspirado em":"JIMMY CHOO FEVER","Grife":"JIMMY CHOO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"367","Inspirado em":"JOOP","Grife":"JOOP"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"244","Inspirado em":"JOOP JUMP","Grife":"JOOP"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"387","Inspirado em":"JOOP NIGHT FLIGHT","Grife":"JOOP"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5231","Inspirado em":"JOY","Grife":"DIOR"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5373","Inspirado em":"JUBILATION XXV MAN","Grife":"AMOUAGE"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5657","Inspirado em":"JUBILATION XXV WOMAM","Grife":"AMOUAGE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5327","Inspirado em":"K","Grife":"DOLCE & GABBANA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5451","Inspirado em":"KALAN","Grife":"PARFUMS DE MARLY"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5817","Inspirado em":"KALEMAT","Grife":"ARABIAN OUD"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"327","Inspirado em":"KENZO","Grife":"KENZO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"288","Inspirado em":"KENZO AMOR","Grife":"KENZO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5175","Inspirado em":"KENZO WORLD","Grife":"KENZO"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5864","Inspirado em":"KHAMRAH QAHWA","Grife":"LATTAFA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"445","Inspirado em":"KING OF SEDUCTION","Grife":"ANT\u00d4NIO BANDEIRAS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"347","Inspirado em":"KOKORICO","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"510","Inspirado em":"KOUROS","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5240","Inspirado em":"KOUROS FRAICHEUR","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5241","Inspirado em":"KOUROS SILVER","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"150","Inspirado em":"L' HOMME","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"74","Inspirado em":"L' HOMME PRADA MILANO","Grife":"ARGENTINO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"830","Inspirado em":"L'EAU CH","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"321","Inspirado em":"L'EAU PAR KENZO","Grife":"KENZO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"408","Inspirado em":"L'EAU PAR KENZO","Grife":"KENZO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"232","Inspirado em":"L'EXTASE","Grife":"NINA RICCI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"350","Inspirado em":"L'HOMME LIBRE","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5235","Inspirado em":"L'INTERDIT","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5416","Inspirado em":"L'INTERDIT INTENSE","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5417","Inspirado em":"L'INTERDIT MILLESSIME","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5787","Inspirado em":"L'INTERDIT NOCTURE","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5410","Inspirado em":"L'INTERDIT ROUGE","Grife":"GIVENCHY"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5287","Inspirado em":"L'OCCITAN","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5401","Inspirado em":"LA BELLE","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5557","Inspirado em":"LA BELLE PARFUM","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6064","Inspirado em":"LA BOMBA","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"376","Inspirado em":"LA NUIT TRESOR","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5711","Inspirado em":"LA NUIT TRESOR FLEUR DE NUIT","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5425","Inspirado em":"LA NUIT TRESOR NUDE","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5400","Inspirado em":"LA PANTHERE","Grife":"CARTIER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"473","Inspirado em":"LA VIE EST BELLE","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5264","Inspirado em":"LA VIE EST BELLE EM ROSE","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5354","Inspirado em":"LA VIE EST BELLE INTENS\u00c9MENT","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6055","Inspirado em":"LA VIE EST BELLE L'ELIXIR","Grife":"LANCOME"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"311","Inspirado em":"LACOSTE","Grife":"LACOSTE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"732","Inspirado em":"LACOSTE","Grife":"LACOSTE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"354","Inspirado em":"LACOSTE ESSENTIALE","Grife":"LACOSTE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5328","Inspirado em":"LACOSTE NOIR","Grife":"LACOSTE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5350","Inspirado em":"LACOSTE NOIR INTENSE","Grife":"LACOSTE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"381","Inspirado em":"LADY EMBLEM","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"233","Inspirado em":"LADY GAGA \/ FAME","Grife":"LADY GAGA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"407","Inspirado em":"LADY MILLION","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5384","Inspirado em":"LADY MILLION EMPIRE","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5176","Inspirado em":"LADY MILLION PRIV\u00ca","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5726","Inspirado em":"LADY MILLION ROYAL","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"301","Inspirado em":"LAGUNA","Grife":"SALVADOR DALI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"110","Inspirado em":"LANCASTER","Grife":"LAPIDUS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"352","Inspirado em":"LAPIDUS","Grife":"LAPIDUS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5841","Inspirado em":"LE BEAU PARADISE","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5366","Inspirado em":"LE LABO","Grife":"SANTAL 33"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"331","Inspirado em":"LE MALE","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5744","Inspirado em":"LE MALE ELIXIR","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"384","Inspirado em":"LE MALE ESSENCE","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5745","Inspirado em":"LE MALE PARFUM","Grife":"JEAN PAUL"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5716","Inspirado em":"LEITE E MEL","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"360","Inspirado em":"LEGEND","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"356","Inspirado em":"LENGEND SPIRIT","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5371","Inspirado em":"LIBRE","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5773","Inspirado em":"LIBRE L'ABSOLUT PLATINE","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5429","Inspirado em":"LIFE","Grife":"VIVARA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"154","Inspirado em":"LIGHT BLUE","Grife":"DOLCE & GABBANA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"409","Inspirado em":"LIGHT BLUE","Grife":"DOLCE & GABBANA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5944","Inspirado em":"LIGHT BLUE SUMMER VIBES","Grife":"DOLCE & GABBANA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5966","Inspirado em":"LIWA","Grife":"WIDIAN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"805","Inspirado em":"LIZ","Grife":"MARINA BOURBON"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"141","Inspirado em":"LOLITA LEMPICKA","Grife":"LOLITA LEMPICKA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5450","Inspirado em":"LOST CHERRY","Grife":"TOM FORD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"501","Inspirado em":"LOU LOU","Grife":"CACHARREL"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"5184","Inspirado em":"LOVE","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5842","Inspirado em":"LOVE IN BLACK","Grife":"CREED"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"5183","Inspirado em":"LOVE ME","Grife":"FEM."},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"LOVE SPELL","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5258","Inspirado em":"LUNA","Grife":"NINA RICCI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"31","Inspirado em":"LUNA BLOSSON","Grife":"NINA RICCI"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"LUSCIOUS KISSES","Grife":"FEM"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"426","Inspirado em":"M7","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"607","Inspirado em":"MA VIE POUR FEMME","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"92","Inspirado em":"MADAME","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5575","Inspirado em":"MAGNOLIA SENSUEL ESPLEND.","Grife":"BVLGARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5654","Inspirado em":"MANCERA CEDRAT BOISE","Grife":"MANCERA"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"MANGO TEMPTATION","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5572","Inspirado em":"MERCEDEZ BENZ","Grife":"MERCEDES BENZ"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5563","Inspirado em":"MERCEDEZ THE MOVE","Grife":"MERCEDEZ BENZ"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"503","Inspirado em":"MIDNIGHT FANTASY","Grife":"BRITNEY SPEARS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"6013","Inspirado em":"MILLION GOLD","Grife":"-"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6012","Inspirado em":"MILLION GOLD FOR HER","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6048","Inspirado em":"MILLION GOLD PURE JASMIN","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"130","Inspirado em":"MISS DIOR 1947","Grife":"DIOR"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"437","Inspirado em":"MISS DIOR 2013","Grife":"DIOR"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"505","Inspirado em":"MISS DIOR BLOOMING","Grife":"DIOR"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"256","Inspirado em":"MISTER DIAVOLO","Grife":"ANT\u00d4NIO BANDEIRAS"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"MORANGO C\/CHAMP.","Grife":"FEM."},{"Categoria":"\u00c1RABE","C\u00f3digo":"5790","Inspirado em":"MELODIE","Grife":"ORIENTICA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5794","Inspirado em":"MULA MULA ROUGE EXTREME","Grife":"BYRON"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5828","Inspirado em":"MUSAMAM","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5866","Inspirado em":"MUSAMAM WHITE INTENSE","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5964","Inspirado em":"MUSK TAHARA","Grife":"ARABIAN OUD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5776","Inspirado em":"MY EUPHORIA","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5782","Inspirado em":"MY SLF","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5678","Inspirado em":"MY WAY","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5877","Inspirado em":"MY WAY NECTAR","Grife":"GIORGIO ARMANI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5936","Inspirado em":"MYSTIQUE BOUQUET","Grife":"AFNAN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5718","Inspirado em":"NARCISO RODRIGUES BLEU","Grife":"NARCISO RODRIIGUES"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5321","Inspirado em":"NARCISO RODRIGUES","Grife":"NARCISO RODRIGUES"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"448","Inspirado em":"NARCISO RODRIGUES FOR HER","Grife":"NARCISO RODRIGUES"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5372","Inspirado em":"NEROLI PORTO FINO","Grife":"TOM FORD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"507","Inspirado em":"NINA","Grife":"NINA RICCI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"319","Inspirado em":"NINA TENTATION","Grife":"NINA RICCI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"57","Inspirado em":"NOA","Grife":"CACHARREL"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5716","Inspirado em":"NUVEM","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5225","Inspirado em":"OBSSED FOR MEN","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"708","Inspirado em":"OLYMPEA","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5394","Inspirado em":"OLYMPEA BLOSSOM","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5727","Inspirado em":"OLYMPEA FLORA","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5206","Inspirado em":"OLYMPEA INTENSE","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5979","Inspirado em":"OLYMPEA PARFUM","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"157","Inspirado em":"ONE MILLION","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5559","Inspirado em":"ONE MILLION ELIXIR","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5978","Inspirado em":"ONE MILLION GOLD","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5779","Inspirado em":"ONE MILLION GOLDEN OUD","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5380","Inspirado em":"ONE MILLION PARFUM","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"500","Inspirado em":"ONE MILLION PRIV\u00ca","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5725","Inspirado em":"ONE MILLION ROYAL","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"158","Inspirado em":"OPIUM","Grife":"YVES SAINT LAURENT"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"828","Inspirado em":"ORGANZA","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"827","Inspirado em":"ORGANZA INDECENCE","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5808","Inspirado em":"ORIANA","Grife":"PARFUMS DE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5653","Inspirado em":"ORMONDE MAN","Grife":"ORMONDE JAYNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5729","Inspirado em":"OUD FOR GREATNESS","Grife":"INITIO PARFUMS PRIVES"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"281","Inspirado em":"PACO RABANNE","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"601","Inspirado em":"PALOMA PICASSO","Grife":"PALOMA"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"PARADISE","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"829","Inspirado em":"PARIS","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"831","Inspirado em":"PARIS HILTON","Grife":"PARIS HILTON"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"215","Inspirado em":"PARISIENSE","Grife":"PARISIENSE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5212","Inspirado em":"PATCHOULY","Grife":"PATCHOULY"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"PEAR GLAC\u00ca","Grife":"FEM."},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5640","Inspirado em":"PEGASUS EXCLUSIF","Grife":"PARFUMS DE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5430","Inspirado em":"PERCIVAL","Grife":"PARFUMS DE"},{"Categoria":"CUIDE-SE BEM","C\u00f3digo":"5716","Inspirado em":"PESSEGURA","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5395","Inspirado em":"PHANTOM","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5205","Inspirado em":"PINK SUGAR","Grife":"AQUOLINE"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"6021","Inspirado em":"PISTACHE","Grife":"FEM."},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"164","Inspirado em":"PLATINUM EGO\u00cdSTE","Grife":"CHANNEL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"603","Inspirado em":"PLAY","Grife":"GIVENCHY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"83","Inspirado em":"POISON","Grife":"DIOR"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"324","Inspirado em":"POISON GIRL","Grife":"DIOR"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"270","Inspirado em":"POLO","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"193","Inspirado em":"POLO BLACK","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"168","Inspirado em":"POLO BLUE","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"499","Inspirado em":"POLO EXPLORER","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"477","Inspirado em":"POLO RED","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5174","Inspirado em":"POLO RED EXTREME","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5820","Inspirado em":"POLO RED PARFUM","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"171","Inspirado em":"POLO SPORT","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5324","Inspirado em":"POLO ULTRA BLUE","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5682","Inspirado em":"POUR HOMME","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"604","Inspirado em":"PRADA AMBER","Grife":"PRADA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"162","Inspirado em":"PRADA AMBER","Grife":"PRADA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"169","Inspirado em":"PRADA CANDY FLORALLE","Grife":"PRADA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5785","Inspirado em":"PRADA INFUSION DE ROSE","Grife":"PRADA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"74","Inspirado em":"PRADA MILANO INFUSION D'HOMME","Grife":"PRADA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5694","Inspirado em":"PRADA PARADOXE","Grife":"PRADA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"163","Inspirado em":"PRESENCE","Grife":"MONTBLANC"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"PRETY PINK","Grife":"FEM."},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"PURE SEDUTION","Grife":"FEM."},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5180","Inspirado em":"PURE XS","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5263","Inspirado em":"PURE XS FOR HER","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"174","Inspirado em":"PY","Grife":"GIVENCHY"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5829","Inspirado em":"QASAED AL SULTAN","Grife":"LATTAFA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5571","Inspirado em":"QUATREE","Grife":"BOUCHERON"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5724","Inspirado em":"QUEEN BY D&G","Grife":"DOLCE &"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5748","Inspirado em":"QUI LA VIE EST BELLE","Grife":"LANCOME"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"606","Inspirado em":"RALPH","Grife":"RALPH LAUREN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5626","Inspirado em":"RALPH'S CLUB","Grife":"RALPH LAURENT"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"359","Inspirado em":"REAVEL","Grife":"CALVIN KLEIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5652","Inspirado em":"RENAISSACE","Grife":"XERJOFF"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5871","Inspirado em":"REYNA","Grife":"MAISON AL"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"ROMANTIC WISK","Grife":"FEM."},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5280","Inspirado em":"ROSE 4 REINES","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"609","Inspirado em":"ROSE ESSENTIALLE","Grife":"BVLGARI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5881","Inspirado em":"ROSE ROYALE","Grife":"KAYALI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"702","Inspirado em":"ROUGE ROYALE","Grife":"MARINA BOURBON"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5662","Inspirado em":"ROYAL AMBER","Grife":"ORIENTICA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5843","Inspirado em":"ROYAL OUD CREED","Grife":"CREED"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"703","Inspirado em":"S. BY SHAKIRA","Grife":"SHAKIRA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5831","Inspirado em":"SABAH AL WARD","Grife":"AL WATANIAH"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"102","Inspirado em":"SAFARI","Grife":"YVES S. LAURENT"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"478","Inspirado em":"SANSARA","Grife":"GUERLAIN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"322","Inspirado em":"SAUVAGE EDP","Grife":"DIOR"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5275","Inspirado em":"SAUVAGE EDT","Grife":"DIOR"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5413","Inspirado em":"SAUVAGE ELIXIR","Grife":"DIOR"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"457","Inspirado em":"SCANDAL","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5402","Inspirado em":"SCANDAL","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5875","Inspirado em":"SCANDAL ABSOLU","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"6085","Inspirado em":"SCANDAL ABSOLU","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5261","Inspirado em":"SCANDAL BY NIGHT","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6049","Inspirado em":"SCANDAL INTENSE","Grife":"JEAN PAUL"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5676","Inspirado em":"SCANDAL LE PARFUM","Grife":"JEAN PAUL"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"5182","Inspirado em":"SCANDALOUS DARE","Grife":"FEM."},{"Categoria":"\u00c1RABE","C\u00f3digo":"5934","Inspirado em":"SCEPT BRONZITE","Grife":"MAISON AL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"475","Inspirado em":"SCUDERIA FERRARI","Grife":"FERRARI"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"SECRET CHARM","Grife":"FEM."},{"Categoria":"\u00c1RABE","C\u00f3digo":"5792","Inspirado em":"SHAEEN GOLD","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5833","Inspirado em":"SHAEEN SILVER","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5832","Inspirado em":"SHAGAF AL WARD","Grife":"AL WATANIAH"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5683","Inspirado em":"SIGNATURE","Grife":"MONTBLANC"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5813","Inspirado em":"SIGNATURE OMBRE LEATHER","Grife":"TOM FORD"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"207","Inspirado em":"SILVER SCENTER","Grife":"JACQUES BOGART"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"414","Inspirado em":"SILVER SCENTER INTENSE","Grife":"JACQUES BOGART"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5574","Inspirado em":"SILVER SCENTER PURE","Grife":"JACQUES BOGART"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"251","Inspirado em":"SOIR DE LUNE (\u00daLTIMAS UNIDADES)","Grife":"SISLEY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5797","Inspirado em":"SOL CHEIROSA 62","Grife":"SOL DE JANEIRO"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"815","Inspirado em":"SOLE DI POSITANO","Grife":"TOM FORD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"909","Inspirado em":"SOMEDAY (\u00daLTIMAS UNIDADES)","Grife":"JUSTIN BIEBER"},{"Categoria":"\u00c1RABE","C\u00f3digo":"6025","Inspirado em":"SOUVENIR FLORAL","Grife":"AFNAN"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"737","Inspirado em":"SPICE BOMB","Grife":"VICTOR & RALF"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5214","Inspirado em":"STRONG WITH YOU","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5412","Inspirado em":"STRONG WITH YOU ABSOLUTELY","Grife":"GIORGIO ARMANI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5953","Inspirado em":"STYLE & S. AL TURAS","Grife":"STYLE & SCENTS"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5857","Inspirado em":"SULTAN AL LAIL","Grife":"AL WATANIAH"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5968","Inspirado em":"SUSHINE MAN","Grife":"AMOUAGE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"99","Inspirado em":"S\u00cd","Grife":"GIORGIO ARMANI"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"265","Inspirado em":"S\u00cd PASSIONE","Grife":"GIORGIO ARMANI"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5937","Inspirado em":"TARAF WHITE","Grife":"ZIMAYA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"489","Inspirado em":"TERRE D'HERM\u00c8S","Grife":"HERMES"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5234","Inspirado em":"THE GOLDEN SECRET","Grife":"\u0391\u039d\u03a4\u039f\u039d\u0399\u039f BANDERAS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5847","Inspirado em":"THE NOIR 29","Grife":"LE LABO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"262","Inspirado em":"THE ONE GENTLEMAN","Grife":"DOLCE & GABBANA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5268","Inspirado em":"THE ONE GREY","Grife":"DOLCE & GABBANA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"727","Inspirado em":"THE SECRET","Grife":"ANTONIO BANDERAS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5562","Inspirado em":"TIFFANY & CO. INTENSE","Grife":"TIFFANY & CO."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5719","Inspirado em":"TIFFANY & CO. LOVE HER","Grife":"TIFFANY & CO."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5357","Inspirado em":"TOM FORD METALLIQUE","Grife":"TOM FORD"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5213","Inspirado em":"TOM FORD OUD WOOD","Grife":"TOM FORD"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"197","Inspirado em":"TOM FORD TABACO VANILLE","Grife":"TOM FORD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5358","Inspirado em":"TOM FORD WHITE SUED","Grife":"TOM FORD"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"175","Inspirado em":"TOMMY","Grife":"TOMMY HILFIGER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"709","Inspirado em":"TOMMY GIRL","Grife":"TOMMY HILFIGER"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"707","Inspirado em":"TRESOR","Grife":"LANCOME"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"230","Inspirado em":"TSAR","Grife":"VAN CLEEF ARPELS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5355","Inspirado em":"TUBEREUSE MYSTIQUE","Grife":"BVLGARI"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5815","Inspirado em":"TUSCAN LEATHER","Grife":"TOM FORD"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5177","Inspirado em":"ULTRA MALE","Grife":"JEAN PAUL"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5848","Inspirado em":"UN BOIS VANILLE","Grife":"SERGE LUTENS"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5323","Inspirado em":"URBAN JOURNEY","Grife":"HUGO BOSS"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5960","Inspirado em":"VALAYA","Grife":"PARFUMS DE MARLY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6056","Inspirado em":"VALAYA EXCLUSIF","Grife":"PARFUMS DE MARLY"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5326","Inspirado em":"VALENTINA","Grife":"VALENTINO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5273","Inspirado em":"VALENTINO UOMO INTENSE","Grife":"VALENTINO"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5296","Inspirado em":"VANILLA","Grife":"L'OCCITANE"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"VANILLA LACE","Grife":"FEM."},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5642","Inspirado em":"VENICE ARMAF LUXE","Grife":"VENICE"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5286","Inspirado em":"VERDON","Grife":"L'OCCITANE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5418","Inspirado em":"VERSACE DYLAN BLUE","Grife":"VERSACE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"6065","Inspirado em":"VERSACE DYLAN PURPLE","Grife":"VERSACE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5784","Inspirado em":"VERSACE DYLAN TOURQUASE","Grife":"VERSACE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"254","Inspirado em":"VERSACE EAU FRAICHE","Grife":"VERSACE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5558","Inspirado em":"VERSACE EROS","Grife":"VERSACE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"484","Inspirado em":"VERSACE EROS","Grife":"VERSACE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5320","Inspirado em":"VERSACE EROS FLAME","Grife":"VERSACE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5393","Inspirado em":"VERY GOOD GIRL","Grife":"CAROLINA HERRERA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5223","Inspirado em":"VERY IRRESISTIBLE","Grife":"GIVENCHY"},{"Categoria":"VICTORIA'S SECRET","C\u00f3digo":"155","Inspirado em":"VERY SEXY","Grife":"FEM."},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"77","Inspirado em":"VETIVER (\u00daLTIMAS UNIDADES)","Grife":"-"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"6084","Inspirado em":"VIBRATO","Grife":"SOSPIRO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"825","Inspirado em":"VILA ROM\u0391\u039d\u0391 53","Grife":"FIFTY THREE"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"463","Inspirado em":"VIVA LA JUICY (\u00daLTIMAS UNIDADES)","Grife":"CONTURE"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5873","Inspirado em":"WATANI","Grife":"AL WATANIAH"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5816","Inspirado em":"WHITE PATCHOULI","Grife":"TOM FORD"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"5181","Inspirado em":"WOMAN BY RALPH","Grife":"RALPH"},{"Categoria":"\u00c1RABE","C\u00f3digo":"6087","Inspirado em":"XCLUSIF OUD BLEU","Grife":"ORIENTICA"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"278","Inspirado em":"XS PACO RABANNE","Grife":"PACO RABANNE"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5382","Inspirado em":"Y","Grife":"YVES S. LAURENT"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5870","Inspirado em":"YARA","Grife":"LATTAFA"},{"Categoria":"\u00c1RABE","C\u00f3digo":"5933","Inspirado em":"YARA TOUS","Grife":"LATTAFA"},{"Categoria":"IMPORTADO FEMININO","C\u00f3digo":"176","Inspirado em":"YES I AM","Grife":"CACHARREL"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"180","Inspirado em":"ZINO","Grife":"DAVIDOFF"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"196","Inspirado em":"ZIPPO IN THE BLUE","Grife":"ZIPPO"},{"Categoria":"ESS\u00caNCIAS DE VER\u00c3O","C\u00f3digo":"5282","Inspirado em":"\u00c1GUA DE LICHIA","Grife":"BOTIC\u00c1RIO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"812","Inspirado em":"\u00d3LEO DE PATCHOULY","Grife":"PATCHOULY"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5869","Inspirado em":"\u03a4\u039f\u03a5 2 PEARL","Grife":"MOSCHINO"},{"Categoria":"IMPORTADO MASCULINO","C\u00f3digo":"5570","Inspirado em":"\u03a4\u039f\u03a5 \u0392\u039f\u03a5","Grife":"MOSCHINO"}];
+
+    const grid = document.getElementById('catalogGrid');
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const brandFilter = document.getElementById('brandFilter');
+    const sortSelect = document.getElementById('sortSelect');
+    const statsDisplay = document.getElementById('statsDisplay');
+
+    // Initialize Dropdowns
+    function initFilters() {
+        const categories = [...new Set(perfumesData.map(p => p.Categoria))].sort();
+        const brands = [...new Set(perfumesData.map(p => p.Grife))].sort();
+
+        categories.forEach(cat => {
+            let option = document.createElement('option');
+            option.value = cat;
+            option.textContent = cat;
+            categoryFilter.appendChild(option);
+        });
+
+        brands.forEach(brand => {
+            let option = document.createElement('option');
+            option.value = brand;
+            option.textContent = brand;
+            brandFilter.appendChild(option);
+        });
+    }
+
+    // SVG Icon for Perfume Bottle
+    const perfumeSVG = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 2v3a1 1 0 0 1-1 1H7a1 1 0 0 0-1 1v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7a1 1 0 0 0-1-1h-2a1 1 0 0 1-1-1V2"/>
+            <path d="M6 11v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8"/>
+            <path d="M12 2v3"/>
+            <path d="M9 15h6"/>
+            <path d="M9 18h6"/>
+        </svg>
+    `;
+
+    function renderCards(data) {
+        grid.innerHTML = '';
+        
+        if (data.length === 0) {
+            grid.innerHTML = '<div class="no-results serif">Nenhum perfume encontrado com estes filtros.</div>';
+            statsDisplay.textContent = '0 perfumes';
+            return;
+        }
+
+        statsDisplay.textContent = `Mostrando ${data.length} perfumes`;
+
+        data.forEach(perfume => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-img-placeholder">
+                    ${perfumeSVG}
+                </div>
+                <div class="card-content">
+                    <div class="card-category">${perfume.Categoria}</div>
+                    <h2 class="card-title serif">${perfume['Inspirado em']}</h2>
+                    <div class="card-brand">${perfume.Grife}</div>
+                    <div class="card-footer">
+                        <div class="card-code">Cód: ${perfume['Código']}</div>
+                        <button class="buy-btn">Eu Quero</button>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function filterAndSort() {
+        const term = searchInput.value.toLowerCase();
+        const cat = categoryFilter.value;
+        const brand = brandFilter.value;
+        const sort = sortSelect.value;
+
+        // Filter
+        let filtered = perfumesData.filter(p => {
+            const matchSearch = p['Inspirado em'].toLowerCase().includes(term) || p['Código'].toLowerCase().includes(term);
+            const matchCat = cat === 'all' || p.Categoria === cat;
+            const matchBrand = brand === 'all' || p.Grife === brand;
+            return matchSearch && matchCat && matchBrand;
+        });
+
+        // Sort
+        filtered.sort((a, b) => {
+            if (sort === 'name_asc') return a['Inspirado em'].localeCompare(b['Inspirado em']);
+            if (sort === 'name_desc') return b['Inspirado em'].localeCompare(a['Inspirado em']);
+            if (sort === 'code_asc') return a['Código'].localeCompare(b['Código']);
+            if (sort === 'brand_asc') return a.Grife.localeCompare(b.Grife);
+            return 0;
+        });
+
+        renderCards(filtered);
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', filterAndSort);
+    categoryFilter.addEventListener('change', filterAndSort);
+    brandFilter.addEventListener('change', filterAndSort);
+    sortSelect.addEventListener('change', filterAndSort);
+
+    // Initial Render
+    initFilters();
+    filterAndSort();
+
+</script>
