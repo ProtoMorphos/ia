@@ -73,6 +73,32 @@
             color: var(--gold-light);
             font-weight: 300;
             letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--gold);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            border-radius: 6px;
+            transition: var(--transition);
+            border: 2px solid var(--gold);
+            font-size: 0.95rem;
+        }
+
+        .download-btn:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+
+        .download-btn svg {
+            vertical-align: text-bottom;
+            margin-right: 8px;
         }
 
         /* Controls Section */
@@ -221,6 +247,14 @@
         <div class="hero-content">
             <h1>Catálogo 2026</h1>
             <p>Coleção Exclusiva de Perfumes</p>
+            <a href="https://protomorphos.github.io/ia/catalogo.pdf" target="_blank" class="download-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download
+            </a>
         </div>
     </header>
 
@@ -258,7 +292,7 @@
         <table class="perfume-table">
             <thead>
                 <tr>
-                    <th>Perfume (Inspirado Em)</th>
+                    <th>Inspiração</th>
                     <th>Grife</th>
                     <th>Categoria</th>
                 </tr>
