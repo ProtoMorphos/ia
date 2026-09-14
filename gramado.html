@@ -12,8 +12,8 @@
                 extend: {
                     colors: {
                         serra: {
-                            green: '#1a3224', /* Verde escuro baseado na imagem */
-                            gold: '#c29b57',  /* Dourado baseado na imagem */
+                            green: '#1a3224',
+                            gold: '#c29b57',
                             light: '#f9f8f6'
                         }
                     },
@@ -28,7 +28,6 @@
 </head>
 <body class="bg-serra-light text-gray-800">
 
-    <!-- Navegação (Branca conforme o padrão da imagem) -->
     <nav class="bg-white text-gray-800 sticky top-0 z-50 shadow-sm border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
             <div class="text-2xl font-bold font-serif text-serra-green tracking-tight">
@@ -45,57 +44,58 @@
         </div>
     </nav>
 
-    <!-- Header Verde e Dourado -->
-    <header class="bg-serra-green text-white py-24 text-center">
-        <div class="max-w-4xl mx-auto px-4 flex flex-col items-center">
+    <header class="bg-serra-green text-white py-24 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col items-center relative z-10">
             <span class="text-serra-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">O Guia Definitivo</span>
             <h1 class="text-6xl md:text-7xl font-bold font-serif mb-6 tracking-tight">
                 Gramado <span class="text-serra-gold italic font-normal">&</span> Canela
             </h1>
             <p class="text-lg md:text-xl font-light opacity-90 max-w-2xl text-gray-200">
-                Um roteiro completo reunindo as melhores atrações, parques, gastronomia e cenários deslumbrantes da Serra Gaúcha.
+                Um roteiro completo com mapas, preços e descontos para as melhores atrações da Serra Gaúcha.
             </p>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
         
-        <!-- Alerta de Valores e Apps de Desconto -->
         <div class="bg-white border-l-4 border-serra-gold p-5 mb-12 rounded shadow-sm flex flex-col md:flex-row gap-6 items-start">
             <div class="flex-1">
-                <h4 class="font-bold text-serra-green font-serif text-lg">💡 Como funcionam os Descontos?</h4>
+                <h4 class="font-bold text-serra-green font-serif text-lg flex items-center gap-2">
+                    <svg class="w-5 h-5 text-serra-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Navegação Integrada
+                </h4>
                 <p class="text-sm text-gray-600 mt-2">
-                    Na Serra Gaúcha, o uso de aplicativos é essencial para economizar. Procuramos mapear a disponibilidade de cada atração nos principais apps:
+                    Todas as atrações agora possuem um botão de localização. Clique nas etiquetas com o ícone de mapa <strong>(📍 Cidade)</strong> para abrir a rota exata no Google Maps automaticamente.
                 </p>
                 <ul class="mt-3 space-y-2 text-sm text-gray-700">
                     <li class="flex items-center gap-2">
                         <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">🎟️ Prime Gourmet</span>
-                        Funciona no formato "Compre 1, Leve 2" (compra um ingresso/prato e o acompanhante não paga).
+                        Compre 1, Leve 2.
                     </li>
                     <li class="flex items-center gap-2">
                         <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-blue-200">🎫 Compra Coletiva</span>
-                        Sites como Laçador de Ofertas e Tchê Ofertas oferecem descontos de 10% a 40% na compra antecipada.
+                        Descontos via Laçador de Ofertas e Tchê Ofertas.
                     </li>
                 </ul>
-                <p class="text-xs text-gray-500 mt-3 italic">* Os preços base são estimativas. As parcerias com os apps podem sofrer pausas temporárias durante a altíssima temporada (Julho e Dezembro).</p>
             </div>
         </div>
 
-        <!-- SEÇÃO 1: Parques Temáticos e Indoor -->
+        <!-- SEÇÃO 1: Parques -->
         <section id="parques" class="mb-16 pt-8">
             <h2 class="text-3xl font-bold font-serif text-serra-green border-b border-gray-200 pb-3 mb-8">Parques Temáticos e Indoor</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                <!-- Card -->
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Snowland</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Gramado</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Snowland+Gramado" target="_blank" title="Abrir no Google Maps" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Gramado
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-blue-200">🎫 Compra Coletiva</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">Parque de neve indoor com esqui, snowboard, patinação no gelo e vila alpina. Raramente aceita Prime, mas tem cupons no Laçador.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Parque de neve indoor com esqui, snowboard, patinação no gelo e vila alpina.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
                         <p class="text-sm font-bold text-serra-green">R$ 249,00</p>
                         <a href="https://www.snowland.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site Oficial &rarr;</a>
@@ -105,12 +105,14 @@
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Mini Mundo</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Gramado</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Mini+Mundo+Gramado" target="_blank" title="Abrir no Google Maps" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Gramado
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-blue-200">🎫 Compra Coletiva</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">Cidade em miniatura ao ar livre com réplicas incríveis. Descontos apenas em sites de compra coletiva ou antecipado.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Cidade em miniatura ao ar livre com réplicas incríveis. Descontos apenas em sites de compra coletiva.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
                         <p class="text-sm font-bold text-serra-green">R$ 90,00</p>
                         <a href="https://www.minimundo.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site Oficial &rarr;</a>
@@ -119,14 +121,15 @@
 
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold font-serif text-serra-green">Terra Mágica Florybal</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Canela</span>
+                        <h3 class="text-xl font-bold font-serif text-serra-green">Florybal</h3>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Parque+Terra+Magica+Florybal+Canela" target="_blank" title="Abrir no Google Maps" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Canela
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3 flex-wrap">
                         <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">🎟️ Prime Gourmet</span>
-                        <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-blue-200">🎫 Compra Coletiva</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">Parque focado no público infantil com dinossauros animatrônicos, teatro e cinema 7D na mata.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Parque Terra Mágica focado no público infantil com dinossauros animatrônicos, teatro e cinema 7D.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
                         <p class="text-sm font-bold text-serra-green">R$ 160,00</p>
                         <a href="https://parqueterramagicaflorybal.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site Oficial &rarr;</a>
@@ -136,14 +139,16 @@
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Alpen Park</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Canela</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Alpen+Park+Canela" target="_blank" title="Abrir no Google Maps" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Canela
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">🎟️ Prime Gourmet</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">Parque de adrenalina (trenó alpino, montanha-russa). O Prime Gourmet é válido para o passaporte de brinquedos.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Parque de adrenalina (trenó alpino, montanha-russa). O Prime Gourmet é válido para o passaporte.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
-                        <p class="text-sm font-bold text-serra-green">Entrada Livre (Pass. R$ 160)</p>
+                        <p class="text-sm font-bold text-serra-green">Pass. R$ 160</p>
                         <a href="https://www.alpenpark.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site Oficial &rarr;</a>
                     </div>
                 </div>
@@ -151,7 +156,9 @@
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Acquamotion</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Gramado</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Acquamotion+Gramado" target="_blank" title="Abrir no Google Maps" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Gramado
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-blue-200">🎫 Compra Coletiva</span>
@@ -165,8 +172,10 @@
 
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold font-serif text-serra-green">Aldeia do Papai Noel</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Gramado</span>
+                        <h3 class="text-xl font-bold font-serif text-serra-green">Aldeia Papai Noel</h3>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Aldeia+do+Papai+Noel+Gramado" target="_blank" title="Abrir no Google Maps" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Gramado
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">🎟️ Prime Gourmet</span>
@@ -181,20 +190,22 @@
             </div>
         </section>
 
-        <!-- SEÇÃO 2: Natureza e Ecoturismo -->
+        <!-- SEÇÃO 2: Natureza -->
         <section id="natureza" class="mb-16 pt-8">
             <h2 class="text-3xl font-bold font-serif text-serra-green border-b border-gray-200 pb-3 mb-8">Cenários Naturais e Ecoturismo</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold font-serif text-serra-green">Parque do Caracol</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Canela</span>
+                        <h3 class="text-xl font-bold font-serif text-serra-green">P. do Caracol</h3>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Parque+do+Caracol+Canela" target="_blank" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Canela
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3 flex-wrap">
                         <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-blue-200">🎫 Compra Coletiva</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">O clássico mirante para a Cascata do Caracol (130m). Conta com observatório ecológico e trilhas.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Reserva natural ecológica com o mirante clássico para a Cascata do Caracol (130m de altura).</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
                         <p class="text-sm font-bold text-serra-green">R$ 75,00</p>
                         <a href="https://parquecaracol.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site Oficial &rarr;</a>
@@ -204,12 +215,14 @@
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Skyglass</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Canela</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Skyglass+Canela" target="_blank" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Canela
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">🎟️ Prime Gourmet</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">Plataforma de vidro a 360m de altura. O Prime costuma cobrir o ingresso da plataforma (verifique combos).</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Plataforma de vidro suspensa a 360m de altura sobre os cânions do Vale da Ferradura.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
                         <p class="text-sm font-bold text-serra-green">R$ 170,00</p>
                         <a href="https://skyglasscanela.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site Oficial &rarr;</a>
@@ -218,13 +231,15 @@
 
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold font-serif text-serra-green">Parque dos Bondinhos</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Canela</span>
+                        <h3 class="text-xl font-bold font-serif text-serra-green">P. dos Bondinhos</h3>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Parque+dos+Bondinhos+Canela" target="_blank" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Canela
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-blue-200">🎫 Compra Coletiva</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">Teleféricos suíços com o melhor ângulo frontal para as fotos da Cascata do Caracol.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Teleféricos suíços modernos com o melhor e mais próximo ângulo frontal para a Cascata do Caracol.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
                         <p class="text-sm font-bold text-serra-green">R$ 140,00</p>
                         <a href="https://parquesdaserra.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site Oficial &rarr;</a>
@@ -234,12 +249,14 @@
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Olivas de Gramado</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Gramado</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Olivas+de+Gramado" target="_blank" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Gramado
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">🎟️ Prime Gourmet</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">Um espetáculo no pôr do sol no topo do cânion com degustação de azeites, piquenique e fazendinha.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Um espetáculo no pôr do sol no topo do cânion com degustação de azeites locais e piquenique.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
                         <p class="text-sm font-bold text-serra-green">R$ 140,00</p>
                         <a href="https://olivasdegramado.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site Oficial &rarr;</a>
@@ -248,13 +265,15 @@
 
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold font-serif text-serra-green">Pé da Cascata Explorer</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Canela</span>
+                        <h3 class="text-xl font-bold font-serif text-serra-green">Cascata Explorer</h3>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Pé+da+Cascata+Explorer+Brocker" target="_blank" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Canela
+                        </a>
                     </div>
                     <div class="flex gap-2 mb-3">
                         <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">🎟️ Prime Gourmet</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">Tour off-road da Brocker Turismo que leva à base secreta da Cascata. Experiência muito exclusiva.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">Tour off-road da Brocker Turismo que leva à base secreta da Cascata. Experiência de ecoturismo exclusiva.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
                         <p class="text-sm font-bold text-serra-green">R$ 290,00</p>
                         <a href="https://brockerturismo.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Reservar &rarr;</a>
@@ -264,38 +283,41 @@
                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Lago Negro</h3>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-semibold">Gramado</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Lago+Negro+Gramado" target="_blank" class="flex items-center gap-1 text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase tracking-wider font-bold hover:bg-serra-green hover:text-white transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Gramado
+                        </a>
                     </div>
-                    <p class="text-sm text-gray-600 mb-6 flex-grow">O clássico parque de hortênsias com pedalinhos de cisne. Entrada gratuita no parque.</p>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">O clássico parque de hortênsias com pedalinhos de cisne e caravelas. Entrada gratuita no parque.</p>
                     <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
-                        <p class="text-sm font-bold text-serra-green">Gratuito (Pedalinho R$ 70)</p>
-                        <span class="text-gray-400 text-sm font-semibold">Sem descontos apps</span>
+                        <p class="text-sm font-bold text-serra-green">Pedalinho R$ 70</p>
+                        <span class="text-gray-400 text-sm font-semibold">Local</span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- SEÇÃO 3: Museus e Exposições -->
+        <!-- SEÇÃO 3: Museus -->
         <section id="museus" class="mb-16 pt-8">
             <h2 class="text-3xl font-bold font-serif text-serra-green border-b border-gray-200 pb-3 mb-8">Museus e Exposições</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-                <!-- Museu Card -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
-                    <h3 class="text-lg font-bold font-serif text-serra-green mb-1">Space Adventure (NASA)</h3>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col relative group">
+                    <h3 class="text-lg font-bold font-serif text-serra-green mb-1">Space Adventure</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Space+Adventure+NASA+Canela" target="_blank" class="absolute top-5 right-5 text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <div class="flex gap-2 mb-2">
                         <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-4 flex-grow">Acervo original de missões espaciais e simuladores.</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">Acervo original da NASA e simuladores espaciais.</p>
                     <div class="border-t border-gray-100 pt-3 flex justify-between items-center">
                         <p class="text-sm font-bold">R$ 130,00</p>
                         <a href="https://spaceadventure.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site &rarr;</a>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col relative group">
                     <h3 class="text-lg font-bold font-serif text-serra-green mb-1">NBA Park</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=NBA+Park+Gramado" target="_blank" class="absolute top-5 right-5 text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <div class="flex gap-2 mb-2">
                         <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
                     </div>
@@ -306,21 +328,23 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
-                    <h3 class="text-lg font-bold font-serif text-serra-green mb-1">Complexo Dreams</h3>
-                    <div class="flex gap-2 mb-2">
-                        <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
-                        <span class="bg-blue-100 text-blue-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-blue-200">Laçador</span>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col relative group">
+                    <h3 class="text-lg font-bold font-serif text-serra-green mb-1 pr-6">Complexo Dreams</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Complexo+Dreams+Gramado" target="_blank" class="absolute top-5 right-5 text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
+                    <div class="flex gap-1 mb-2">
+                        <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border border-amber-200">Prime</span>
+                        <span class="bg-blue-100 text-blue-800 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border border-blue-200">Laçador</span>
                     </div>
                     <p class="text-sm text-gray-600 mb-4 flex-grow">Museu de Cera, Super Carros e Hollywood Dream Cars.</p>
                     <div class="border-t border-gray-100 pt-3 flex justify-between items-center">
-                        <p class="text-sm font-bold">Passaporte R$ 250</p>
+                        <p class="text-sm font-bold">R$ 250 (Pass.)</p>
                         <a href="https://dreamland.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site &rarr;</a>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col relative group">
                     <h3 class="text-lg font-bold font-serif text-serra-green mb-1">Mundo a Vapor</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Mundo+a+Vapor+Canela" target="_blank" class="absolute top-5 right-5 text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <div class="flex gap-2 mb-2">
                         <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
                     </div>
@@ -331,8 +355,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col relative group">
                     <h3 class="text-lg font-bold font-serif text-serra-green mb-1">Cristais de Gramado</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Cristais+de+Gramado" target="_blank" class="absolute top-5 right-5 text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <div class="flex gap-2 mb-2">
                         <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
                     </div>
@@ -343,8 +368,9 @@
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
-                    <h3 class="text-lg font-bold font-serif text-serra-green mb-1">American Old Trucks</h3>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col relative group">
+                    <h3 class="text-lg font-bold font-serif text-serra-green mb-1">Old Trucks</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=American+Old+Trucks+Canela" target="_blank" class="absolute top-5 right-5 text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <div class="flex gap-2 mb-2">
                         <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
                     </div>
@@ -355,20 +381,22 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col relative group">
                     <h3 class="text-lg font-bold font-serif text-serra-green mb-1">Museu da Moda</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Museu+da+Moda+Canela" target="_blank" class="absolute top-5 right-5 text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <div class="flex gap-2 mb-2">
                         <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-4 flex-grow">4.000 anos de história da indumentária feminina.</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">4.000 anos de história da indumentária e figurinos.</p>
                     <div class="border-t border-gray-100 pt-3 flex justify-between items-center">
                         <p class="text-sm font-bold">R$ 90,00</p>
                         <a href="https://museudamodacanela.com.br" target="_blank" class="text-serra-gold text-sm font-semibold hover:underline">Site &rarr;</a>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col relative group">
                     <h3 class="text-lg font-bold font-serif text-serra-green mb-1">Museu Egípcio</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Museu+Egipcio+Canela" target="_blank" class="absolute top-5 right-5 text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <div class="flex gap-2 mb-2">
                         <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
                     </div>
@@ -382,54 +410,58 @@
             </div>
         </section>
 
-        <!-- SEÇÃO 4: Gastronomia Temática e Jantares Show -->
+        <!-- SEÇÃO 4: Gastronomia Temática -->
         <section id="gastronomia" class="mb-16 pt-8">
-            <h2 class="text-3xl font-bold font-serif text-serra-green border-b border-gray-200 pb-3 mb-8">Gastronomia Temática (Onde o Prime Gourmet Brilha)</h2>
+            <h2 class="text-3xl font-bold font-serif text-serra-green border-b border-gray-200 pb-3 mb-8">Gastronomia Temática</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 relative">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Sequência de Fondue</h3>
-                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded border border-amber-200">🎟️ Aceita Prime Gourmet</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Sequencia+de+Fondue+Gramado+Canela" target="_blank" title="Buscar no Mapa" class="text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     </div>
-                    <p class="text-sm text-gray-600 mb-4">A famosa "Noite Suíça". Dezenas de restaurantes em Gramado e Canela oferecem o rodízio no esquema "Pague 1, Comam 2" usando o Prime.</p>
-                    <p class="text-sm font-bold text-serra-green border-t pt-4">R$ 100 a R$ 250 (por pessoa, sem bebida)</p>
+                    <span class="inline-block bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-amber-200 mb-2">🎟️ Ampla Oferta no Prime</span>
+                    <p class="text-sm text-gray-600 mb-4">A famosa "Noite Suíça". Dezenas de restaurantes oferecem o rodízio no esquema "Pague 1, Comam 2" usando o Prime.</p>
+                    <p class="text-sm font-bold text-serra-green border-t pt-4">R$ 100 a R$ 250 (por pessoa)</p>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 relative">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Cafés Coloniais</h3>
-                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded border border-amber-200">🎟️ Aceita Prime Gourmet</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Cafe+Colonial+Gramado+Canela" target="_blank" title="Buscar no Mapa" class="text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     </div>
-                    <p class="text-sm text-gray-600 mb-4">Mesas infinitas com mais de 80 variedades. O icônico *Bela Vista* e o *Torre Cafe* costumam participar do Prime e de sites de ofertas.</p>
-                    <p class="text-sm font-bold text-serra-green border-t pt-4">Aprox. R$ 140,00 (Bela Vista)</p>
+                    <span class="inline-block bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-amber-200 mb-2">🎟️ Aceita Prime Gourmet</span>
+                    <p class="text-sm text-gray-600 mb-4">Mesas infinitas com mais de 80 variedades. O icônico *Bela Vista* e o *Torre Cafe* costumam participar de ofertas.</p>
+                    <p class="text-sm font-bold text-serra-green border-t pt-4">Aprox. R$ 140,00</p>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 relative">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Pizzarias Temáticas</h3>
-                        <div class="flex gap-1">
-                            <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-amber-200">Prime</span>
-                            <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-blue-200">Laçador</span>
-                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Pizzaria+Tematica+Gramado" target="_blank" title="Buscar no Mapa" class="text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     </div>
-                    <p class="text-sm text-gray-600 mb-4">Verdadeiros espetáculos teatrais (Hector, Cara de Mau, Kongo). Verifique os dias válidos nos apps, pois costumam restringir finais de semana.</p>
+                    <div class="flex gap-1 mb-2">
+                        <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-amber-200">Prime</span>
+                        <span class="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-blue-200">Laçador</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Verdadeiros espetáculos teatrais (Hector, Cara de Mau, Kongo). Verifique os dias válidos nos apps para evitar bloqueios.</p>
                     <p class="text-sm font-bold text-serra-green border-t pt-4">R$ 180 a R$ 250 (Rodízio)</p>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 relative">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="text-xl font-bold font-serif text-serra-green">Noite Gaúcha e Italiana</h3>
-                        <span class="bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-amber-200">🎟️ Prime Gourmet</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Churrascaria+Garfo+e+Bombacha+ou+Linha+Bella" target="_blank" title="Buscar no Mapa" class="text-gray-400 hover:text-serra-green transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     </div>
-                    <p class="text-sm text-gray-600 mb-4">Jantares com show folclórico como o *Garfo e Bombacha* (churrasco) e *Linha Bella* (italiano) frequentemente entram no catálogo do Prime.</p>
+                    <span class="inline-block bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-amber-200 mb-2">🎟️ Aceita Prime Gourmet</span>
+                    <p class="text-sm text-gray-600 mb-4">Jantares com show folclórico como o *Garfo e Bombacha* (churrasco) e *Linha Bella* (italiano) entram no catálogo com frequência.</p>
                     <p class="text-sm font-bold text-serra-green border-t pt-4">R$ 250 a R$ 300 (Jantar + Show)</p>
                 </div>
 
             </div>
         </section>
 
-        <!-- SEÇÃO 5: Passeios Clássicos -->
+        <!-- SEÇÃO 5: Clássicos -->
         <section id="classicos" class="mb-16 pt-8">
             <h2 class="text-3xl font-bold font-serif text-serra-green border-b border-gray-200 pb-3 mb-8">Pontos Turísticos e Passeios Clássicos</h2>
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -437,38 +469,53 @@
                     <thead>
                         <tr class="bg-serra-light text-serra-green border-b border-gray-200">
                             <th class="p-4 font-bold font-serif">Local / Passeio</th>
-                            <th class="p-4 font-bold font-serif">Descrição</th>
-                            <th class="p-4 font-bold font-serif">Ingresso & Descontos</th>
+                            <th class="p-4 font-bold font-serif hidden md:table-cell">Descrição</th>
+                            <th class="p-4 font-bold font-serif">Acesso & Rota</th>
                         </tr>
                     </thead>
                     <tbody class="text-sm text-gray-700">
                         <tr class="border-b hover:bg-gray-50 transition">
-                            <td class="p-4 font-bold text-serra-green">Bustour</td>
-                            <td class="p-4">Ônibus panorâmico Hop-on Hop-off de 2 andares que percorre dezenas de atrações nas duas cidades.</td>
+                            <td class="p-4 font-bold text-serra-green">Bustour (Ônibus Hop-on Hop-off)</td>
+                            <td class="p-4 hidden md:table-cell">Ônibus panorâmico de 2 andares que percorre dezenas de atrações nas duas cidades.</td>
                             <td class="p-4">
-                                <span class="font-bold">Aprox. R$ 139</span><br>
-                                <span class="inline-block mt-1 bg-amber-100 text-amber-800 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-amber-200">Prime</span>
+                                <span class="font-bold">Aprox. R$ 139</span>
+                                <div class="mt-2 flex items-center gap-2">
+                                    <span class="bg-amber-100 text-amber-800 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border border-amber-200">Prime</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Bustour+Loja+Gramado" target="_blank" class="text-gray-400 hover:text-serra-green"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
+                                </div>
                             </td>
                         </tr>
                         <tr class="border-b hover:bg-gray-50 transition">
-                            <td class="p-4 font-bold text-serra-green">Catedral de Pedra</td>
-                            <td class="p-4">Igreja gótica de Canela. Abriga um maravilhoso espetáculo gratuito de luzes à noite.</td>
-                            <td class="p-4 font-bold text-green-700">Gratuito</td>
+                            <td class="p-4 font-bold text-serra-green">Catedral de Pedra (Canela)</td>
+                            <td class="p-4 hidden md:table-cell">Igreja gótica de Canela. Abriga um maravilhoso espetáculo gratuito de luzes à noite.</td>
+                            <td class="p-4">
+                                <span class="font-bold text-green-700">Gratuito</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Catedral+de+Pedra+Canela" target="_blank" class="block mt-2 text-serra-gold hover:underline text-xs font-semibold">Traçar Rota &rarr;</a>
+                            </td>
                         </tr>
                         <tr class="border-b hover:bg-gray-50 transition">
                             <td class="p-4 font-bold text-serra-green">Rua Coberta & Rua Torta</td>
-                            <td class="p-4">O coração gastronômico de Gramado e a famosa e instagramável rua sinuosa logo em frente.</td>
-                            <td class="p-4 font-bold text-green-700">Gratuito</td>
+                            <td class="p-4 hidden md:table-cell">O coração gastronômico de Gramado e a famosa e instagramável rua sinuosa logo em frente.</td>
+                            <td class="p-4">
+                                <span class="font-bold text-green-700">Gratuito</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Rua+Coberta+Gramado" target="_blank" class="block mt-2 text-serra-gold hover:underline text-xs font-semibold">Traçar Rota &rarr;</a>
+                            </td>
                         </tr>
                         <tr class="border-b hover:bg-gray-50 transition">
                             <td class="p-4 font-bold text-serra-green">Castelinho Caracol</td>
-                            <td class="p-4">Uma das casas mais antigas de Canela. Serve o lendário Apfelstrudel (torta de maçã).</td>
-                            <td class="p-4"><span class="font-bold">R$ 20</span> (Acesso ao Museu)</td>
+                            <td class="p-4 hidden md:table-cell">Uma das casas mais antigas de Canela. Serve o lendário Apfelstrudel (torta de maçã).</td>
+                            <td class="p-4">
+                                <span class="font-bold">R$ 20 (Museu)</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Castelinho+Caracol+Canela" target="_blank" class="block mt-2 text-serra-gold hover:underline text-xs font-semibold">Traçar Rota &rarr;</a>
+                            </td>
                         </tr>
                         <tr class="border-b hover:bg-gray-50 transition">
                             <td class="p-4 font-bold text-serra-green">Estação Campos de Canella</td>
-                            <td class="p-4">Antiga estação de trem revitalizada em um charmoso polo gastronômico (pagamento pelo consumo).</td>
-                            <td class="p-4 font-bold text-green-700">Acesso Gratuito</td>
+                            <td class="p-4 hidden md:table-cell">Antiga estação de trem revitalizada em um charmoso polo gastronômico.</td>
+                            <td class="p-4">
+                                <span class="font-bold text-green-700">Acesso Gratuito</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Estacao+Campos+de+Canella" target="_blank" class="block mt-2 text-serra-gold hover:underline text-xs font-semibold">Traçar Rota &rarr;</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -477,26 +524,28 @@
 
         <!-- SEÇÃO 6: Eventos -->
         <section id="eventos" class="mb-16 pt-8">
-            <h2 class="text-3xl font-bold font-serif text-serra-green border-b border-gray-200 pb-3 mb-8">Festividades e Grandes Eventos</h2>
+            <h2 class="text-3xl font-bold font-serif text-serra-green border-b border-gray-200 pb-3 mb-8">Grandes Eventos</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-gradient-to-br from-[#1a3224] to-[#0f1f16] text-white rounded-xl shadow-md p-8 border border-gray-700">
+                <div class="bg-gradient-to-br from-[#1a3224] to-[#0f1f16] text-white rounded-xl shadow-md p-8 border border-gray-700 relative">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Expogramado+Gramado" target="_blank" class="absolute top-6 right-6 text-gray-400 hover:text-serra-gold transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <h3 class="text-2xl font-bold font-serif mb-2 text-serra-gold">Natal Luz (Gramado)</h3>
                     <p class="text-sm text-gray-300 mb-6 leading-relaxed">
-                        O maior evento natalino do Brasil (de Outubro a Janeiro). A cidade ganha iluminação mágica, shows teatrais diários, desfiles grandiosos e corais. O clima é indescritível.
+                        O maior evento natalino do Brasil (de Outubro a Janeiro). A cidade ganha iluminação mágica, shows teatrais diários (na Expogramado), desfiles grandiosos e corais.
                     </p>
                     <div class="flex justify-between items-center border-t border-gray-700 pt-5">
-                        <p class="text-sm font-semibold">Ruas (Gratuito) | Shows Pagos (R$ 150 a R$ 350)</p>
+                        <p class="text-sm font-semibold">Ruas (Livre) | Shows (R$ 150 a R$ 350)</p>
                         <a href="https://natalluzdegramado.com.br" target="_blank" class="text-serra-gold hover:text-white transition text-sm font-bold">Site Oficial &rarr;</a>
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-[#c29b57] to-[#a67c33] text-white rounded-xl shadow-md p-8">
+                <div class="bg-gradient-to-br from-[#c29b57] to-[#a67c33] text-white rounded-xl shadow-md p-8 relative">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Expogramado+Gramado" target="_blank" class="absolute top-6 right-6 text-[#1a3224]/50 hover:text-[#1a3224] transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></a>
                     <h3 class="text-2xl font-bold font-serif mb-2 text-[#1a3224]">Festa da Colônia</h3>
                     <p class="text-sm text-[#f9f8f6] mb-6 leading-relaxed opacity-90">
-                        A grande celebração da imigração alemã, italiana e portuguesa em Gramado (geralmente em maio). Conta com comida farta, fornos de barro na rua e produtos artesanais diretos dos colonos.
+                        Celebração da imigração alemã, italiana e portuguesa em Gramado. Conta com comida farta, fornos de barro na rua e produtos artesanais diretos dos colonos.
                     </p>
                     <div class="flex justify-between items-center border-t border-white/30 pt-5">
-                        <p class="text-sm font-bold text-[#1a3224]">Acesso Gratuito</p>
+                        <p class="text-sm font-bold text-[#1a3224]">Acesso Gratuito (Expogramado)</p>
                         <a href="https://festadacolonia.net.br" target="_blank" class="text-[#1a3224] hover:text-white transition text-sm font-bold">Site Oficial &rarr;</a>
                     </div>
                 </div>
@@ -509,7 +558,7 @@
         <div class="text-xl font-bold font-serif text-white tracking-tight mb-2 opacity-50">
             Serra<span class="italic font-normal">Gaúcha</span>
         </div>
-        <p class="text-sm">Desenvolvido como seu guia personalizado e inteligente de Gramado & Canela.</p>
+        <p class="text-sm">Desenvolvido como seu guia inteligente com roteamento integrado.</p>
     </footer>
 
 </body>
