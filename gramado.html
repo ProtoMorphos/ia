@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo: Atrações Gramado e Canela</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Configuração do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#1a2e23',    // Verde escuro profundo (pinheiros)
+                            primary: '#2C4C3B', // Verde serra
+                            wine: '#722F37',    // Vinho tinto
+                            gold: '#C5A059',    // Dourado
+                            light: '#F4F4F1',   // Off-white elegante
+                        }
+                    },
+                    boxShadow: {
+                        'elegant': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F4F4F1;
+        }
+        
+        .hero-bg {
+            background-color: #1a2e23;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(197, 160, 89, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(114, 47, 55, 0.15), transparent 25%);
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.05);
+            border-color: rgba(197, 160, 89, 0.3);
+        }
+
+        /* Esconder barra de rolagem no menu mobile */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased font-sans flex flex-col min-h-screen pt-16">
+
+    <!-- Navbar / Sticky Menu -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-serif font-bold text-xl text-brand-dark tracking-tight">
+                    Serra<span class="text-brand-gold italic font-normal">Gaúcha</span>
+                </div>
+                
+                <!-- Navegação Desktop & Mobile (Scroll Horizontal) -->
+                <div class="flex overflow-x-auto hide-scrollbar ml-6 space-x-6 py-2 w-full justify-start lg:justify-end">
+                    <a href="#parques" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Parques Temáticos</a>
+                    <a href="#natureza" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Natureza</a>
+                    <a href="#classicos" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Clássicos</a>
+                    <a href="#eventos" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Eventos</a>
+                    <a href="#gastronomia" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Gastronomia</a>
+                    <a href="#museus" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Museus</a>
+                    <a href="#indoor" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Indoor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-white py-24 px-4 md:px-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="text-brand-gold font-semibold tracking-widest uppercase text-xs mb-4 block">O Guia Definitivo</span>
+            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg">
+                Gramado <span class="text-brand-gold italic font-normal">&</span> Canela
+            </h1>
+            <p class="text-lg md:text-xl font-light text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                Um roteiro completo reunindo as melhores atrações, parques, gastronomia e cenários deslumbrantes da Serra Gaúcha.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24 w-full">
+
+        <!-- 1. Parques e Entretenimento Temático -->
+        <section id="parques" class="scroll-mt-24">
+            <header class="mb-12 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Parques e Entretenimento Temático</h2>
+                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto">Diversão garantida para todas as idades com estruturas de nível internacional.</p>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Snowland</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow leading-relaxed">Parque indoor com neve de verdade o ano todo. Oferece patinação no gelo, esqui, snowboard, tubbing (boia na neve) e uma encantadora vila alpina cenográfica.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Mini Mundo</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow leading-relaxed">Cidade em miniatura ao ar livre. Conta com réplicas fiéis e interligadas de castelos, ferrovias e prédios famosos em escala 24 vezes menor que a real.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Acquamotion</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow leading-relaxed">Parque aquático coberto e termal. Possui piscinas aquecidas, toboáguas, piscinas com ondas e áreas relaxantes, ideal para dias de frio ou chuva na serra.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Alpen Park</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow leading-relaxed">Parque de diversões com foco em adrenalina. Destaque para o icônico trenó alpino que corta as montanhas, montanha-russa, tirolesa e quadriciclos.</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Terra Mágica Florybal</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow leading-relaxed">Parque imersivo em meio à mata focado no público infantil. Apresenta imensos dinossauros animatrônicos, fadas, cinema 7D e teatro de bonecos.</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Complexo Dreams</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow leading-relaxed">Reúne múltiplos museus temáticos em um só local. Inclui o Museu de Cera, Super Carros, Hollywood Dream Cars (carros antigos) e o bar Harley Motor Show.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Cenários Naturais e Ecoturismo -->
+        <section id="natureza" class="scroll-mt-24">
+            <header class="mb-12 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Cenários Naturais e Ecoturismo</h2>
+                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto">Paisagens de tirar o fôlego, mirantes grandiosos e o ar puro da Serra Gaúcha.</p>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Parque do Caracol</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Reserva ecológica com trilhas e um observatório panorâmico para a famosa Cascata do Caracol, com seus imponentes 130 metros de queda.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Skyglass</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Plataforma de chão de vidro suspensa a 360 metros de altura sobre o Vale da Ferradura. Inclui o brinquedo suspenso "Abusado" sob a passarela.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Parque dos Bondinhos</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Teleféricos suíços modernos que descem o cânion, oferecendo o melhor e mais próximo ângulo frontal para fotos da Cascata do Caracol.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Lago Negro</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Cartão-postal romântico de águas escuras. Famoso pelo clássico passeio de pedalinhos em formato de cisne e caminhadas por hortênsias.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Le Jardin</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Parque focado no cultivo de lavandas e plantas exóticas. Oferece belas estufas, jardins impecáveis, bistrô aconchegante e loja de cosméticos.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Olivas de Gramado</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Situado no alto de um cânion, oferece degustação de azeites de oliva, fazendinha e um disputado piquenique com música no pôr do sol.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Ecoparque Sperry</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Reserva na Mata Atlântica com trilhas acessíveis até belas cachoeiras (como a do Trombão) e sede do renomado restaurante Bêrga Motta.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Pé da Cascata Explorer</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Aventura em veículos off-road pelo Vale da Lageana até a base da Cascata do Caracol, rendendo um ângulo exclusivo e imponente da queda d'água.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Pontos Turísticos e Passeios Clássicos -->
+        <section id="classicos" class="scroll-mt-24">
+            <header class="mb-12 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Pontos Turísticos e Clássicos</h2>
+                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto">A essência arquitetônica, cultura local e os passeios indispensáveis para iniciantes.</p>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Catedral de Pedra</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow">Majestosa igreja gótica revestida de basalto, coração de Canela. Abriga um espetáculo gratuito de som e luzes em sua fachada todas as noites.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Rua Coberta & Torta</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow">O epicentro de Gramado. A Rua Coberta abriga restaurantes sob telhado de vidro, enquanto a vizinha Rua Torta rende fotos icônicas em suas curvas floridas.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Bustour</h3>
+                        <span class="bg-purple-50 text-purple-700 ring-1 ring-purple-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Ambas</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow">Ônibus turístico panorâmico de dois andares. Conecta as principais atrações, permitindo subir e descer livremente (hop-on hop-off) ao longo do dia.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Agroturismo</h3>
+                        <span class="bg-purple-50 text-purple-700 ring-1 ring-purple-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Ambas</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow">Roteiros clássicos (como o Linha Bella) feitos em jardineiras, que visitam propriedades rurais de imigrantes, oferecendo degustações e fartos banquetes coloniais.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Aldeia do Papai Noel</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow">Parque no Parque Knorr onde é Natal o ano todo. Conta com bosque, neve artificial, renas reais, fábrica de brinquedos e a casa em estilo bávaro do Bom Velhinho.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Castelinho Caracol</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow">Residência histórica e museu da colonização, construída em madeira sem pregos. Famosa por servir o mais tradicional Apfelstrudel (torta de maçã) da serra.</p>
+                </div>
+                
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group md:col-span-2 lg:col-span-3">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Estação Campos de Canella</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
+                    </div>
+                    <p class="text-gray-600 flex-grow">A antiga estação ferroviária revitalizada em um charmoso polo gastronômico e cultural, com a locomotiva original exposta ao redor de restaurantes e lojas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Grandes Eventos e Festividades -->
+        <section id="eventos" class="scroll-mt-24">
+            <div class="bg-brand-dark rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-elegant">
+                <!-- Efeito visual de fundo -->
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                
+                <header class="mb-10 relative z-10 text-center md:text-left">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4 text-brand-light">Grandes Eventos & Festividades</h2>
+                    <p class="text-gray-300 max-w-2xl text-lg font-light">Épocas mágicas que transformam completamente a atmosfera das cidades.</p>
+                </header>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                    <!-- Evento -->
+                    <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
+                        <span class="text-brand-gold text-sm font-bold tracking-widest uppercase mb-2 block">Out a Jan</span>
+                        <h3 class="font-serif text-xl font-bold mb-2">Natal Luz</h3>
+                        <p class="text-sm text-gray-300">O maior evento natalino do Brasil em Gramado. Desfiles de rua grandiosos, shows de luzes, corais e peças teatrais.</p>
+                    </div>
+                    <!-- Evento -->
+                    <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
+                        <span class="text-brand-gold text-sm font-bold tracking-widest uppercase mb-2 block">Out a Jan</span>
+                        <h3 class="font-serif text-xl font-bold mb-2">Sonho de Natal</h3>
+                        <p class="text-sm text-gray-300">A festa de Canela. Destaque para a espetacular descida do Papai Noel pela torre da Catedral de Pedra e shows culturais.</p>
+                    </div>
+                    <!-- Evento -->
+                    <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
+                        <span class="text-brand-gold text-sm font-bold tracking-widest uppercase mb-2 block">Agosto</span>
+                        <h3 class="font-serif text-xl font-bold mb-2">Festival de Cinema</h3>
+                        <p class="text-sm text-gray-300">Gramado ganha tapetes vermelhos, astros, exibição de filmes no Palácio dos Festivais e a entrega do cobiçado Kikito.</p>
+                    </div>
+                    <!-- Evento -->
+                    <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
+                        <span class="text-brand-gold text-sm font-bold tracking-widest uppercase mb-2 block">Maio</span>
+                        <h3 class="font-serif text-xl font-bold mb-2">Festa da Colônia</h3>
+                        <p class="text-sm text-gray-300">Celebração da imigração. Reúne a autêntica gastronomia alemã e italiana, danças típicas e produtos de colonos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Gastronomia Temática -->
+        <section id="gastronomia" class="scroll-mt-24">
+            <header class="mb-12 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Gastronomia Temática</h2>
+                <div class="h-1 w-20 bg-brand-wine mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto">Refeições fartas e jantares-show que são atrações turísticas inesquecíveis por si só.</p>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Cafés Coloniais</h3>
+                    <p class="text-sm text-gray-600 flex-grow">Herança dos imigrantes. Mesas extremamente fartas com dezenas de bolos, pães, cucas, geleias, frios, salgados e doces, como nos clássicos *Bela Vista* e *Torre*.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Noite Gaúcha</h3>
+                    <p class="text-sm text-gray-600 flex-grow">Churrasco raiz (destaque para o costelão na vala) acompanhado de um vibrante e interativo show de danças folclóricas e boleadeiras (Ex: *Churrascaria Garfo e Bombacha*).</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Noite Italiana</h3>
+                    <p class="text-sm text-gray-600 flex-grow">Jantar festivo com sequência farta de massas artesanais, galeto e polenta, embalado por músicas típicas e encenações teatrais humoradas (Ex: *Cantina Linha Bella*).</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Sequência de Fondue</h3>
+                    <p class="text-sm text-gray-600 flex-grow">A aconchegante "Noite Suíça". Um rodízio clássico que inclui fondue de queijo, carnes na pedra e finaliza com fondue de chocolate e frutas da estação.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Pizzarias Temáticas</h3>
+                    <p class="text-sm text-gray-600 flex-grow">Rodízios que são verdadeiros espetáculos teatrais. Há temáticas de escolas de magia (*Hector*), piratas (*Cara de Mau*) e selvas (*Kongo*).</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Hard Rock Cafe</h3>
+                    <p class="text-sm text-gray-600 flex-grow">A icônica franquia em um ambiente de três andares em Gramado. Combina gastronomia americana, música ao vivo e memorabília de lendas do rock.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Museus e Exposições Exclusivas -->
+        <section id="museus" class="scroll-mt-24">
+            <header class="mb-12 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Museus e Exposições</h2>
+                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto">Acervos incríveis que vão do espaço sideral às quadras esportivas e história automotiva.</p>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">NBA Park</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Primeiro parque da NBA no mundo. Tem quadras para arremessos, museu com itens autografados, fliperamas esportivos e restaurante.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Space Adventure</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Exposição imersiva da NASA. Exibe trajes espaciais reais, réplicas de foguetes, simuladores de gravidade e um grande planetário.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Museu da Moda</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Uma viagem por 4.000 anos de indumentária (MUM). Exibe peças originais e reconstruções fiéis desde a antiguidade até hoje.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">American Old Trucks</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Museu focado em utilitários de carga. Possui uma coleção impecável de caminhões clássicos, picapes e veículos militares restaurados.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Museu Egípcio</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Abriga grandiosas réplicas artesanais de múmias, sarcófagos e pirâmides, proporcionando uma imersão na cultura do Antigo Egito.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Mundo a Vapor</h3>
+                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Museu interativo da revolução industrial. Exibe no interior réplicas perfeitas de moinhos, fábricas e olarias movidas a vapor.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Cristais de Gramado</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Mestres vidreiros moldando cristais ao vivo (técnica de Murano) a 1.000 graus. Conta com loja imensa e museu de esculturas de vidro.</p>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Mundo de Chocolate</h3>
+                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow">Parque da marca Lugano com mais de 200 esculturas maciças (incluindo Torre Eiffel e Cristo Redentor) feitas 100% de chocolate.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Parques Interativos e Indoor -->
+        <section id="indoor" class="scroll-mt-24 pb-12">
+            <header class="mb-12 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Parques Interativos e Indoor</h2>
+                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto">Ambientes climatizados repletos de tecnologia, realidade virtual e nostalgia gamificada.</p>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex items-start gap-6 group">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Big Land</h3>
+                            <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
+                        </div>
+                        <p class="text-gray-600">Parque focado na nostalgia. Oferece réplicas em tamanho humano de jogos clássicos como Pega Varetas, Genius, além de fliperamas e videogames antigos jogáveis.</p>
+                    </div>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex items-start gap-6 group">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Exceed Experience</h3>
+                            <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                        </div>
+                        <p class="text-gray-600">Parque de alta tecnologia e realidade virtual. Possui simuladores de voo em caças, corridas de Fórmula 1 e montanhas-russas interativas super imersivas.</p>
+                    </div>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex items-start gap-6 group">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Playhouse Florybal</h3>
+                            <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                        </div>
+                        <p class="text-gray-600">Espaço de diversão indoor da marca de chocolates. Conta com pistas de patinação, carrossel, fliperamas e lanchonetes em um ambiente super familiar.</p>
+                    </div>
+                </div>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex items-start gap-6 group">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Oficina da Diversão</h3>
+                            <span class="bg-purple-50 text-purple-700 ring-1 ring-purple-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Ambas</span>
+                        </div>
+                        <p class="text-gray-600">Complexos de jogos infanto-juvenis comuns no centro das cidades, equipados com máquinas de fliperama, máquinas de pelúcia, air hockey e simuladores.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-brand-light py-12 mt-auto border-t-4 border-brand-gold">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="font-serif italic text-2xl mb-4">Prepare-se para viver momentos inesquecíveis.</h2>
+            <p class="text-gray-400 text-sm font-light mb-6">Este guia é um roteiro completo de inspiração para a sua próxima viagem.</p>
+            <div class="flex justify-center space-x-2">
+                <span class="text-brand-gold">★</span>
+                <span class="text-brand-gold">★</span>
+                <span class="text-brand-gold">★</span>
+                <span class="text-brand-gold">★</span>
+                <span class="text-brand-gold">★</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
