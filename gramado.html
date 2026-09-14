@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Completo: Atrações Gramado e Canela</title>
+    <title>Guia Definitivo: Gramado & Canela</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
     
     <!-- Configuração do Tailwind -->
     <script>
@@ -23,16 +23,15 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
-                        brand: {
-                            dark: '#1a2e23',    // Verde escuro profundo (pinheiros)
-                            primary: '#2C4C3B', // Verde serra
-                            wine: '#722F37',    // Vinho tinto
-                            gold: '#C5A059',    // Dourado
-                            light: '#F4F4F1',   // Off-white elegante
+                        serra: {
+                            green: '#233329',   /* Verde floresta da imagem de referência */
+                            gold: '#C4A464',    /* Dourado da imagem de referência */
+                            dark: '#1a261e',
+                            light: '#F9F9F7',
                         }
                     },
-                    boxShadow: {
-                        'elegant': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    letterSpacing: {
+                        'widest': '.25em',
                     }
                 }
             }
@@ -41,24 +40,24 @@
 
     <style>
         body {
-            background-color: #F4F4F1;
+            background-color: #F9F9F7;
         }
         
-        .hero-bg {
-            background-color: #1a2e23;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(197, 160, 89, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(114, 47, 55, 0.15), transparent 25%);
+        /* Padrão de pontos do Header conforme a imagem de referência */
+        .hero-pattern {
+            background-color: #233329;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
 
         .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
         }
         
         .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.05);
-            border-color: rgba(197, 160, 89, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(35, 51, 41, 0.15);
+            border-color: rgba(196, 164, 100, 0.4);
         }
 
         /* Esconder barra de rolagem no menu mobile */
@@ -74,471 +73,454 @@
 <body class="text-gray-800 antialiased font-sans flex flex-col min-h-screen pt-16">
 
     <!-- Navbar / Sticky Menu -->
-    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-gray-100">
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0 font-serif font-bold text-xl text-brand-dark tracking-tight">
-                    Serra<span class="text-brand-gold italic font-normal">Gaúcha</span>
+                <!-- Logo conforme a referência -->
+                <div class="flex-shrink-0 font-serif text-2xl tracking-tight">
+                    <span class="font-bold text-gray-900">Serra</span><span class="italic font-medium text-serra-gold">Gaúcha</span>
                 </div>
                 
                 <!-- Navegação Desktop & Mobile (Scroll Horizontal) -->
                 <div class="flex overflow-x-auto hide-scrollbar ml-6 space-x-6 py-2 w-full justify-start lg:justify-end">
-                    <a href="#parques" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Parques Temáticos</a>
-                    <a href="#natureza" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Natureza</a>
-                    <a href="#classicos" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Clássicos</a>
-                    <a href="#eventos" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Eventos</a>
-                    <a href="#gastronomia" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Gastronomia</a>
-                    <a href="#museus" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Museus</a>
-                    <a href="#indoor" class="text-sm font-medium text-gray-600 hover:text-brand-gold whitespace-nowrap transition-colors">Indoor</a>
+                    <a href="#parques" class="text-[13px] font-medium text-gray-500 hover:text-serra-green whitespace-nowrap transition-colors">Parques Temáticos</a>
+                    <a href="#natureza" class="text-[13px] font-medium text-gray-500 hover:text-serra-green whitespace-nowrap transition-colors">Natureza</a>
+                    <a href="#museus" class="text-[13px] font-medium text-gray-500 hover:text-serra-green whitespace-nowrap transition-colors">Museus</a>
+                    <a href="#gastronomia" class="text-[13px] font-medium text-gray-500 hover:text-serra-green whitespace-nowrap transition-colors">Gastronomia</a>
+                    <a href="#classicos" class="text-[13px] font-medium text-gray-500 hover:text-serra-green whitespace-nowrap transition-colors">Clássicos</a>
+                    <a href="#eventos" class="text-[13px] font-medium text-gray-500 hover:text-serra-green whitespace-nowrap transition-colors">Eventos</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-bg text-white py-24 px-4 md:px-8 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')]"></div>
+    <header class="hero-pattern py-28 px-4 md:px-8 relative border-b-4 border-serra-gold">
         <div class="max-w-4xl mx-auto text-center relative z-10">
-            <span class="text-brand-gold font-semibold tracking-widest uppercase text-xs mb-4 block">O Guia Definitivo</span>
-            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg">
-                Gramado <span class="text-brand-gold italic font-normal">&</span> Canela
+            <!-- Overbrow texto -->
+            <div class="text-serra-gold text-xs font-bold tracking-widest uppercase mb-5">
+                O Guia Definitivo
+            </div>
+            <!-- Título Principal -->
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white mb-6 tracking-tight">
+                Gramado <span class="text-serra-gold italic font-medium">&</span> Canela
             </h1>
-            <p class="text-lg md:text-xl font-light text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <!-- Subtítulo -->
+            <p class="text-lg md:text-xl font-light text-gray-200 max-w-2xl mx-auto leading-relaxed">
                 Um roteiro completo reunindo as melhores atrações, parques, gastronomia e cenários deslumbrantes da Serra Gaúcha.
             </p>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24 w-full">
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20 w-full">
+
+        <!-- Aviso de Preços -->
+        <div class="bg-serra-light border-l-4 border-serra-gold p-4 mb-4 rounded shadow-sm text-sm">
+            <strong class="text-serra-green font-semibold">Nota sobre valores:</strong> 
+            <span class="text-gray-600">Os preços informados são estimativas. Muitas atrações oferecem descontos em compras antecipadas. Consulte os sites oficiais para valores exatos.</span>
+        </div>
 
         <!-- 1. Parques e Entretenimento Temático -->
         <section id="parques" class="scroll-mt-24">
-            <header class="mb-12 text-center">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Parques e Entretenimento Temático</h2>
-                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto">Diversão garantida para todas as idades com estruturas de nível internacional.</p>
+            <header class="mb-10 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-serra-green mb-3">Parques Temáticos e Indoor</h2>
+                <div class="h-0.5 w-16 bg-serra-gold mx-auto mb-4"></div>
+                <p class="text-gray-500">Diversão garantida para todas as idades com estruturas de nível internacional.</p>
             </header>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Snowland</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card -->
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-serra-green mb-1">Snowland</h3>
+                    <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">Gramado</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">Parque indoor com neve de verdade. Oferece patinação no gelo, esqui, snowboard e vila alpina.</p>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                        <p class="font-semibold text-gray-900 mb-3 text-sm">Aprox. R$ 249,00</p>
+                        <a href="https://www.snowland.com.br" target="_blank" class="block w-full text-center bg-serra-green hover:bg-serra-dark text-white text-sm py-2 px-4 rounded transition-colors">Site Oficial</a>
                     </div>
-                    <p class="text-gray-600 flex-grow leading-relaxed">Parque indoor com neve de verdade o ano todo. Oferece patinação no gelo, esqui, snowboard, tubbing (boia na neve) e uma encantadora vila alpina cenográfica.</p>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Mini Mundo</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                <!-- Card -->
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-serra-green mb-1">Mini Mundo</h3>
+                    <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">Gramado</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">Cidade em miniatura ao ar livre com réplicas de prédios famosos 24 vezes menores que o real.</p>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                        <p class="font-semibold text-gray-900 mb-3 text-sm">Aprox. R$ 90,00</p>
+                        <a href="https://www.minimundo.com.br" target="_blank" class="block w-full text-center bg-serra-green hover:bg-serra-dark text-white text-sm py-2 px-4 rounded transition-colors">Site Oficial</a>
                     </div>
-                    <p class="text-gray-600 flex-grow leading-relaxed">Cidade em miniatura ao ar livre. Conta com réplicas fiéis e interligadas de castelos, ferrovias e prédios famosos em escala 24 vezes menor que a real.</p>
                 </div>
 
-                <!-- Card 3 -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Acquamotion</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                <!-- Card -->
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-serra-green mb-1">Acquamotion</h3>
+                    <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">Gramado</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">Parque aquático coberto e termal. Piscinas aquecidas, toboáguas e áreas relaxantes.</p>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                        <p class="font-semibold text-gray-900 mb-3 text-sm">Aprox. R$ 199,00</p>
+                        <a href="https://www.acquamotion.com.br" target="_blank" class="block w-full text-center bg-serra-green hover:bg-serra-dark text-white text-sm py-2 px-4 rounded transition-colors">Site Oficial</a>
                     </div>
-                    <p class="text-gray-600 flex-grow leading-relaxed">Parque aquático coberto e termal. Possui piscinas aquecidas, toboáguas, piscinas com ondas e áreas relaxantes, ideal para dias de frio ou chuva na serra.</p>
                 </div>
 
-                <!-- Card 4 -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Alpen Park</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
+                <!-- Card -->
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-serra-green mb-1">Alpen Park</h3>
+                    <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">Canela</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">Parque de diversões de montanha. Destaque para o icônico trenó alpino e montanha-russa.</p>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                        <p class="font-semibold text-gray-900 mb-3 text-sm">Gratuito / Passaporte R$ 160</p>
+                        <a href="https://www.alpenpark.com.br" target="_blank" class="block w-full text-center bg-serra-green hover:bg-serra-dark text-white text-sm py-2 px-4 rounded transition-colors">Ver Ingressos</a>
                     </div>
-                    <p class="text-gray-600 flex-grow leading-relaxed">Parque de diversões com foco em adrenalina. Destaque para o icônico trenó alpino que corta as montanhas, montanha-russa, tirolesa e quadriciclos.</p>
                 </div>
 
-                <!-- Card 5 -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Terra Mágica Florybal</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
+                <!-- Card -->
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-serra-green mb-1">Terra Mágica Florybal</h3>
+                    <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">Canela</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">Parque focado no público infantil em meio à mata, com fadas, teatro e grandes dinossauros.</p>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                        <p class="font-semibold text-gray-900 mb-3 text-sm">Aprox. R$ 160,00</p>
+                        <a href="https://parqueterramagicaflorybal.com.br" target="_blank" class="block w-full text-center bg-serra-green hover:bg-serra-dark text-white text-sm py-2 px-4 rounded transition-colors">Site Oficial</a>
                     </div>
-                    <p class="text-gray-600 flex-grow leading-relaxed">Parque imersivo em meio à mata focado no público infantil. Apresenta imensos dinossauros animatrônicos, fadas, cinema 7D e teatro de bonecos.</p>
                 </div>
 
-                <!-- Card 6 -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full relative group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Complexo Dreams</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
+                <!-- Card -->
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-serra-green mb-1">Exceed Experience</h3>
+                    <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">Gramado</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">Realidade virtual de altíssima tecnologia. Simuladores de F1, caças militares e montanha-russa.</p>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                        <p class="font-semibold text-gray-900 mb-3 text-sm">Aprox. R$ 140,00</p>
+                        <a href="https://exceedpark.com.br" target="_blank" class="block w-full text-center bg-serra-green hover:bg-serra-dark text-white text-sm py-2 px-4 rounded transition-colors">Site Oficial</a>
                     </div>
-                    <p class="text-gray-600 flex-grow leading-relaxed">Reúne múltiplos museus temáticos em um só local. Inclui o Museu de Cera, Super Carros, Hollywood Dream Cars (carros antigos) e o bar Harley Motor Show.</p>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-serra-green mb-1">Big Land</h3>
+                    <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">Canela</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">Parque da nostalgia. Jogos antigos em tamanho gigante (Genius, Pega Varetas) e fliperamas retrô.</p>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                        <p class="font-semibold text-gray-900 mb-3 text-sm">Aprox. R$ 80,00</p>
+                        <a href="https://bigland.com.br" target="_blank" class="block w-full text-center bg-serra-green hover:bg-serra-dark text-white text-sm py-2 px-4 rounded transition-colors">Site Oficial</a>
+                    </div>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <h3 class="font-serif text-xl font-bold text-serra-green mb-1">Aldeia do Papai Noel</h3>
+                    <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">Gramado</p>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">É Natal o ano todo no Parque Knorr. Neve artificial, renas vivas e a casa do Bom Velhinho.</p>
+                    <div class="border-t border-gray-100 pt-4 mt-auto">
+                        <p class="font-semibold text-gray-900 mb-3 text-sm">Aprox. R$ 90,00</p>
+                        <a href="https://www.papainoel.com.br" target="_blank" class="block w-full text-center bg-serra-green hover:bg-serra-dark text-white text-sm py-2 px-4 rounded transition-colors">Site Oficial</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 2. Cenários Naturais e Ecoturismo -->
         <section id="natureza" class="scroll-mt-24">
-            <header class="mb-12 text-center">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Cenários Naturais e Ecoturismo</h2>
-                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto">Paisagens de tirar o fôlego, mirantes grandiosos e o ar puro da Serra Gaúcha.</p>
-            </header>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Parque do Caracol</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Reserva ecológica com trilhas e um observatório panorâmico para a famosa Cascata do Caracol, com seus imponentes 130 metros de queda.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Skyglass</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Plataforma de chão de vidro suspensa a 360 metros de altura sobre o Vale da Ferradura. Inclui o brinquedo suspenso "Abusado" sob a passarela.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Parque dos Bondinhos</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Teleféricos suíços modernos que descem o cânion, oferecendo o melhor e mais próximo ângulo frontal para fotos da Cascata do Caracol.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Lago Negro</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Cartão-postal romântico de águas escuras. Famoso pelo clássico passeio de pedalinhos em formato de cisne e caminhadas por hortênsias.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Le Jardin</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Parque focado no cultivo de lavandas e plantas exóticas. Oferece belas estufas, jardins impecáveis, bistrô aconchegante e loja de cosméticos.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Olivas de Gramado</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Situado no alto de um cânion, oferece degustação de azeites de oliva, fazendinha e um disputado piquenique com música no pôr do sol.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Ecoparque Sperry</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Reserva na Mata Atlântica com trilhas acessíveis até belas cachoeiras (como a do Trombão) e sede do renomado restaurante Bêrga Motta.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Pé da Cascata Explorer</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Aventura em veículos off-road pelo Vale da Lageana até a base da Cascata do Caracol, rendendo um ângulo exclusivo e imponente da queda d'água.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Pontos Turísticos e Passeios Clássicos -->
-        <section id="classicos" class="scroll-mt-24">
-            <header class="mb-12 text-center">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Pontos Turísticos e Clássicos</h2>
-                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto">A essência arquitetônica, cultura local e os passeios indispensáveis para iniciantes.</p>
-            </header>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Catedral de Pedra</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
-                    </div>
-                    <p class="text-gray-600 flex-grow">Majestosa igreja gótica revestida de basalto, coração de Canela. Abriga um espetáculo gratuito de som e luzes em sua fachada todas as noites.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Rua Coberta & Torta</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
-                    </div>
-                    <p class="text-gray-600 flex-grow">O epicentro de Gramado. A Rua Coberta abriga restaurantes sob telhado de vidro, enquanto a vizinha Rua Torta rende fotos icônicas em suas curvas floridas.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Bustour</h3>
-                        <span class="bg-purple-50 text-purple-700 ring-1 ring-purple-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Ambas</span>
-                    </div>
-                    <p class="text-gray-600 flex-grow">Ônibus turístico panorâmico de dois andares. Conecta as principais atrações, permitindo subir e descer livremente (hop-on hop-off) ao longo do dia.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Agroturismo</h3>
-                        <span class="bg-purple-50 text-purple-700 ring-1 ring-purple-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Ambas</span>
-                    </div>
-                    <p class="text-gray-600 flex-grow">Roteiros clássicos (como o Linha Bella) feitos em jardineiras, que visitam propriedades rurais de imigrantes, oferecendo degustações e fartos banquetes coloniais.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Aldeia do Papai Noel</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
-                    </div>
-                    <p class="text-gray-600 flex-grow">Parque no Parque Knorr onde é Natal o ano todo. Conta com bosque, neve artificial, renas reais, fábrica de brinquedos e a casa em estilo bávaro do Bom Velhinho.</p>
-                </div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Castelinho Caracol</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
-                    </div>
-                    <p class="text-gray-600 flex-grow">Residência histórica e museu da colonização, construída em madeira sem pregos. Famosa por servir o mais tradicional Apfelstrudel (torta de maçã) da serra.</p>
-                </div>
-                
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex flex-col h-full group md:col-span-2 lg:col-span-3">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Estação Campos de Canella</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
-                    </div>
-                    <p class="text-gray-600 flex-grow">A antiga estação ferroviária revitalizada em um charmoso polo gastronômico e cultural, com a locomotiva original exposta ao redor de restaurantes e lojas.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Grandes Eventos e Festividades -->
-        <section id="eventos" class="scroll-mt-24">
-            <div class="bg-brand-dark rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-elegant">
-                <!-- Efeito visual de fundo -->
-                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-                
-                <header class="mb-10 relative z-10 text-center md:text-left">
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4 text-brand-light">Grandes Eventos & Festividades</h2>
-                    <p class="text-gray-300 max-w-2xl text-lg font-light">Épocas mágicas que transformam completamente a atmosfera das cidades.</p>
-                </header>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-                    <!-- Evento -->
-                    <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
-                        <span class="text-brand-gold text-sm font-bold tracking-widest uppercase mb-2 block">Out a Jan</span>
-                        <h3 class="font-serif text-xl font-bold mb-2">Natal Luz</h3>
-                        <p class="text-sm text-gray-300">O maior evento natalino do Brasil em Gramado. Desfiles de rua grandiosos, shows de luzes, corais e peças teatrais.</p>
-                    </div>
-                    <!-- Evento -->
-                    <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
-                        <span class="text-brand-gold text-sm font-bold tracking-widest uppercase mb-2 block">Out a Jan</span>
-                        <h3 class="font-serif text-xl font-bold mb-2">Sonho de Natal</h3>
-                        <p class="text-sm text-gray-300">A festa de Canela. Destaque para a espetacular descida do Papai Noel pela torre da Catedral de Pedra e shows culturais.</p>
-                    </div>
-                    <!-- Evento -->
-                    <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
-                        <span class="text-brand-gold text-sm font-bold tracking-widest uppercase mb-2 block">Agosto</span>
-                        <h3 class="font-serif text-xl font-bold mb-2">Festival de Cinema</h3>
-                        <p class="text-sm text-gray-300">Gramado ganha tapetes vermelhos, astros, exibição de filmes no Palácio dos Festivais e a entrega do cobiçado Kikito.</p>
-                    </div>
-                    <!-- Evento -->
-                    <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
-                        <span class="text-brand-gold text-sm font-bold tracking-widest uppercase mb-2 block">Maio</span>
-                        <h3 class="font-serif text-xl font-bold mb-2">Festa da Colônia</h3>
-                        <p class="text-sm text-gray-300">Celebração da imigração. Reúne a autêntica gastronomia alemã e italiana, danças típicas e produtos de colonos.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. Gastronomia Temática -->
-        <section id="gastronomia" class="scroll-mt-24">
-            <header class="mb-12 text-center">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Gastronomia Temática</h2>
-                <div class="h-1 w-20 bg-brand-wine mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto">Refeições fartas e jantares-show que são atrações turísticas inesquecíveis por si só.</p>
+            <header class="mb-10 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-serra-green mb-3">Cenários Naturais</h2>
+                <div class="h-0.5 w-16 bg-serra-gold mx-auto mb-4"></div>
+                <p class="text-gray-500">Paisagens de tirar o fôlego e o ar puro dos vales.</p>
             </header>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Cafés Coloniais</h3>
-                    <p class="text-sm text-gray-600 flex-grow">Herança dos imigrantes. Mesas extremamente fartas com dezenas de bolos, pães, cucas, geleias, frios, salgados e doces, como nos clássicos *Bela Vista* e *Torre*.</p>
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-xl font-bold text-gray-900">Parque do Caracol</h3>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow mb-4">Abrigando a famosa cascata de 130m, oferece mirantes, trilhas ecológicas e o observatório panorâmico.</p>
+                    <div class="flex justify-between items-center border-t border-gray-100 pt-3">
+                        <span class="font-semibold text-serra-green text-sm">Aprox. R$ 75,00</span>
+                        <a href="https://parquecaracol.com.br" target="_blank" class="text-serra-gold hover:text-serra-green text-sm font-semibold transition-colors">Site Oficial &rarr;</a>
+                    </div>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Noite Gaúcha</h3>
-                    <p class="text-sm text-gray-600 flex-grow">Churrasco raiz (destaque para o costelão na vala) acompanhado de um vibrante e interativo show de danças folclóricas e boleadeiras (Ex: *Churrascaria Garfo e Bombacha*).</p>
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-xl font-bold text-gray-900">Skyglass</h3>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow mb-4">Plataforma de vidro estaiada a 360m de altura sobre o Vale da Ferradura. Inclui o brinquedo "Abusado".</p>
+                    <div class="flex justify-between items-center border-t border-gray-100 pt-3">
+                        <span class="font-semibold text-serra-green text-sm">Aprox. R$ 170,00</span>
+                        <a href="https://skyglasscanela.com.br" target="_blank" class="text-serra-gold hover:text-serra-green text-sm font-semibold transition-colors">Site Oficial &rarr;</a>
+                    </div>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Noite Italiana</h3>
-                    <p class="text-sm text-gray-600 flex-grow">Jantar festivo com sequência farta de massas artesanais, galeto e polenta, embalado por músicas típicas e encenações teatrais humoradas (Ex: *Cantina Linha Bella*).</p>
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-xl font-bold text-gray-900">Parque dos Bondinhos</h3>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow mb-4">Teleféricos modernos que descem o cânion para oferecer o melhor ângulo frontal da Cascata do Caracol.</p>
+                    <div class="flex justify-between items-center border-t border-gray-100 pt-3">
+                        <span class="font-semibold text-serra-green text-sm">Aprox. R$ 140,00</span>
+                        <a href="https://parquesdaserra.com.br" target="_blank" class="text-serra-gold hover:text-serra-green text-sm font-semibold transition-colors">Site Oficial &rarr;</a>
+                    </div>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Sequência de Fondue</h3>
-                    <p class="text-sm text-gray-600 flex-grow">A aconchegante "Noite Suíça". Um rodízio clássico que inclui fondue de queijo, carnes na pedra e finaliza com fondue de chocolate e frutas da estação.</p>
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-xl font-bold text-gray-900">Lago Negro</h3>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Gramado</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow mb-4">Parque com águas escuras, rodeado de hortênsias. Famoso pelo clássico passeio de pedalinho.</p>
+                    <div class="flex justify-between items-center border-t border-gray-100 pt-3">
+                        <span class="font-semibold text-serra-green text-sm">Livre / Pedalinho R$ 70</span>
+                        <span class="text-gray-400 text-sm">No Local</span>
+                    </div>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Pizzarias Temáticas</h3>
-                    <p class="text-sm text-gray-600 flex-grow">Rodízios que são verdadeiros espetáculos teatrais. Há temáticas de escolas de magia (*Hector*), piratas (*Cara de Mau*) e selvas (*Kongo*).</p>
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-xl font-bold text-gray-900">Olivas de Gramado</h3>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Gramado</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow mb-4">No topo de um cânion, oferece degustação de azeites e piquenique inesquecível ao pôr do sol.</p>
+                    <div class="flex justify-between items-center border-t border-gray-100 pt-3">
+                        <span class="font-semibold text-serra-green text-sm">Aprox. R$ 140,00</span>
+                        <a href="https://olivasdegramado.com.br" target="_blank" class="text-serra-gold hover:text-serra-green text-sm font-semibold transition-colors">Site Oficial &rarr;</a>
+                    </div>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border-l-4 border-brand-wine shadow-sm card-hover flex flex-col h-full">
-                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-2">Hard Rock Cafe</h3>
-                    <p class="text-sm text-gray-600 flex-grow">A icônica franquia em um ambiente de três andares em Gramado. Combina gastronomia americana, música ao vivo e memorabília de lendas do rock.</p>
+                <div class="bg-white rounded-lg p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-xl font-bold text-gray-900">Pé da Cascata Explorer</h3>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Canela</span>
+                    </div>
+                    <p class="text-sm text-gray-600 flex-grow mb-4">Roteiro de aventura (veículo off-road) até a base secreta da Cascata do Caracol. Vista estonteante.</p>
+                    <div class="flex justify-between items-center border-t border-gray-100 pt-3">
+                        <span class="font-semibold text-serra-green text-sm">Aprox. R$ 290,00</span>
+                        <a href="https://brockerturismo.com.br" target="_blank" class="text-serra-gold hover:text-serra-green text-sm font-semibold transition-colors">Site Oficial &rarr;</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Museus e Exposições Exclusivas -->
+        <!-- 3. Museus e Exposições Exclusivas -->
         <section id="museus" class="scroll-mt-24">
-            <header class="mb-12 text-center">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Museus e Exposições</h2>
-                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto">Acervos incríveis que vão do espaço sideral às quadras esportivas e história automotiva.</p>
+            <header class="mb-10 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-serra-green mb-3">Museus e Exposições</h2>
+                <div class="h-0.5 w-16 bg-serra-gold mx-auto mb-4"></div>
             </header>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <a href="https://spaceadventure.com.br" target="_blank" class="block bg-white p-5 rounded border border-gray-100 shadow-sm hover:border-serra-gold transition-colors group">
+                    <h3 class="font-serif font-bold text-lg text-gray-900 group-hover:text-serra-green">Space Adventure</h3>
+                    <p class="text-xs text-serra-gold font-semibold uppercase mb-2">Canela</p>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">Exposição oficial da NASA com itens reais, simuladores e planetário.</p>
+                    <p class="text-sm font-bold text-serra-green">R$ 130,00</p>
+                </a>
+
+                <a href="https://nbaparkgramado.com.br" target="_blank" class="block bg-white p-5 rounded border border-gray-100 shadow-sm hover:border-serra-gold transition-colors group">
+                    <h3 class="font-serif font-bold text-lg text-gray-900 group-hover:text-serra-green">NBA Park</h3>
+                    <p class="text-xs text-serra-gold font-semibold uppercase mb-2">Gramado</p>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">Quadras, jogos interativos, itens autografados e restaurante temático da liga.</p>
+                    <p class="text-sm font-bold text-serra-green">R$ 180,00</p>
+                </a>
+
+                <a href="https://mundoavapor.com.br" target="_blank" class="block bg-white p-5 rounded border border-gray-100 shadow-sm hover:border-serra-gold transition-colors group">
+                    <h3 class="font-serif font-bold text-lg text-gray-900 group-hover:text-serra-green">Mundo a Vapor</h3>
+                    <p class="text-xs text-serra-gold font-semibold uppercase mb-2">Canela</p>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">Réplicas perfeitas de fábricas e ferrovias em miniatura movidas a vapor.</p>
+                    <p class="text-sm font-bold text-serra-green">R$ 80,00</p>
+                </a>
+
+                <a href="https://dreamland.com.br" target="_blank" class="block bg-white p-5 rounded border border-gray-100 shadow-sm hover:border-serra-gold transition-colors group">
+                    <h3 class="font-serif font-bold text-lg text-gray-900 group-hover:text-serra-green">Complexo Dreams</h3>
+                    <p class="text-xs text-serra-gold font-semibold uppercase mb-2">Gramado</p>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">Reúne Museu de Cera, Super Carros e Hollywood Dream Cars (Passaporte).</p>
+                    <p class="text-sm font-bold text-serra-green">R$ 250,00</p>
+                </a>
+
+                <a href="https://cristaisdegramado.com.br" target="_blank" class="block bg-white p-5 rounded border border-gray-100 shadow-sm hover:border-serra-gold transition-colors group">
+                    <h3 class="font-serif font-bold text-lg text-gray-900 group-hover:text-serra-green">Cristais de Gramado</h3>
+                    <p class="text-xs text-serra-gold font-semibold uppercase mb-2">Gramado</p>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">Acompanhe mestres vidreiros moldando cristais a mais de 1000 graus.</p>
+                    <p class="text-sm font-bold text-serra-green">R$ 60,00</p>
+                </a>
+
+                <a href="https://americanoldtrucks.com.br" target="_blank" class="block bg-white p-5 rounded border border-gray-100 shadow-sm hover:border-serra-gold transition-colors group">
+                    <h3 class="font-serif font-bold text-lg text-gray-900 group-hover:text-serra-green">American Old Trucks</h3>
+                    <p class="text-xs text-serra-gold font-semibold uppercase mb-2">Canela</p>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">Impressionante acervo de caminhões e veículos de carga clássicos e militares.</p>
+                    <p class="text-sm font-bold text-serra-green">R$ 70,00</p>
+                </a>
+
+                <a href="https://museudamodacanela.com.br" target="_blank" class="block bg-white p-5 rounded border border-gray-100 shadow-sm hover:border-serra-gold transition-colors group">
+                    <h3 class="font-serif font-bold text-lg text-gray-900 group-hover:text-serra-green">MUM - Museu da Moda</h3>
+                    <p class="text-xs text-serra-gold font-semibold uppercase mb-2">Canela</p>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">Reconstrução visual da história da indumentária e costura em 4000 anos.</p>
+                    <p class="text-sm font-bold text-serra-green">R$ 90,00</p>
+                </a>
+
+                <a href="https://museuegipciocanela.com.br" target="_blank" class="block bg-white p-5 rounded border border-gray-100 shadow-sm hover:border-serra-gold transition-colors group">
+                    <h3 class="font-serif font-bold text-lg text-gray-900 group-hover:text-serra-green">Museu Egípcio</h3>
+                    <p class="text-xs text-serra-gold font-semibold uppercase mb-2">Canela</p>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">Réplicas precisas de pirâmides, sarcófagos e papiros do Egito Antigo.</p>
+                    <p class="text-sm font-bold text-serra-green">R$ 60,00</p>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- 4. Gastronomia Temática -->
+        <section id="gastronomia" class="scroll-mt-24">
+            <header class="mb-10 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-serra-green mb-3">Gastronomia Temática</h2>
+                <div class="h-0.5 w-16 bg-serra-gold mx-auto mb-4"></div>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">NBA Park</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
+                <div class="bg-white rounded border-l-4 border-serra-green shadow-sm p-6">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-1">Cafés Coloniais</h3>
+                    <p class="text-sm text-gray-600 mb-4">Mesas fartas com dezenas de bolos, pães e salgados. O <strong>Bela Vista</strong> é o pioneiro e mais famoso.</p>
+                    <div class="text-sm border-t pt-3 flex justify-between items-center">
+                        <span class="font-bold text-serra-green">R$ 140,00</span>
+                        <a href="https://belavista.tur.br" target="_blank" class="text-gray-500 hover:text-serra-gold">Bela Vista &rarr;</a>
                     </div>
-                    <p class="text-sm text-gray-600 flex-grow">Primeiro parque da NBA no mundo. Tem quadras para arremessos, museu com itens autografados, fliperamas esportivos e restaurante.</p>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Space Adventure</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                <div class="bg-white rounded border-l-4 border-serra-green shadow-sm p-6">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-1">Noite Gaúcha</h3>
+                    <p class="text-sm text-gray-600 mb-4">Churrasco com costelão na vala e vibrante show folclórico. Destaque para a <strong>Garfo e Bombacha</strong>.</p>
+                    <div class="text-sm border-t pt-3 flex justify-between items-center">
+                        <span class="font-bold text-serra-green">R$ 280,00</span>
+                        <a href="https://garfoebombacha.com.br" target="_blank" class="text-gray-500 hover:text-serra-gold">Garfo e Bombacha &rarr;</a>
                     </div>
-                    <p class="text-sm text-gray-600 flex-grow">Exposição imersiva da NASA. Exibe trajes espaciais reais, réplicas de foguetes, simuladores de gravidade e um grande planetário.</p>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Museu da Moda</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                <div class="bg-white rounded border-l-4 border-serra-green shadow-sm p-6">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-1">Noite Italiana</h3>
+                    <p class="text-sm text-gray-600 mb-4">Massas, galeto e polenta com muita animação, teatro e músicas. A <strong>Cantina Linha Bella</strong> é clássica.</p>
+                    <div class="text-sm border-t pt-3 flex justify-between items-center">
+                        <span class="font-bold text-serra-green">R$ 250,00</span>
+                        <a href="https://linhabella.com.br" target="_blank" class="text-gray-500 hover:text-serra-gold">Linha Bella &rarr;</a>
                     </div>
-                    <p class="text-sm text-gray-600 flex-grow">Uma viagem por 4.000 anos de indumentária (MUM). Exibe peças originais e reconstruções fiéis desde a antiguidade até hoje.</p>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">American Old Trucks</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                <div class="bg-white rounded border-l-4 border-serra-green shadow-sm p-6">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-1">Pizzarias Temáticas</h3>
+                    <p class="text-sm text-gray-600 mb-4">Rodízios imersivos com cenários e atores interagindo (Ex: Magia em Hector, Piratas em Cara de Mau).</p>
+                    <div class="text-sm border-t pt-3 flex justify-between items-center">
+                        <span class="font-bold text-serra-green">R$ 180 a R$ 250</span>
+                        <span class="text-gray-400">Diversas opções</span>
                     </div>
-                    <p class="text-sm text-gray-600 flex-grow">Museu focado em utilitários de carga. Possui uma coleção impecável de caminhões clássicos, picapes e veículos militares restaurados.</p>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Museu Egípcio</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                <div class="bg-white rounded border-l-4 border-serra-green shadow-sm p-6">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-1">Sequência de Fondue</h3>
+                    <p class="text-sm text-gray-600 mb-4">Rodízio completo de queijos, carnes na pedra e chocolate. Ideal para as noites frias de inverno na serra.</p>
+                    <div class="text-sm border-t pt-3 flex justify-between items-center">
+                        <span class="font-bold text-serra-green">R$ 100 a R$ 250</span>
+                        <span class="text-gray-400">Diversas opções</span>
                     </div>
-                    <p class="text-sm text-gray-600 flex-grow">Abriga grandiosas réplicas artesanais de múmias, sarcófagos e pirâmides, proporcionando uma imersão na cultura do Antigo Egito.</p>
                 </div>
+
                 <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Mundo a Vapor</h3>
-                        <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Canela</span>
+                <div class="bg-white rounded border-l-4 border-serra-green shadow-sm p-6">
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-1">Hard Rock Cafe</h3>
+                    <p class="text-sm text-gray-600 mb-4">Em Gramado. Ambiente icônico com lanches clássicos, itens autografados de músicos e música ao vivo.</p>
+                    <div class="text-sm border-t pt-3 flex justify-between items-center">
+                        <span class="font-bold text-serra-green">Acesso Gratuito</span>
+                        <span class="text-gray-400">Pagamento pelo consumo</span>
                     </div>
-                    <p class="text-sm text-gray-600 flex-grow">Museu interativo da revolução industrial. Exibe no interior réplicas perfeitas de moinhos, fábricas e olarias movidas a vapor.</p>
-                </div>
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Cristais de Gramado</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Mestres vidreiros moldando cristais ao vivo (técnica de Murano) a 1.000 graus. Conta com loja imensa e museu de esculturas de vidro.</p>
-                </div>
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm card-hover flex flex-col h-full group">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-serif text-xl font-bold text-gray-900 group-hover:text-brand-primary">Mundo de Chocolate</h3>
-                        <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Gramado</span>
-                    </div>
-                    <p class="text-sm text-gray-600 flex-grow">Parque da marca Lugano com mais de 200 esculturas maciças (incluindo Torre Eiffel e Cristo Redentor) feitas 100% de chocolate.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Parques Interativos e Indoor -->
-        <section id="indoor" class="scroll-mt-24 pb-12">
-            <header class="mb-12 text-center">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-4">Parques Interativos e Indoor</h2>
-                <div class="h-1 w-20 bg-brand-gold mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto">Ambientes climatizados repletos de tecnologia, realidade virtual e nostalgia gamificada.</p>
+        <!-- 5. Pontos Turísticos (Table) -->
+        <section id="classicos" class="scroll-mt-24">
+            <header class="mb-10 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-serra-green mb-3">Pontos Turísticos Urbanos</h2>
+                <div class="h-0.5 w-16 bg-serra-gold mx-auto mb-4"></div>
             </header>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex items-start gap-6 group">
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Big Land</h3>
-                            <span class="bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Canela</span>
-                        </div>
-                        <p class="text-gray-600">Parque focado na nostalgia. Oferece réplicas em tamanho humano de jogos clássicos como Pega Varetas, Genius, além de fliperamas e videogames antigos jogáveis.</p>
+            <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-serra-green text-white">
+                                <th class="py-4 px-6 font-semibold">Atração Clássica</th>
+                                <th class="py-4 px-6 font-semibold">Descrição / Local</th>
+                                <th class="py-4 px-6 font-semibold text-right w-48">Preço Estimado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm text-gray-700">
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-bold text-gray-900">Catedral de Pedra</td>
+                                <td class="py-4 px-6">Majestosa igreja gótica em Canela. Possui espetáculo de luzes noturno.</td>
+                                <td class="py-4 px-6 text-right font-semibold text-serra-green">Gratuito</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-bold text-gray-900">Rua Coberta & Torta</td>
+                                <td class="py-4 px-6">Os cartões-postais do centro de Gramado. Polos de gastronomia e fotos.</td>
+                                <td class="py-4 px-6 text-right font-semibold text-serra-green">Gratuito</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-bold text-gray-900">Estação Campos de Canella</td>
+                                <td class="py-4 px-6">Antiga estação ferroviária convertida num requintado pólo gastronômico.</td>
+                                <td class="py-4 px-6 text-right font-semibold text-serra-green">Gratuito</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-bold text-gray-900">Castelinho Caracol</td>
+                                <td class="py-4 px-6">Em Canela. Museu da colonização com o melhor Apfelstrudel da região.</td>
+                                <td class="py-4 px-6 text-right font-bold text-gray-900">R$ 20,00</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-bold text-gray-900">Bustour</td>
+                                <td class="py-4 px-6">Ônibus Hop-on Hop-off de 2 andares ligando as duas cidades inteiras.</td>
+                                <td class="py-4 px-6 text-right font-bold text-gray-900">
+                                    <a href="https://bustour.com.br" class="text-serra-gold hover:underline">R$ 139,00</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Eventos -->
+        <section id="eventos" class="scroll-mt-24">
+            <header class="mb-10 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-serra-green mb-3">Eventos Sazonais</h2>
+                <div class="h-0.5 w-16 bg-serra-gold mx-auto mb-4"></div>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-serra-green text-white rounded-lg shadow-sm p-8 border-l-8 border-serra-gold relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-serra-gold text-xs font-bold tracking-widest uppercase mb-2 block">Outubro a Janeiro</span>
+                        <h3 class="font-serif text-3xl font-bold mb-3">Natal Luz</h3>
+                        <p class="text-gray-300 mb-6 text-sm">O maior evento natalino do Brasil em Gramado. Desfiles grandiosos, iluminação espetacular nas ruas, corais e peças teatrais.</p>
+                        <a href="https://natalluzdegramado.com.br" target="_blank" class="inline-block border border-serra-gold text-serra-gold hover:bg-serra-gold hover:text-serra-green transition-colors px-5 py-2 text-sm font-semibold rounded">Acessar Programação</a>
                     </div>
                 </div>
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex items-start gap-6 group">
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Exceed Experience</h3>
-                            <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
-                        </div>
-                        <p class="text-gray-600">Parque de alta tecnologia e realidade virtual. Possui simuladores de voo em caças, corridas de Fórmula 1 e montanhas-russas interativas super imersivas.</p>
-                    </div>
-                </div>
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex items-start gap-6 group">
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Playhouse Florybal</h3>
-                            <span class="bg-blue-50 text-blue-700 ring-1 ring-blue-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Gramado</span>
-                        </div>
-                        <p class="text-gray-600">Espaço de diversão indoor da marca de chocolates. Conta com pistas de patinação, carrossel, fliperamas e lanchonetes em um ambiente super familiar.</p>
-                    </div>
-                </div>
-                <!-- Card -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex items-start gap-6 group">
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="font-serif text-2xl font-bold text-gray-900 group-hover:text-brand-primary">Oficina da Diversão</h3>
-                            <span class="bg-purple-50 text-purple-700 ring-1 ring-purple-600/20 text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Ambas</span>
-                        </div>
-                        <p class="text-gray-600">Complexos de jogos infanto-juvenis comuns no centro das cidades, equipados com máquinas de fliperama, máquinas de pelúcia, air hockey e simuladores.</p>
+
+                <div class="bg-serra-gold text-serra-green rounded-lg shadow-sm p-8 border-l-8 border-serra-green relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-serra-green text-xs font-bold tracking-widest uppercase mb-2 block">Geralmente em Maio</span>
+                        <h3 class="font-serif text-3xl font-bold mb-3">Festa da Colônia</h3>
+                        <p class="text-serra-dark opacity-90 mb-6 text-sm">Celebração em Gramado focada na imigração europeia. Reúne a autêntica culinária farta feita em fornos de barro e produtos coloniais.</p>
+                        <a href="https://festadacolonia.net.br" target="_blank" class="inline-block bg-serra-green text-white hover:bg-serra-dark transition-colors px-5 py-2 text-sm font-semibold rounded">Saiba Mais</a>
                     </div>
                 </div>
             </div>
@@ -547,17 +529,12 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-brand-dark text-brand-light py-12 mt-auto border-t-4 border-brand-gold">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="font-serif italic text-2xl mb-4">Prepare-se para viver momentos inesquecíveis.</h2>
-            <p class="text-gray-400 text-sm font-light mb-6">Este guia é um roteiro completo de inspiração para a sua próxima viagem.</p>
-            <div class="flex justify-center space-x-2">
-                <span class="text-brand-gold">★</span>
-                <span class="text-brand-gold">★</span>
-                <span class="text-brand-gold">★</span>
-                <span class="text-brand-gold">★</span>
-                <span class="text-brand-gold">★</span>
+    <footer class="bg-serra-green border-t-4 border-serra-gold mt-12 py-12 text-center text-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="font-serif text-2xl mb-4">
+                <span class="font-bold">Serra</span><span class="italic text-serra-gold">Gaúcha</span>
             </div>
+            <p class="text-sm text-gray-400">Guia de Viagem Definitivo. Todos os preços são estimativas e sujeitos à alteração pelos organizadores.</p>
         </div>
     </footer>
 
